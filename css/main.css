@@ -1,0 +1,77 @@
+
+*{
+	font-family: 'poppins';
+}
+body, p, div, span, h1, h2, h3, h4, h5, ul, li, html, body {
+	color: white;
+	margin: 0;
+	padding: 0;	
+}
+ul {
+	list-style: none;
+}
+ul li {
+	float: left;
+}
+
+a {
+	border: 0;
+	outline: none !important;
+	text-decoration: none;
+	color: #FFF;
+}
+
+body {
+	background-color: #151921 !important;
+	font-family: arial;
+	font-size: 18px;
+	color: var(--bs-light);
+	overflow: hidden;
+}
+
+/* global objects */
+.focusable {
+	cursor: pointer;
+}
+
+/* notification object */
+#notifications {
+	position: absolute;
+	z-index: 99;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+#notifications .msg {
+	padding: 20px;
+	color: #fff;
+	text-align: left;
+	background: rgba(0, 0, 0, 0.7);
+	margin-bottom: 2px;
+	font-size: 22px;
+}
+.scene{
+	width: 100vw;
+	height: 100vh;
+}
+#scene-splash{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.player{
+	display: none;
+}
+.main.show{
+	display: block;
+}
+.modal .back{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(19, 20, 22);
+	opacity: 0.7;
+}

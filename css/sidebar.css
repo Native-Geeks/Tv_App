@@ -1,0 +1,74 @@
+.sidebar{
+    transition: .3s;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 4rem;
+    height: 100vh;
+    padding: 4rem 0 1rem 0;
+}
+.sidebar header{
+    visibility: hidden;
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.sidebar header i {
+    font-size: x-large;
+}
+
+.sidebar #sidebar-list,.sidebar #sidebar-footer{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+.onfocus {
+    transition: .3s;
+    width: 300px;
+    z-index: 1;
+    background: #222;
+}
+.onfocus #sidebar-list,.onfocus #sidebar-footer{
+    align-items: center;
+}
+.onfocus span{
+    display: unset !important;
+}
+.onfocus .sidebar-btn{
+    justify-content: space-between !important;
+    width: 75%;
+}
+.onfocus header{
+    visibility: unset;
+}
+.sidebar .sidebar-btn {
+    transition: .1s;
+    color: var(--bs-gray-500);
+    font-size: x-large;
+    display: flex;
+    gap: 1rem;
+    padding: .25rem 1rem;
+}
+.sidebar .focus i{
+    transition: .1s;
+    font-size: 26px;
+}
+.sidebar .focus{
+    transition: .1s;
+    color: white !important;
+    font-weight: 600;
+}
+.sidebar .focus span{
+    display: unset !important;
+    color: white !important;
+}
+.sidebar .sidebar-btn span{
+    display: none;
+    color: var(--bs-gray-500);
+}
