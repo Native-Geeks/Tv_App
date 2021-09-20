@@ -59,7 +59,7 @@ Scene_Settings = (function (Scene) {
       CONFIG.timeZone_list.forEach((timzone) => {
         this.$sub_menu.append(fillTimazone(timzone));
       });
-      
+
       I18n.changeLanguage("EN");
     },
 
@@ -75,25 +75,25 @@ Scene_Settings = (function (Scene) {
       });
       I18n.changeLanguage("EN");
     },
-    
+
     navigate: function (direction) {
       var $nowEl = this.$el.find(".div-icon .focus");
       if (this.isOpened) $nowEl = this.$el.find(".div-lang .focus");
       switch (direction) {
         case "up":
           Focus.to($nowEl.prev());
-          if (this.isTimeZone && this.top < -1)
-          {
+          if (this.isTimeZone && this.top < -1) {
             this.top += 69.14;
             this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
           }
           break;
         case "down":
           Focus.to($nowEl.next());
-          if (this.$sub_menu[0].scrollHeight - this.$sub_menu[0].offsetHeight >-(this.top - this.$el.find("h1")[0].offsetHeight)) 
-          {
-            if (this.isTimeZone)
-            {
+          if (
+            this.$sub_menu[0].scrollHeight - this.$sub_menu[0].offsetHeight >
+            -(this.top - this.$el.find("h1")[0].offsetHeight)
+          ) {
+            if (this.isTimeZone) {
               this.top -= 69.14;
               this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
             }
@@ -114,39 +114,42 @@ Scene_Settings = (function (Scene) {
 
     onEnter: function ($el, event) {
       if (this.isOpened) {
-        this.active.css({background: 'unset'});
+        this.active.css({ background: "unset" });
         this.isOpened = false;
-        this.$sub_menu.css({ flexBasis: "0"});
+        this.$sub_menu.css({ flexBasis: "0" });
         Focus.to(this.active);
         this.$sub_menu.empty();
-      }
-      else {
+      } else {
         this.$sub_menu.empty();
         var action = $el.attr("data-action");
         var id = $el.attr("data-id");
-        // var offset = $el.attr("data-offset");
         this.top = 0;
         this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
+        
         if (action === "language") {
           this.isTimeZone = true;
           this.active = this.$el.find(".focus");
           this.renderLanguage(id);
           this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%"});
-          Focus.to(this.$el.find(".div-lang .settings_language[data-id='" + id + "']"));
+          this.$sub_menu.css({ flexBasis: "150%" });
+          Focus.to(
+            this.$el.find(".div-lang .settings_language[data-id='" + id + "']")
+          );
         }
-        if (action === "timezone") { 
+        if (action === "timezone") {
           this.active = this.$el.find(".focus");
           this.renderTimeZone();
-          Focus.to(this.$el.find(".div-lang .settings_language[data-id='" + id + "']"));
+          Focus.to(
+            this.$el.find(".div-lang .settings_language[data-id='" + id + "']")
+          );
 
           this.isTimeZone = true;
           this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%"});
-          
-          console.log(this.$sub_menu.find('.focusable').last());
-            this.top -= this.$sub_menu.find('.focus')[0].offsetTop;
-            this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
+          this.$sub_menu.css({ flexBasis: "150%" });
+
+          console.log(this.$sub_menu.find(".focusable").last());
+          this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
+          this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
         }
         if (action === "color") {
           this.active = this.$el.find(".focus");
@@ -156,13 +159,39 @@ Scene_Settings = (function (Scene) {
           );
           this.isTimeZone = true;
           this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%"});
+          this.$sub_menu.css({ flexBasis: "150%" });
         }
-        if(action === "back"){
+        if (action === "epginfo") {
+          this.active = this.$el.find(".focus");
+          if (id === "Disabled") {
+            // this.active.css({ background: "unset" });
+            $('.settings-menu[data-action="epginfo"] label')
+              .last()
+              .text("Enabled");
+            $('.settings-menu[data-action="epginfo"]').attr(
+              "data-id",
+              "Enabled"
+            );
+          } else {
+            $('.settings-menu[data-action="epginfo"] label')
+              .last()
+              .text("Disabled");
+            $('.settings-menu[data-action="epginfo"]').attr(
+              "data-id",
+              "Disabled"
+            );
+          }
+          this.isTimeZone = true;
+          // this.isOpened = true;
+        }
+        if (action === "about") {
+        }
+        if (action === "info") {
+        }
+        if (action === "back") {
           this.onReturn();
         }
-        this.active.css({background: '#151617'});
-
+        this.active.css({ background: "#151617" });
       }
     },
 
@@ -170,12 +199,8 @@ Scene_Settings = (function (Scene) {
       I18n.translateHTML(this.$el);
     },
 
-    // tmpButtonSelect: function () {
-    //   return '<div class="settings-menu focusable" data-action="{{action}}"><span><i class="{{class}}" id="info-icon"></i><label data-i18n="{{i18n}}"></label></span></div>';
-    // },
-
     tmpButton: function () {
-      return '<div class="settings-menu focusable" data-action="{{action}}" data-id="{{id}}"><span><i class="{{class}}" id="info-icon"></i><label data-i18n="{{i18n}}"></label></span><lable>{{id}}</label></div>';
+      return '<div class="settings-menu focusable" data-action="{{action}}" data-id="{{id}}"><span><i class="{{class}}" id="info-icon"></i><label data-i18n="{{i18n}}"></label></span><label>{{id}}</label></div>';
     },
 
     tmpList: function () {
@@ -183,7 +208,7 @@ Scene_Settings = (function (Scene) {
     },
 
     tmpTimeZone: function () {
-      return '<li class="settings_language focusable"  data-id="{{id}}"><label>{{id}} {{value}}</label></li>';
+      return '<li class="settings_language focusable"  data-id="{{id}}"><label>{{value}}</label></li>';
     },
 
     tmpColors: function () {

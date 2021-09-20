@@ -16,7 +16,7 @@ App = (function(Events, Deferrable) {
 			Router.addScene('home', new Scene_Home);
 			Router.addScene('error', new Scene_Error);
 
-			Router.go('splash');
+			Router.go('settings');
 		}
 	});
 
