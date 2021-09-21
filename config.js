@@ -152,13 +152,13 @@ CONFIG = {
 		action: "timezone",
 		class: "fas fa-clock",
 		i18n: "settings_menu_timezone",
-		id: "GMT-01:00",
+		id: "-1",
 	  },
 	  {
 		action: "epginfo",
 		class: "fas fa-calendar",
 		i18n: "settings_menu_epginfo",
-		id: "disabled",
+		id: "Disabled",
 	  },
 	  {
 		action: "about",
@@ -236,397 +236,125 @@ CONFIG = {
 	colors_list: [
 	  {
 		id: "red",
-		color: "red",
-		hex: "#FF0",
+		color: "red"
 	  },
 	  {
 		id: "blue",
-		color: "blue",
-		hex: "#00F",
+		color: "blue"
 	  },
 	  {
 		id: "yellow",
-		color: "yellow",
-		hex: "#FF0",
+		color: "yellow"
 	  },
 	  {
 		id: "green",
-		color: "green",
-		hex: "#0F0",
+		color: "green"
 	  },
 	],
 	timeZone_list: [
 	  {
-		id: "GMT-12:00",
-		value: " Etc/GMT-12",
+		id: "-12",
+		value: "GMT-12:00",
 	  },
 	  {
-		id: "GMT-11:00",
-		value: "Etc/GMT-11",
+		id: "-11",
+		value: "GMT-11:00",
 	  },
 	  {
-		id: "GMT-11:00",
-		value: "Pacific/Midway",
+		id: "-10",
+		value: "GMT-10:00",
 	  },
 	  {
-		id: "GMT-10:00",
-		value: "America/Adak",
+		id: "-9",
+		value: "GMT-09:00",
 	  },
 	  {
-		id: "GMT-09:00",
-		value: "America/Anchorage",
+		id: "-8",
+		value: "GMT-08:00",
 	  },
 	  {
-		id: "GMT-09:00",
-		value: "Pacific/Gambier",
+		id: "-7",
+		value: "GMT-07:00",
 	  },
 	  {
-		id: "GMT-08:00",
-		value: "America/Dawson_Creek",
+		id: "-6",
+		value: "GMT-06:00",
 	  },
 	  {
-		id: "GMT-08:00",
-		value: "America/Ensenada",
+		id: "-5",
+		value: "GMT-05:00",
 	  },
 	  {
-		id: "GMT-08:00",
-		value: "America/Los_Angeles",
+		id: "-4",
+		value: "GMT-04:00",
 	  },
 	  {
-		id: "GMT-07:00",
-		value: "America/Chihuahua",
+		id: "-3",
+		value: "GMT-03:00",
 	  },
 	  {
-		id: "GMT-07:00",
-		value: "America/Denver",
+		id: "-2",
+		value: "GMT-02:00",
 	  },
 	  {
-		id: "GMT-06:00",
-		value: "America/Belize",
+		id: "-1",
+		value: "GMT-01:00",
 	  },
 	  {
-		id: "GMT-06:00",
-		value: "America/Cancun",
+		id: "0",
+		value: "GMT",
 	  },
 	  {
-		id: "GMT-06:00",
-		value: "America/Chicago",
-	  },
-	  {
-		id: "GMT-06:00",
-		value: "Chile/EasterIsland",
-	  },
-	  {
-		id: "GMT-05:00",
-		value: "America/Bogota",
-	  },
-	  {
-		id: "GMT-05:00",
-		value: "America/Havana",
-	  },
-	  {
-		id: "GMT-05:00",
-		value: "America/New_York",
-	  },
-	  {
-		id: "GMT-04:30",
-		value: "America/Caracas",
-	  },
-	  {
-		id: "GMT-04:00",
-		value: "America/Campo_Grande",
-	  },
-	  {
-		id: "GMT-04:00",
-		value: "America/Glace_Bay",
-	  },
-	  {
-		id: "GMT-04:00",
-		value: "America/Goose_Bay",
-	  },
-	  {
-		id: "GMT-04:00",
-		value: "America/Santiago",
-	  },
-	  {
-		id: "GMT-04:00",
-		value: "America/La_Paz",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Argentina/Buenos_Aires",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Montevideo",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Araguaina",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Godthab",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Miquelon",
-	  },
-	  {
-		id: "GMT-03:00",
-		value: "America/Sao_Paulo",
-	  },
-	  {
-		id: "GMT-03:30",
-		value: "America/St_Johns",
-	  },
-	  {
-		id: "GMT-02:00",
-		value: "America/Noronha",
-	  },
-	  {
-		id: "GMT-01:00",
-		value: "Atlantic/Cape_Verde",
-	  },
-	  {
-		id: "GMT",
-		value: "Europe/Belfast",
-	  },
-	  {
-		id: "GMT",
-		value: "Africa/Abidjan",
-	  },
-	  {
-		id: "GMT",
-		value: "Europe/Dublin",
-	  },
-	  {
-		id: "GMT",
-		value: "Europe/Lisbon",
-	  },
-	  {
-		id: "GMT",
-		value: "Europe/London",
-	  },
-	  {
-		id: "UTC",
+		id: "+0",
 		value: "UTC",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Africa/Algiers",
+		id: "+1",
+		value: "GMT+01:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Africa/Windhoek",
+		id: "+2",
+		value: "GMT+02:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Atlantic/Azores",
+		id: "+3",
+		value: "GMT+03:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Atlantic/Stanley",
+		id: "+4",
+		value: "GMT+04:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Europe/Amsterdam",
+		id: "+5",
+		value: "GMT+05:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Europe/Belgrade",
+		id: "+6",
+		value: "GMT+06:00",
 	  },
 	  {
-		id: "GMT+01:00",
-		value: "Europe/Brussels",
+		id: "+7",
+		value: "GMT+07:00",
 	  },
 	  {
-		id: "GMT+02:00",
-		value: "Africa/Cairo",
+		id: "+8",
+		value: "GMT+08:00",
 	  },
 	  {
-		id: "GMT+02:00",
-		value: "Africa/Blantyre",
+		id: "+9",
+		value: "GMT+09:00",
 	  },
 	  {
-		id: "GMT+02:00",
-		value: "Asia/Beirut",
+		id: "+10",
+		value: "GMT+10:00",
 	  },
 	  {
-		id: "GMT+02:00",
-		value: "Asia/Damascus",
+		id: "+11",
+		value: "GMT+11:00",
 	  },
 	  {
-		id: "GMT+02:00",
-		value: "Asia/Gaza",
-	  },
-	  {
-		id: "GMT+02:00",
-		value: "Asia/Jerusalem",
-	  },
-	  {
-		id: "GMT+03:00",
-		value: "Africa/Addis_Ababa",
-	  },
-	  {
-		id: "GMT+03:00",
-		value: "Asia/Riyadh89",
-	  },
-	  {
-		id: "GMT+03:00",
-		value: "Europe/Minsk",
-	  },
-	  {
-		id: "GMT+03:30",
-		value: "Asia/Tehran",
-	  },
-	  {
-		id: "GMT+04:00",
-		value: "Asia/Dubai",
-	  },
-	  {
-		id: "GMT+04:00",
-		value: "Asia/Yerevan",
-	  },
-	  {
-		id: "GMT+04:00",
-		value: "Europe/Moscow",
-	  },
-	  {
-		id: "GMT+04:30",
-		value: "Asia/Kabul",
-	  },
-	  {
-		id: "GMT+05:00",
-		value: "Asia/Tashkent",
-	  },
-	  {
-		id: "GMT+05:30",
-		value: "Asia/Kolkata",
-	  },
-	  {
-		id: "GMT+05:45",
-		value: "Asia/Katmandu",
-	  },
-	  {
-		id: "GMT+06:00",
-		value: "Asia/Dhaka",
-	  },
-	  {
-		id: "GMT+06:00",
-		value: "Asia/Yekaterinburg",
-	  },
-	  {
-		id: "GMT+06:30",
-		value: "Asia/Rangoon",
-	  },
-	  {
-		id: "GMT+07:00",
-		value: "Asia/Bangkok",
-	  },
-	  {
-		id: "GMT+07:00",
-		value: "Asia/Novosibirsk",
-	  },
-	  {
-		id: "GMT+08:00",
-		value: "Etc/GMT+8",
-	  },
-	  {
-		id: "GMT+08:00",
-		value: "Asia/Hong_Kong",
-	  },
-	  {
-		id: "GMT+08:00",
-		value: "Asia/Krasnoyarsk",
-	  },
-	  {
-		id: "GMT+08:00",
-		value: "Australia/Perth",
-	  },
-	  {
-		id: "GMT+08:45",
-		value: "Australia/Eucla",
-	  },
-	  {
-		id: "GMT+09:00",
-		value: "Asia/Irkutsk",
-	  },
-	  {
-		id: "GMT+09:00",
-		value: "Asia/Seoul",
-	  },
-	  {
-		id: "GMT+09:00",
-		value: "Asia/Tokyo",
-	  },
-	  {
-		id: "GMT+09:30",
-		value: "Australia/Adelaide",
-	  },
-	  {
-		id: "GMT+09:30",
-		value: "Australia/Darwin",
-	  },
-	  {
-		id: "GMT+09:30",
-		value: "Pacific/Marquesas",
-	  },
-	  {
-		id: "GMT+10:00",
-		value: "Etc/GMT+10",
-	  },
-	  {
-		id: "GMT+10:00",
-		value: "Australia/Brisbane",
-	  },
-	  {
-		id: "GMT+10:00",
-		value: "Australia/Hobart",
-	  },
-	  {
-		id: "GMT+10:00",
-		value: "Asia/Yakutsk",
-	  },
-	  {
-		id: "GMT+10:30",
-		value: "Australia/Lord_Howe",
-	  },
-	  {
-		id: "GMT+11:00",
-		value: "Asia/Vladivostok",
-	  },
-	  {
-		id: "GMT+11:30",
-		value: "Pacific/Norfolk",
-	  },
-	  {
-		id: "GMT+12:00",
-		value: "Etc/GMT+12",
-	  },
-	  {
-		id: "GMT+12:00",
-		value: "Asia/Anadyr",
-	  },
-	  {
-		id: "GMT+12:00",
-		value: "Asia/Magadan",
-	  },
-	  {
-		id: "GMT+12:00",
-		value: "Pacific/Auckland",
-	  },
-	  {
-		id: "GMT+12:45",
-		value: "Pacific/Chatham",
-	  },
-	  {
-		id: "GMT+13:00",
-		value: "Pacific/Tongatapu",
-	  },
-	  {
-		id: "GMT+14:00",
-		value: "Pacific/Kiritimati",
+		id: "+12",
+		value: "GMT+12:00",
 	  },
 	],
 	sidebar: {

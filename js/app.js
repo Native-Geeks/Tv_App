@@ -18,7 +18,6 @@ App = (function(Events, Deferrable) {
 			Router.addScene('error', new Scene_Error);
 			
 			Router.go('splash',this.sidebar);
-			
 		}
 	});
 
