@@ -10,13 +10,15 @@ App = (function(Events, Deferrable) {
 		},
 		
 		initRouter: function() {
+			this.sidebar = new Snippet_Sidebar(this);
 			Router.addScene('splash', new Scene_Splash);
 			Router.addScene('profiles', new Scene_Profiles);
 			Router.addScene('settings', new Scene_Settings);
 			Router.addScene('home', new Scene_Home);
 			Router.addScene('error', new Scene_Error);
-
-			Router.go('splash');
+			
+			Router.go('splash',this.sidebar);
+			
 		}
 	});
 

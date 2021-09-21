@@ -8,12 +8,13 @@ Scene_Splash = (function(Scene) {
 		
 		init: function(){},
 		
-		activate: function() {
+		activate: function(sidebar) {
+			this.sidebar = sidebar;
 			
 		},
 		render:function(){		
 			setTimeout(()=>{
-					Router.go('profiles', CONFIG.profiles.accounts)
+					Router.go('profiles', CONFIG.profiles.accounts,this.sidebar);
 			},1000);
 		},
 		

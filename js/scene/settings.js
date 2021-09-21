@@ -142,7 +142,7 @@ Scene_Settings = (function (Scene) {
 
           this.isTimeZone = true;
           this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%"});
+          this.$sub_menu.css({transition:"0.3s", flexBasis: "150%"});
           
           console.log(this.$sub_menu.find('.focusable').last());
             this.top -= this.$sub_menu.find('.focus')[0].offsetTop;

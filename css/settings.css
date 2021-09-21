@@ -43,7 +43,6 @@
       border: 3px solid white;
   }
   #scene-settings .settings-container .div-lang{
-      transition: .3s;
       display: flex;
       flex-direction: column;
       font-size: 25px;
@@ -57,11 +56,4 @@
   #scene-settings .settings-container .div-lang .focus{
       background-color: white;
       color: #151921;
-  }
-  .iw{
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgba(12, 22, 151, 0.5);
-      z-index: 11;
   }
