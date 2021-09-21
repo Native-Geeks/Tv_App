@@ -162,7 +162,6 @@ Scene_Settings = (function (Scene) {
           this.$sub_menu.css({ flexBasis: "150%" });
         }
         if (action === "epginfo") {
-          this.active = this.$el.find(".focus");
           if (id === "Disabled") {
             // this.active.css({ background: "unset" });
             $('.settings-menu[data-action="epginfo"] label')

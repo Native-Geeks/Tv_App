@@ -296,7 +296,7 @@ Scene_Profiles = (function(Scene) {
         },
         
         onLangChange: function () {
-            I18n.translateHTML(this.$el)
+            I18n.translateHTML(this.$el);
         },
 
         tmpProfiles:function(){

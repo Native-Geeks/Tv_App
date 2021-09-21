@@ -14,10 +14,15 @@ App = (function(Events, Deferrable) {
 			Router.addScene('splash', new Scene_Splash);
 			Router.addScene('profiles', new Scene_Profiles);
 			Router.addScene('settings', new Scene_Settings);
-			Router.addScene('home', new Scene_Home);
 			Router.addScene('error', new Scene_Error);
+
+			Router.addScene('home', new Scene_Home);
+			Router.addScene('live', new Scene_Home);
+			Router.addScene('home', new Scene_Home);
+			Router.addScene('home', new Scene_Home);
 			
-			Router.go('splash',this.sidebar);
+			
+			Router.go('error');
 		}
 	});
 
