@@ -22,7 +22,7 @@ App = (function(Events, Deferrable) {
 			Router.addScene('home', new Scene_Home);
 			
 			
-			Router.go('error');
+			Router.go('splash');
 		}
 	});
 

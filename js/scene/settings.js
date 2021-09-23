@@ -9,13 +9,12 @@ Scene_Settings = (function (Scene) {
       this.$isloadedLang = false;
       this.$menu = this.$el.find(".div-icon");
       this.$sub_menu = this.$el.find(".list");
+      this.isModalOpened = false;
     },
 
     render: function () {
       this.renderButtons();
     },
-
-    activate: function () {},
 
     renderButtons: function () {
       if (!this.$isLoadedSetting) {
@@ -107,6 +106,8 @@ Scene_Settings = (function (Scene) {
       if (this.isOpened) $nowEl = this.$el.find(".list .focus");
       switch (direction) {
         case "up":
+          if(this.isModalOpened)
+          {return;}
           Focus.to($nowEl.prev());
           if (this.isTimeZone && this.top < -1) {
             this.top += 69.14;
@@ -114,6 +115,8 @@ Scene_Settings = (function (Scene) {
           }
           break;
         case "down":
+          if(this.isModalOpened)
+          {return;}
           Focus.to($nowEl.next());
           if (
             this.$sub_menu[0].scrollHeight - this.$sub_menu[0].offsetHeight >
@@ -126,20 +129,31 @@ Scene_Settings = (function (Scene) {
           }
           break;
         case "left":
-          $el = this.$el.find('.focus').prev();
-          Focus.to($el);
-          this.$sub_menu.empty();
-          this.$sub_menu.css({ flexBasis: "0" });
-          this.active.css({ background: "unset" });
-          // Focus.to(
-          //   this.$el.find(
-          //     ".div-icon .settings-menu[" + action.slice(0, 5) + "]"
-          //   )
-          // );
+          if(this.isModalOpened)
+          {
+            Focus.to(this.$el.find('#ResetModal .modal-footer .focus').prev());
+            return;
+          }
+          if(this.isOpened)
+          {
+            Focus.to(this.active);
+            this.isOpened = false;
+            this.$sub_menu.empty();
+            this.$sub_menu.css({ flexBasis: "0" });
+            this.active.css({ background: "unset" });
+          }
           break;
         case "right":
-          $el = this.$el.find('.focus').next();
-          Focus.to($el);
+          if(this.isModalOpened)
+          {
+            Focus.to(this.$el.find('#ResetModal .modal-footer .focus').next());
+            return;
+          }
+          if(!this.isOpened)
+          {
+            $el = this.$menu.find('.focus');
+            this.onEnter($el);
+          }
           break;
         default:
           break;
@@ -210,7 +224,6 @@ Scene_Settings = (function (Scene) {
               "data-id",
               "Enabled"
             );
-            this.active.css({ background: "#151617" });
           } else {
             $('.settings-menu[data-action="epginfo"] label')
               .last()
@@ -219,7 +232,6 @@ Scene_Settings = (function (Scene) {
               "data-id",
               "Disabled"
             );
-            this.active.css({ background: "unset" });
           }
           // this.isTimeZone = true;
           // this.isOpened = true;
@@ -244,19 +256,20 @@ Scene_Settings = (function (Scene) {
           $("#ResetModal").addClass("show");
           $("#ResetModal").show();
           Focus.to(this.$el.find(".btn").first());
+          this.active = $el;
+          this.isModalOpened = true;
         }
         if (action === "reset_okay") {
           $("#ResetModal").removeClass("show");
           $("#ResetModal").hide();
+          Focus.to(this.active);
+          this.isModalOpened = false;
         }
         if (action === "reset_cancel") {
           $("#ResetModal").removeClass("show");
           $("#ResetModal").hide();
-          Focus.to(
-            this.$el.find(
-              ".div-icon .settings-menu[data-action=" + action.slice(0, 5) + "]"
-            )
-          );
+          Focus.to(this.active);
+          this.isModalOpened = false;
         }
         if (action === "back") {
           this.onReturn();
