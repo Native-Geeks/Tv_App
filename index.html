@@ -5,23 +5,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=1280" />
 
-  <link rel="stylesheet" type="text/css" href="css/main.css" />
-  <link rel="stylesheet" type="text/css" href="css/profiles.css" />
-  <link rel="stylesheet" type="text/css" href="css/keyboard.css" />    
-  <link rel="stylesheet" type="text/css" href="css/settings.css" />
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
-  <link rel="stylesheet" type="text/css" href="css/home.css" />
-  <link rel="stylesheet" type="text/css" href="css/error.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/profiles.css" />
+    <link rel="stylesheet" type="text/css" href="css/keyboard.css" />
+    <link rel="stylesheet" type="text/css" href="css/settings.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="css/home.css" />
+    <link rel="stylesheet" type="text/css" href="css/error.css" />
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
 
-    
     <script src="js/core/jquery.js"></script>
     <script src="js/core/jasmine.js"></script>
     <script src="js/core/json2.js"></script>
@@ -30,8 +45,11 @@
     <script src="js/core/mustache.js"></script>
     <script src="js/core/helpers.js"></script>
     <script src="js/core/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous" ></script>
-  
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="js/core/module/developer.js"></script>
     <script src="js/core/module/events.js"></script>
@@ -58,9 +76,9 @@
     <script src="js/core/module/template.js"></script>
     <script src="js/core/module/analytics.js"></script>
 
-        	<!-- Tizen TV driver, 2015+ -->
-	<script src="js/core/device/tizen.js"></script>
-	<script src="js/core/device/tizen/player.js"></script>
+    <!-- Tizen TV driver, 2015+ -->
+    <script src="js/core/device/tizen.js"></script>
+    <script src="js/core/device/tizen/player.js"></script>
 
     <!-- Languages -->
     <script src="js/i18n/en.js"></script>
@@ -80,17 +98,22 @@
     <script src="js/app.js"></script>
   </head>
   <body>
-
     <!-- Scenes -->
-    <div id="scene-splash" class="scene" style="display: none;">
-      <img src="./Assets//img/loading.gif" width="286"/>
+    <div id="scene-splash" class="scene" style="display: none">
+      <img src="./Assets//img/loading.gif" width="286" />
     </div>
-    <div id="scene-profiles" class="scene flex-column"  style="display: none;">
-      <h4 id="choose-film" style="z-index: 2;" data-i18n="profile_header"></h4>
-      <div id="profile-list" ></div>
+    <div id="scene-profiles" class="scene flex-column" style="display: none">
+      <h4 id="choose-film" style="z-index: 2" data-i18n="profile_header"></h4>
+      <div id="profile-list"></div>
       <div id="profile-btn" class="text-center"></div>
       <!-- Exit Modal -->
-      <div class="modal fade" id="ExitModal" tabindex="-1" aria-labelledby="ExitModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="ExitModal"
+        tabindex="-1"
+        aria-labelledby="ExitModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -98,96 +121,208 @@
             </div>
             <div class="modal-body">Are you sure you want exit ?</div>
             <div class="modal-footer">
-              <button id="ExitBtnClose" type="button" class="btn focusable" data-bs-dismiss="modal" data-action="ExitModalClose">Close</button>
-              <button type="button" class="btn focusable" data-action="Exit">Exit</button>
+              <button
+                id="ExitBtnClose"
+                type="button"
+                class="btn focusable"
+                data-bs-dismiss="modal"
+                data-action="ExitModalClose"
+              >
+                Close
+              </button>
+              <button type="button" class="btn focusable" data-action="Exit">
+                Exit
+              </button>
             </div>
           </div>
         </div>
       </div>
       <!-- Info Modal -->
-      <div class="modal fade" id="InfoModal" tabindex="-1" aria-labelledby="InfoModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="InfoModal"
+        tabindex="-1"
+        aria-labelledby="InfoModalLabel"
+        aria-hidden="true"
+      >
         <div class="back"></div>
-          <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header justify-content-center">
-              <h5 class="modal-title" id="exampleModalLabel">Account informations</h5>
+              <h5 class="modal-title" id="exampleModalLabel">
+                Account informations
+              </h5>
             </div>
             <div class="modal-body">
               <div class="mb-3 row">
-                <label for="staticUsername" class="col-sm-4 col-form-label">Username</label>
+                <label for="staticUsername" class="col-sm-4 col-form-label"
+                  >Username</label
+                >
                 <div class="col-sm-8">
-                  <input type="text" readonly class="form-control-plaintext" id="staticUsername" value="">
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext"
+                    id="staticUsername"
+                    value=""
+                  />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticName" class="col-sm-4 col-form-label">Name</label>
+                <label for="staticName" class="col-sm-4 col-form-label"
+                  >Name</label
+                >
                 <div class="col-sm-8">
-                  <input type="text" readonly class="form-control-plaintext" id="staticName" value="">
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext"
+                    id="staticName"
+                    value=""
+                  />
                 </div>
               </div>
               <div class="mb-3 row">
-                <label for="staticType" class="col-sm-4 col-form-label">Type</label>
+                <label for="staticType" class="col-sm-4 col-form-label"
+                  >Type</label
+                >
                 <div class="col-sm-8">
-                  <input type="text" readonly class="form-control-plaintext" id="staticType" value="">
+                  <input
+                    type="text"
+                    readonly
+                    class="form-control-plaintext"
+                    id="staticType"
+                    value=""
+                  />
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button id="InfoClose" type="button" class="btn focusable" data-bs-dismiss="modal" data-action="info_close">Close</button>
+              <button
+                id="InfoClose"
+                type="button"
+                class="btn focusable"
+                data-bs-dismiss="modal"
+                data-action="info_close"
+              >
+                Close
+              </button>
             </div>
           </div>
-          </div>
+        </div>
       </div>
       <!-- Delete Modal -->
-      <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="DeleteModal"
+        tabindex="-1"
+        aria-labelledby="DeleteModalLabel"
+        aria-hidden="true"
+      >
         <div class="back"></div>
-          <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete account</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Delete account</h5>
             </div>
             <div class="modal-body">
-            Are you sure you want delete this account ?
+              Are you sure you want delete this account ?
             </div>
             <div class="modal-footer">
-              <button id="DeleteClose" type="button" class="btn focusable" data-bs-dismiss="modal" data-action="delete_cancel">Cancel</button>
-              <button type="button" class="btn focusable" data-action="delete_yes">Yes</button>
-              </div>
+              <button
+                id="DeleteClose"
+                type="button"
+                class="btn focusable"
+                data-bs-dismiss="modal"
+                data-action="delete_cancel"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn focusable"
+                data-action="delete_yes"
+              >
+                Yes
+              </button>
+            </div>
           </div>
-          </div>
+        </div>
       </div>
     </div>
     <div id="scene-home" class="scene" style="display: none">
-      <div class="header">
-      </div>
+      <div class="header"></div>
       <div id="trailer">
-        <img alt="trailer" src="https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg"/>
+        <img
+          alt="trailer"
+          src="https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg"
+        />
       </div>
       <div id="snippet-home-list"></div>
     </div>
     <div id="scene-settings" class="scene" style="display: none">
       <h1 class="head-settings">Settings</h1>
       <div class="settings-container">
-        <div class="div-icon">
+        <div class="div-icon"></div>
+        <ul class="list"></ul>
+        <!-- Reset Modal -->
+        <div
+          class="modal fade"
+          id="ResetModal"
+          tabindex="-1"
+          aria-labelledby="DeleteModalLabel"
+          aria-hidden="true"
+        >
+          <div class="back"></div>
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Reset Application
+                </h5>
+              </div>
+              <div class="modal-body">
+                Are you sure you want reset the application ?
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="CancelClose"
+                  type="button"
+                  class="btn focusable"
+                  data-bs-dismiss="modal"
+                  data-action="reset_cancel"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn focusable"
+                  data-action="reset_okay"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <ul class="div-lang"></ul>
       </div>
-     
     </div>
     <div id="scene-error" class="scene" style="display: none">
       <div class="error-404">
         <h1>Something went wrong</h1>
-        <p class="mb-2">Sorry, we couldn't find the page you were looking for.</p>
+        <p class="mb-2">
+          Sorry, we couldn't find the page you were looking for.
+        </p>
         <p>To return to the profiles page click on the button bellow</p>
         <button type="button">Go back</button>
       </div>
       <div class="pic">
-        <img src="https://i.gifer.com/52O8.gif" alt="Not found" width="300px">
+        <img src="https://i.gifer.com/52O8.gif" alt="Not found" width="300px" />
       </div>
     </div>
 
     <!-- Snippets -->
-    <div id="snippet-sidebar" class="sidebar" style="display: none;">
+    <div id="snippet-sidebar" class="sidebar" style="display: none">
       <header>
         <i class="bi bi-person"></i>
         <h5 id="profile_name" class="mb-0"></h5>
@@ -195,6 +330,5 @@
       <ul id="sidebar-list"></ul>
       <ul id="sidebar-footer"></ul>
     </div>
-
   </body>
 </html>

@@ -41,7 +41,7 @@
 #scene-settings .div-icon .focus {
   border: 3px solid white;
 }
-#scene-settings .settings-container .div-lang {
+#scene-settings .settings-container .list {
   transition: all 0.3s , flex-basis 0s;
   display: flex;
   flex-direction: column;
@@ -50,10 +50,17 @@
   width: 0;
   flex-basis: 0;
 }
-#scene-settings .settings-container .div-lang .settings_language label {
+#scene-settings .settings-container .list .settings_language label {
   padding: 1rem;
 }
-#scene-settings .settings-container .div-lang .focus {
+#scene-settings .settings-container .list .focus {
   background-color: white;
   color: #151921;
+}
+#scene-settings #ResetModal h5{ 
+  color:#151921;
+}
+#scene-settings #ResetModal .modal-body{ 
+  text-align: center;
+  color:#151921;
 }

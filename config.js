@@ -140,45 +140,45 @@ CONFIG = {
 		action: "language",
 		class: "fas fa-language",
 		i18n: "settings_menu_language",
-		id: "AR",
+		id: "AR"
 	  },
 	  {
 		action: "color",
 		class: "fas fa-palette",
 		i18n: "settings_menu_color",
-		id: "red",
+		id: "red"
 	  },
 	  {
 		action: "timezone",
 		class: "fas fa-clock",
 		i18n: "settings_menu_timezone",
-		id: "-1",
+		id: "-1"
 	  },
 	  {
 		action: "epginfo",
 		class: "fas fa-calendar",
 		i18n: "settings_menu_epginfo",
-		id: "Disabled",
+		id: "Disabled"
 	  },
 	  {
 		action: "about",
 		class: "fas fa-info-circle",
-		i18n: "settings_menu_about",
+		i18n: "settings_menu_about"
 	  },
 	  {
 		action: "info",
 		class: "fas fa-desktop",
-		i18n: "settings_menu_info",
+		i18n: "settings_menu_info"
 	  },
 	  {
 		action: "reset",
 		class: "fas fa-undo-alt",
-		i18n: "settings_menu_reset",
+		i18n: "settings_menu_reset"
 	  },
 	  {
 		action: "back",
 		class: "fas fa-arrow-circle-left",
-		i18n: "settings_menu_back",
+		i18n: "settings_menu_back"
 	  },
 	],
 	settings_language: [
@@ -356,6 +356,18 @@ CONFIG = {
 		id: "+12",
 		value: "GMT+12:00",
 	  },
+	],
+	about_section:[
+		{
+			id:"ab",
+			content:"this section is reserved to about information"
+		}
+	],
+	info_section:[
+		{
+			id:"if",
+			content:"this section is reserved to the information about the application"
+		}
 	],
 	sidebar: {
 	  center: [
