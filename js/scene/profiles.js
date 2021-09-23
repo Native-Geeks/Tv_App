@@ -21,8 +21,8 @@ Scene_Profiles = (function(Scene) {
 
         },
 
-        activate: function(accounts) {
-
+        activate: function(accounts,sidebar) {
+            this.sidebar = sidebar;
             if(this.$activeEl != null) {
                 Focus.to(this.$activeEl);
             }
@@ -78,7 +78,10 @@ Scene_Profiles = (function(Scene) {
             this.$isHover = 'List';
             this.$isListBtnHover = false;
             if(this.cp>7)
-               this.$profiles.css({transform:'translateX('+this.leftPadding+'px)'});
+            {
+                this.$profiles.css({transform:'translateX('+this.leftPadding+'px)',justifyContent:'left'});
+            }
+               
 
         },
         
@@ -136,7 +139,7 @@ Scene_Profiles = (function(Scene) {
                 	if(this.$accounts[account].id == $el.attr("data-id"))
                     {
                         this.notFromSplash = true;
-                        Router.go('home', this.$accounts[account]);
+                        Router.go('home', this.$accounts[account],this.sidebar);
                     }
                 	
                 }
@@ -259,7 +262,7 @@ Scene_Profiles = (function(Scene) {
                 case 'left' : 
                     $el = $nowEl.prev();
                     Focus.to($el);
-                    if(this.$isListHover && (this.leftPadding<(this.$el[0].clientWidth/2)-(this.contentWidth/2)))
+                    if(this.$isListHover && (this.leftPadding<(this.$el[0].clientWidth/2)-(this.contentWidth/2)) && this.cp>7)
                     {
                         this.leftPadding += 165;
                         this.scrollToFit();
@@ -268,7 +271,7 @@ Scene_Profiles = (function(Scene) {
                 case 'right' : 
                     $el = $nowEl.next();
                     Focus.to($el);
-                    if(this.$isListHover && this.leftPadding > this.topPadding)
+                    if(this.$isListHover && this.leftPadding > this.topPadding && this.cp>7)
                     {
                         this.leftPadding -= 165;
                         this.scrollToFit();
@@ -293,7 +296,7 @@ Scene_Profiles = (function(Scene) {
         },
         
         onLangChange: function () {
-            I18n.translateHTML(this.$el)
+            I18n.translateHTML(this.$el);
         },
 
         tmpProfiles:function(){

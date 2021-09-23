@@ -6,31 +6,11 @@
 
 	$.extend(true, Snippet_Sidebar.prototype, Snippet.prototype, {
         
-		init: function(){
-			// Show/Hide
-            this.on('show', function() {
-                this.uiVisible = true;
-                if (!this.$el.hasClass('ui-visible')) {
-                    this.$el.addClass('ui-visible');
-                }
-            }, this);
-
-            // Hide events
-            this.on('hide', function() {
-                if (!this.uiVisible) return;
-                this.uiVisible = false;
-                this.$el.removeClass('ui-visible');
-            }, this);
-			
+		init: function(){			
 			this.render();
-			this.show();
-			this.$el.removeClass('onfocus');
 		},
         
 		render: function() {
-			try{
-				this.$el.find('#profile_name').text(this.parent.account.name);
-			}catch(err){}
 			
             if(!this.isRendered){
 				tmpCenter = this.tmpCenter();
@@ -56,9 +36,6 @@
 			this.isRendered = true;
 		},
         
-		activate: function() {
-		},
-        
 		onLangChange: function () {
 
 		},
@@ -69,41 +46,32 @@
         
 		onEnter: function($el, event) {
             var action = $el.attr("data-action");
+			if(action === 'Search') {this.hide(); Router.go('search',this.sidebar);}
+			if(action === 'Live') {this.hide(); Router.go('live',this.sidebar);}
+			if(action === 'Films') {this.hide(); Router.go('films',this.sidebar);}
+			if(action === 'Series') {this.hide(); Router.go('series',this.sidebar);}
+			if(action === 'Settings') {this.hide(); Router.go('settings');}
 			if(action === 'Quit')	{this.parent.onReturn();}
 		},
         
 		navigate: function(direction) {
-			var nowEl = this.$el.find('ul .focus');
-			
-				
             switch(direction){
-				/*case'up' : 
-					if(nowEl[0] == this.$el.find('#sidebar-footer .sidebar-btn').first()[0])
-						nowEl =  this.$el.find('#sidebar-list .sidebar-btn').last();
-					else
-						nowEl = nowEl.prev();
-					break;
-				case 'down' :
-					if(nowEl[0] == this.$el.find('#sidebar-list .sidebar-btn').last()[0])
-						nowEl =  this.$el.find('#sidebar-footer .sidebar-btn').first();
-					else
-						nowEl = nowEl.next();
-					break;*/
-				case 'up':
-					Focus.to(this.getFocusable(-1,true));
-					return;
-				case 'down':
-					Focus.to(this.getFocusable(1,true));
-					return;
-				case 'right':
-					this.onReturn();
-					return;
+				case 'up': Focus.to(this.getFocusable(-1,true)); break;
+				case 'down': Focus.to(this.getFocusable(1,true)); break;
+				case 'right': if(Router.activeSceneName !== 'home'){this.onReturn();} break;
 			}
-			Focus.to(nowEl);
 		},
 
 		onReturn:function(){
 			Focus.to($('#snippet-home-list .items .item').first());
+			this.hide();
+		},
+
+		open:function(){
+			this.$el.addClass('onfocus');
+		},
+
+		close:function(){
 			this.$el.removeClass('onfocus');
 		},
 

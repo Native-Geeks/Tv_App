@@ -41,6 +41,7 @@
 #scene-settings .div-icon .focus {
   border: 3px solid white;
 }
+
 #scene-settings .settings-container .list {
   transition: all 0.3s , flex-basis 0s;
   display: flex;
@@ -56,6 +57,7 @@
 #scene-settings .settings-container .list .focus {
   background-color: white;
   color: #151921;
+
 }
 #scene-settings #ResetModal h5{ 
   color:#151921;

@@ -6,35 +6,22 @@
 
 	$.extend(true, Scene_Error.prototype, Scene.prototype, {
 		
-		init: function(){
-			
-		},
-		
-		render: function() {
-			if(Main.device[0] === 'webos') {
-				Device.clearHistory();
-			}
-		},
-		
-		activate: function() {
-			
+		activate: function(errMsg) {
+			if(errMsg!=null){this.$el.find('.error-404 p.mb-2').text(errMsg);}
+			I18n.changeLanguage('EN');
+			Focus.to(this.$el.find('.error-404 button'));
 		},
 		
 		onLangChange: function () {
-			
-		},
+            I18n.translateHTML(this.$el);
+        },
 		
 		onClick: function($el, event) {
 		   this.onEnter.apply(this, arguments);
 		},
 		
 		onEnter: function($el, event) {
-			
-		},
-		
-		navigate: function(direction) {
-			if (direction == "left") Focus.to(this.getCircleFocusable(-1));
-			else if (direction == "right") Focus.to(this.getCircleFocusable(1));
+			Router.go('splash');
 		},
 		
 		create: function() {

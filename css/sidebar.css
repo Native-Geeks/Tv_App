@@ -21,7 +21,6 @@
 .sidebar header i {
     font-size: x-large;
 }
-
 .sidebar #sidebar-list,.sidebar #sidebar-footer{
     display: flex;
     flex-direction: column;
@@ -32,7 +31,7 @@
     transition: .3s;
     width: 300px;
     z-index: 1;
-    background: #222;
+    background-color: rgba(37,47,71, 0.8);
 }
 .onfocus #sidebar-list,.onfocus #sidebar-footer{
     align-items: center;
@@ -49,7 +48,7 @@
 }
 .sidebar .sidebar-btn {
     transition: .1s;
-    color: var(--bs-gray-500);
+    color:rgb(173,181,189);
     font-size: x-large;
     display: flex;
     gap: 1rem;
@@ -61,14 +60,15 @@
 }
 .sidebar .focus{
     transition: .1s;
-    color: white !important;
+    color: #151921 !important;
     font-weight: 600;
+    background-color: white;
 }
 .sidebar .focus span{
     display: unset !important;
-    color: white !important;
+    color: #151921 !important;
 }
 .sidebar .sidebar-btn span{
     display: none;
-    color: var(--bs-gray-500);
+    color: rgb(173,181,189);
 }

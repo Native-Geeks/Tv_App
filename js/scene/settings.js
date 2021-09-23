@@ -187,6 +187,7 @@ Scene_Settings = (function (Scene) {
           this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
           this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
           this.active.css({ background: "#151617" });
+
         }
         if (action === "color") {
           this.active = this.$el.find(".focus");
@@ -200,7 +201,6 @@ Scene_Settings = (function (Scene) {
           this.active.css({ background: "#151617" });
         }
         if (action === "epginfo") {
-          this.active = this.$el.find(".focus");
           if (id === "Disabled") {
             // this.active.css({ background: "unset" });
             $('.settings-menu[data-action="epginfo"] label')

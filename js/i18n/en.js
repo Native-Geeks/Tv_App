@@ -11,5 +11,8 @@ I18n.translations.EN = {
 	'settings_menu_info':'Info',
 	'settings_menu_reset':'Reset',
 	'settings_menu_back':'Back',
-	"welcome": "Welcome"
+	"error_header": "Something went wrong",
+	"error_msg": "Sorry, we couldn't find the page you were looking for.",
+	"error_back": "To return to the profiles page click on the button bellow",
+	"error_btn": "Go back"
 };
