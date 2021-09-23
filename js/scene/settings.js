@@ -4,12 +4,19 @@ Scene_Settings = (function (Scene) {
   };
 
   $.extend(true, Scene_Settings.prototype, Scene.prototype, {
+    
     init: function () {
       this.$isLoadedSetting = false;
       this.$isloadedLang = false;
       this.$menu = this.$el.find(".div-icon");
       this.$sub_menu = this.$el.find(".list");
       this.isModalOpened = false;
+      this.fromSideBar = false;
+    },
+
+    activate:function(fromSideBar){
+      if(fromSideBar !=null)
+        this.fromSideBar = true;
     },
 
     render: function () {
@@ -165,117 +172,122 @@ Scene_Settings = (function (Scene) {
     },
 
     onEnter: function ($el, event) {
-      if (this.isOpened) {
-        this.isOpened = false;
-        this.active.css({ background: "unset" });
-        this.$sub_menu.css({ flexBasis: "0" });
-        this.$sub_menu.empty();
-        Focus.to(this.active);
-      } else {
-        this.$sub_menu.empty();
-        var action = $el.attr("data-action");
-        var id = $el.attr("data-id");
-        this.top = 0;
-        this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
-
-        if (action === "language") {
-          // this.isTimeZone = true;
-          this.active = this.$el.find(".focus");
-          this.renderLanguage(id);
-          this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%" });
-          Focus.to(
-            this.$el.find(".list .settings_language[data-id='" + id + "']")
-          );
-          this.active.css({ background: "#151617" });
+      if(!this.fromSideBar)
+      {
+          if (this.isOpened) {
+          this.isOpened = false;
+          this.active.css({ background: "unset" });
+          this.$sub_menu.css({ flexBasis: "0" });
+          this.$sub_menu.empty();
+          Focus.to(this.active);
         }
-        if (action === "timezone") {
-          this.active = this.$el.find(".focus");
-          this.renderTimeZone();
-          Focus.to(
-            this.$el.find(".list .settings_language[data-id='" + id + "']")
-          );
-          this.isTimeZone = true;
-          this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%" });
-          this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
+        else {
+          this.$sub_menu.empty();
+          var action = $el.attr("data-action");
+          var id = $el.attr("data-id");
+          this.top = 0;
           this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
-          this.active.css({ background: "#151617" });
 
-        }
-        if (action === "color") {
-          this.active = this.$el.find(".focus");
-          this.renderColors();
-          Focus.to(
-            this.$el.find(".list .settings_language[data-id='" + id + "']")
-          );
-          this.isTimeZone = true;
-          this.isOpened = true;
-          this.$sub_menu.css({ flexBasis: "150%" });
-          this.active.css({ background: "#151617" });
-        }
-        if (action === "epginfo") {
-          if (id === "Disabled") {
-            // this.active.css({ background: "unset" });
-            $('.settings-menu[data-action="epginfo"] label')
-              .last()
-              .text("Enabled");
-            $('.settings-menu[data-action="epginfo"]').attr(
-              "data-id",
-              "Enabled"
+          if (action === "language") {
+            // this.isTimeZone = true;
+            this.active = this.$el.find(".focus");
+            this.renderLanguage(id);
+            this.isOpened = true;
+            this.$sub_menu.css({ flexBasis: "150%" });
+            Focus.to(
+              this.$el.find(".list .settings_language[data-id='" + id + "']")
             );
-          } else {
-            $('.settings-menu[data-action="epginfo"] label')
-              .last()
-              .text("Disabled");
-            $('.settings-menu[data-action="epginfo"]').attr(
-              "data-id",
-              "Disabled"
-            );
+            this.active.css({ background: "#151617" });
           }
-          // this.isTimeZone = true;
-          // this.isOpened = true;
+          if (action === "timezone") {
+            this.active = this.$el.find(".focus");
+            this.renderTimeZone();
+            Focus.to(
+              this.$el.find(".list .settings_language[data-id='" + id + "']")
+            );
+            this.isTimeZone = true;
+            this.isOpened = true;
+            this.$sub_menu.css({ flexBasis: "150%" });
+            this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
+            this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
+            this.active.css({ background: "#151617" });
+
+          }
+          if (action === "color") {
+            this.active = this.$el.find(".focus");
+            this.renderColors();
+            Focus.to(
+              this.$el.find(".list .settings_language[data-id='" + id + "']")
+            );
+            this.isTimeZone = true;
+            this.isOpened = true;
+            this.$sub_menu.css({ flexBasis: "150%" });
+            this.active.css({ background: "#151617" });
+          }
+          if (action === "epginfo") {
+            if (id === "Disabled") {
+              // this.active.css({ background: "unset" });
+              $('.settings-menu[data-action="epginfo"] label')
+                .last()
+                .text("Enabled");
+              $('.settings-menu[data-action="epginfo"]').attr(
+                "data-id",
+                "Enabled"
+              );
+            } else {
+              $('.settings-menu[data-action="epginfo"] label')
+                .last()
+                .text("Disabled");
+              $('.settings-menu[data-action="epginfo"]').attr(
+                "data-id",
+                "Disabled"
+              );
+            }
+            // this.isTimeZone = true;
+            // this.isOpened = true;
+          }
+          if (action === "about") {
+            this.active = this.$el.find(".focus");
+            this.renderAbout();
+            Focus.to(this.$el.find(".list .settings_language"));
+            this.$sub_menu.css({ flexBasis: "150%" });
+            this.isOpened = true;
+            this.active.css({ background: "#151617" });
+          }
+          if (action === "info") {
+            this.active = this.$el.find(".focus");
+            this.renderInfo();
+            Focus.to(this.$el.find(".list .settings_language"));
+            this.$sub_menu.css({ flexBasis: "150%" });
+            this.isOpened = true;
+            this.active.css({ background: "#151617" });
+          }
+          if (action === "reset") {
+            $("#ResetModal").addClass("show");
+            $("#ResetModal").show();
+            Focus.to(this.$el.find(".btn").first());
+            this.active = $el;
+            this.isModalOpened = true;
+          }
+          if (action === "reset_okay") {
+            $("#ResetModal").removeClass("show");
+            $("#ResetModal").hide();
+            Focus.to(this.active);
+            this.isModalOpened = false;
+          }
+          if (action === "reset_cancel") {
+            $("#ResetModal").removeClass("show");
+            $("#ResetModal").hide();
+            Focus.to(this.active);
+            this.isModalOpened = false;
+          }
+          if (action === "back") {
+            this.onReturn();
+          }
+          // this.active.css({ background: "#151617" });
         }
-        if (action === "about") {
-          this.active = this.$el.find(".focus");
-          this.renderAbout();
-          Focus.to(this.$el.find(".list .settings_language"));
-          this.$sub_menu.css({ flexBasis: "150%" });
-          this.isOpened = true;
-          this.active.css({ background: "#151617" });
-        }
-        if (action === "info") {
-          this.active = this.$el.find(".focus");
-          this.renderInfo();
-          Focus.to(this.$el.find(".list .settings_language"));
-          this.$sub_menu.css({ flexBasis: "150%" });
-          this.isOpened = true;
-          this.active.css({ background: "#151617" });
-        }
-        if (action === "reset") {
-          $("#ResetModal").addClass("show");
-          $("#ResetModal").show();
-          Focus.to(this.$el.find(".btn").first());
-          this.active = $el;
-          this.isModalOpened = true;
-        }
-        if (action === "reset_okay") {
-          $("#ResetModal").removeClass("show");
-          $("#ResetModal").hide();
-          Focus.to(this.active);
-          this.isModalOpened = false;
-        }
-        if (action === "reset_cancel") {
-          $("#ResetModal").removeClass("show");
-          $("#ResetModal").hide();
-          Focus.to(this.active);
-          this.isModalOpened = false;
-        }
-        if (action === "back") {
-          this.onReturn();
-        }
-        // this.active.css({ background: "#151617" });
       }
+        this.fromSideBar = false;
     },
 
     onLangChange: function () {

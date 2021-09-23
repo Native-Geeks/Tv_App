@@ -22,11 +22,13 @@ Scene_Profiles = (function(Scene) {
         },
 
         activate: function(accounts,sidebar) {
-            this.sidebar = sidebar;
+            if(sidebar!=null)
+            {
+                this.sidebar = sidebar;
+            }
             if(this.$activeEl != null) {
                 Focus.to(this.$activeEl);
             }
-
             if(accounts != null) {
                 this.$accounts = null;
                 this.$accounts = accounts;
