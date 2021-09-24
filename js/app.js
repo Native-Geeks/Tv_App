@@ -16,10 +16,11 @@ App = (function(Events, Deferrable) {
 			Router.addScene('settings', new Scene_Settings);
 			Router.addScene('error', new Scene_Error);
 
+			Router.addScene('search', new Scene_Search);
 			Router.addScene('home', new Scene_Home);
-			Router.addScene('live', new Scene_Home);
-			Router.addScene('home', new Scene_Home);
-			Router.addScene('home', new Scene_Home);
+			Router.addScene('live', new Scene_Live);
+			Router.addScene('movie', new Scene_Movie);
+			Router.addScene('series', new Scene_Serie);
 			
 			
 			Router.go('splash',this.sidebar);

@@ -14,28 +14,12 @@
     <link rel="stylesheet" type="text/css" href="css/error.css" />
 
     <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"  />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <script src="js/core/jquery.js"></script>
     <script src="js/core/jasmine.js"></script>
@@ -45,11 +29,7 @@
     <script src="js/core/mustache.js"></script>
     <script src="js/core/helpers.js"></script>
     <script src="js/core/main.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"  ></script>
 
     <script src="js/core/module/developer.js"></script>
     <script src="js/core/module/events.js"></script>
@@ -86,9 +66,13 @@
     <!-- Scenes-->
     <script src="js/scene/splash.js"></script>
     <script src="js/scene/profiles.js"></script>
-    <script src="js/scene/home.js"></script>
     <script src="js/scene/settings.js"></script>
     <script src="js/scene/error.js"></script>
+    <script src="js/scene/search.js"></script>
+    <script src="js/scene/home.js"></script>
+    <script src="js/scene/live.js"></script>
+    <script src="js/scene/movie.js"></script>
+    <script src="js/scene/serie.js"></script>
 
     <!-- Snippets -->
     <script src="js/snippets/sidebar.js"></script>
@@ -250,8 +234,29 @@
         </div>
       </div>
     </div>
+    <div id="scene-search" class="scene" style="display: none"></div>
     <div id="scene-home" class="scene" style="display: none"></div>
-    <div id="scene-lives" class="scene" style="display: none">
+    <div id="scene-live" class="scene" style="display: none">
+      <div class="header"></div> 
+      <div id="trailer">
+        <img
+          alt="trailer"
+          src="https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg"
+        />
+      </div>
+      <div id="snippet-home-list"></div>
+    </div>
+    <div id="scene-movie" class="scene" style="display: none">
+      <div class="header"></div> 
+      <div id="trailer">
+        <img
+          alt="trailer"
+          src="https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg"
+        />
+      </div>
+      <div id="snippet-home-list"></div>
+    </div>
+    <div id="scene-serie" class="scene" style="display: none">
       <div class="header"></div> 
       <div id="trailer">
         <img

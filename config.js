@@ -380,10 +380,6 @@ CONFIG = {
 		  label: "Live",
 		},
 		{
-		  class: "bi bi-house-door",
-		  label: "Home",
-		},
-		{
 		  class: "bi bi-film",
 		  label: "Films",
 		},

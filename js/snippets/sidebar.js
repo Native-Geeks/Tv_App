@@ -47,7 +47,7 @@
             var action = $el.attr("data-action");
 			if(action === 'Search') {this.close(); Router.go('search',this.sidebar);}
 			if(action === 'Live') {this.close(); Router.go('live',this.sidebar);}
-			if(action === 'Films') {this.close(); Router.go('films',this.sidebar);}
+			if(action === 'Films') {this.close(); Router.go('movie',this.sidebar);}
 			if(action === 'Series') {this.close(); Router.go('series',this.sidebar);}
 			if(action === 'Settings') {this.hide(); Router.go('settings',true); return;}
 			if(action === 'Quit')	{this.parent.onReturn();}
