@@ -1,46 +1,66 @@
-Scene_Search = (function(Scene) {
+Scene_Search = (function (Scene) {
+    var Scene_Search = function () {
+        this.construct.apply(this, arguments);
+    };
 
-	var Scene_Search = function() {
-	this.construct.apply(this, arguments);
-	};
+    $.extend(true, Scene_Search.prototype, Scene.prototype, {
+        init: function () {
+            this.config.focusOnRender = false;
 
-	$.extend(true, Scene_Search.prototype, Scene.prototype, {
-		
-		init: function(){
+            this.input = new Input("font-size: x-large;");
+            this.input.create(this.$el.find("#search-input"));
+            console.log(this.input);
+            this.input.setValue("");
+            this.input.blur();
+        },
 
-		},
-		
-		render: function() {			
-			/*console.log(CONFIG.LIVE);
-			console.log(CONFIG.LIVE_LIST_X);
-			console.log(CONFIG.VOD);
-			console.log(CONFIG.VOD_LIST_X);
-			console.log(CONFIG.SERIES);
-			console.log(CONFIG.SERIES_LIST_X);*/
-		},
+        render: function () {
+            this.showKeyboard();
+        },
 
-		activate: function(account,sidebar){
-			this.sidebar  = sidebar;
-			this.sidebar.show();
-			this.sidebar.open();
-			try{
-				this.sidebar.$el.find('#profile_name').text(account.name);
-			}catch(err){}
-			Focus.to(this.sidebar.$el.find('.focusable[data-action="Live"]'));
-			if(account != null)
-				this.account = account;
-		},
+        activate: function () {},
 
-		onReturn:function($el,e,stop){
-			this.sidebar.hide();
-			Router.goBack(null);
-		},
-		
-		create: function() {
-			return $('#scene-search');
-		}
-	});
+        onReturn: function ($el, e, stop) {
+            this.sidebar.hide();
+            Router.goBack(null);
+        },
 
-	return Scene_Search;
+        onClick: function ($el, event) {
+            return this.onEnter.apply(this, arguments);
+        },
 
+        onEnter: function ($el, event) {
+            var action = $el.attr("id");
+
+            if (action == "search-input") {
+                this.showKeyboard();
+            }
+            return false;
+        },
+
+        create: function () {
+            return $("#scene-search");
+        },
+
+        showKeyboard: function () {
+            Keyboard.show(this.input);
+            this.input.off("change:value");
+            this.input.on("change:value", this.onCharacterChange, this);
+
+            Keyboard.on(
+                "exit",
+                function () {
+                    this.focus();
+                    Keyboard.off("exit");
+                },
+                this
+            );
+        },
+        focus: function () {
+            var $el = this.$el.find("#search-input");
+            Focus.to($el);
+        },
+    });
+
+    return Scene_Search;
 })(Scene);
