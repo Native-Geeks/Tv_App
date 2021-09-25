@@ -1,10 +1,10 @@
-Snippet_Home_List = (function(Snippet) {
+Snippet_Live_List = (function(Snippet) {
 
-	var Snippet_Home_List = function() {
+	var Snippet_Live_List = function() {
 	this.construct.apply(this, arguments);
 	};
 
-	$.extend(true, Snippet_Home_List.prototype, Snippet.prototype, {
+	$.extend(true, Snippet_Live_List.prototype, Snippet.prototype, {
         
 		init: function(){
 			this.transformX = 0;
@@ -52,7 +52,7 @@ Snippet_Home_List = (function(Snippet) {
 					if(live.strem_icon==null)
 						live.strem_icon = live.cover;
 
-					this.$el.find('ul').last().append(fillItems(live))
+					this.$le.find('ul').last().append(fillItems(live))
 				});
 			}
 			this.isLiveRendered = true;
@@ -203,10 +203,10 @@ Snippet_Home_List = (function(Snippet) {
 		},
         
 		create: function() {
-			return $('#snippet-home-list');
+			return $('#snippet-live-list');
 		}
 	});
 
-	return Snippet_Home_List;
+	return Snippet_Live_List;
 
 })(Snippet);

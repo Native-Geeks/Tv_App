@@ -25,6 +25,13 @@ Scene_Search = (function (Scene) {
             Router.goBack(null);
         },
 
+        navigate: function(direction) {
+            switch(direction){
+				case 'left': Focus.to($('.sidebar .active')); $('.sidebar').addClass('onfocus');return;
+			}
+		},
+
+
         onClick: function ($el, event) {
             return this.onEnter.apply(this, arguments);
         },

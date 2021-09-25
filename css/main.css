@@ -75,3 +75,59 @@ body {
 	background-color: rgb(19, 20, 22);
 	opacity: 0.7;
 }
+#trailer>div{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 28px -22px 16px #151921;
+}
+.header{
+    background-color: #151921;
+    position: absolute;
+    top: 0;
+    left: 4rem;
+    width: calc(100% - 4rem);
+    height: 50%;
+    z-index: 1;
+}
+#trailer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50vh;
+    z-index: 1;
+}
+ #trailer img{
+    height: 100%;
+    
+}
+#snippet-movie-list ,#snippet-series-list {
+	transition: .3s;
+	position: absolute;
+	top: 50vh;
+	width: calc( 100vw - 4rem);
+	margin-left: 4rem;
+	margin-bottom: 1.25rem;
+}
+#snippet-movie-list .items,#snippet-series-list .items{
+	margin-bottom: 1rem;
+}
+#snippet-movie-list .items ul,#snippet-series-list .items ul{
+	transition: .3s;
+    padding: 0.25rem 0 0;
+    display: inline-flex;
+    margin: 0;
+}
+#snippet-movie-list .item img  ,#snippet-series-list  .item img{
+	height: 100%;
+	width: 100%;
+}
+#snippet-movie-list .item  ,#snippet-series-list  .item{
+	width: 150px;
+	height: 200px;
+	margin-right: 0.5rem ;
+}
+#snippet-series-list ul .focus,#snippet-movie-list ul .focus{
+    border: 2px solid white;
+}

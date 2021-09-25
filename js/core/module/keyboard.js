@@ -740,8 +740,6 @@ Keyboard = (function (Events) {
 		 * Only show element of keyboard.
 		*/
 		showKeyboard: function () {
-			if (this.keyboardPosition == this.enums["BOTTOM"]) this.$el.attr("style", "top: 410px");
-			else if (this.keyboardPosition == this.enums["TOP"]) this.$el.attr("style", "top: 50px");
 
 			if(this.$cover) { this.$cover.show(); }
 			this.$el.show();

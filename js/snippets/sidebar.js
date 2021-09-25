@@ -44,25 +44,30 @@
 		},
         
 		onEnter: function($el, event) {
+			if(this.$activeEl != null){
+				this.$activeEl.removeClass('active');
+			}
+			this.$activeEl = $el;
+			this.$activeEl.addClass('active');
             var action = $el.attr("data-action");
-			if(action === 'Search') {this.close(); Router.go('search',this.sidebar);}
-			if(action === 'Live') {this.close(); Router.go('live',this.sidebar);}
-			if(action === 'Films') {this.close(); Router.go('movie',this.sidebar);}
-			if(action === 'Series') {this.close(); Router.go('series',this.sidebar);}
+			if(action === 'Search') {this.close(); Router.go('search',this);}
+			if(action === 'Live') {this.close(); Router.go('live',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
+			if(action === 'Films') {this.close(); Router.go('movie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
+			if(action === 'Series') {this.close(); Router.go('series',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); }
 			if(action === 'Settings') {this.hide(); Router.go('settings',true); return;}
-			if(action === 'Quit')	{this.parent.onReturn();}
+			if(action === 'Quit')	{this.hide();Router.go('profiles');}
 		},
         
 		navigate: function(direction) {
             switch(direction){
 				case 'up': Focus.to(this.getFocusable(-1,true)); break;
 				case 'down': Focus.to(this.getFocusable(1,true)); break;
-				case 'right': if(Router.activeSceneName !== 'home'){this.onReturn();} break;
+				case 'right': if(Router.activeSceneName !== 'home'){Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); this.close();} return;
 			}
 		},
 
 		onReturn:function(){
-			Focus.to($('#snippet-home-list .items .item').first());
+			Focus.to($('.focusable').first());
 			this.hide();
 		},
 

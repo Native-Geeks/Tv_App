@@ -9,6 +9,7 @@
     width: 4rem;
     height: 100vh;
     padding: 4rem 0 1rem 0;
+    background-color: rgba(21,25,33,0.7);
 }
 .sidebar header{
     visibility: hidden;
@@ -30,7 +31,7 @@
 .onfocus {
     transition: .3s;
     width: 300px;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(37,47,71, 0.8);
 }
 .onfocus #sidebar-list,.onfocus #sidebar-footer{
@@ -71,4 +72,17 @@
 .sidebar .sidebar-btn span{
     display: none;
     color: rgb(173,181,189);
+}
+.sidebar #sidebar-list .active{
+    position: relative;
+}
+.sidebar #sidebar-list .active::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background-color: rgb(159,12,51);
+
 }

@@ -481,7 +481,7 @@ CONFIG = {
 		name: "Big Buck Bunny",
 		stream_type: "movie",
 		stream_id: 1001,
-		stream_icon: "https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg",
+		stream_icon: "https://m.media-amazon.com/images/M/MV5BYzZhZWVkNzYtZjZmOS00MTE1LWFkZTQtYzViYWU0MDU3MDIxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1080_.jpg",
 		epg_channel_id: null,
 		added: "1546743885",
 		category_id: "1",
@@ -491,7 +491,7 @@ CONFIG = {
 		tv_archive_duration: 0,
 		data: {
 		  info: {
-			movie_image: "https://googlecom/images/movies/big_buck_bunny.jpg",
+			movie_image: "https://www.fxnowcanada.ca/wp-content/uploads/2021/08/wwdits-s3-24-hero.png",
 			backdrop_path: [
 			  "https://google.com/images/backdrop/bird1.jpg",
 			  "https://google.com/images/backdrop/rodents.png",
@@ -521,7 +521,7 @@ CONFIG = {
 		name: "Elephant Dream",
 		stream_type: "movie",
 		stream_id: 1002,
-		stream_icon: "https://google.com/images/movies/elephants_dream.jpg",
+		stream_icon: "https://cps-static.rovicorp.com/2/Open/Disney_Media_Distribution/Program/37403911/_derived_jpg_q90_310x470_m0/Black_Widow_3x4_6_1628074323937_8.jpg",
 		epg_channel_id: null,
 		added: "1546743885",
 		category_id: "1",
@@ -531,7 +531,7 @@ CONFIG = {
 		tv_archive_duration: 0,
 		data: {
 		  info: {
-			movie_image: "https://google.com/images/movies/elephants_dream.jpg",
+			movie_image: "https://www.letsott.com/assets/uploads/posts/BlackWidow_H.jpg",
 			backdrop_path: [
 			  "https://google.com/images/backdrop/elephants_dream_both.jpg",
 			],
@@ -560,17 +560,17 @@ CONFIG = {
 		name: "Sintel",
 		stream_type: "movie",
 		stream_id: 1003,
-		stream_icon: "https://google.com/images/movies/sintel.jpg",
+		stream_icon: "https://cps-static.rovicorp.com/2/Open/Sony_Pictures_Television/Program/45277438/_derived_jpg_q90_310x470_m0/DontBreathe2_Sony_3x4_6_1629809206860_4.jpg",
 		epg_channel_id: null,
 		added: "1546743885",
-		category_id: "1",
+		category_id: "3",
 		custom_sid: "",
 		tv_archive: 0,
 		direct_source: "",
 		tv_archive_duration: 0,
 		data: {
 		  info: {
-			movie_image: "https://google.com/images/movies/sintel.jpg",
+			movie_image: "https://images.livemint.com/img/2021/08/29/600x338/Dont_Breathe_1630217582114_1630217610958.jpg",
 			backdrop_path: [
 			  "https://google.com/images/backdrop/sintel_blender.jpg",
 			  "https://www.cheeky.fr/blog/wp-content/uploads/2014/07/dragon-enfant-femme-jouent_animation-3d-sintel-blender-foundation_le-blog-de-cheeky.jpg?x66969",
