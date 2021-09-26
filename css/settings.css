@@ -2,10 +2,12 @@
   padding: 0 1rem 2rem;
   display: flex;
   flex-direction: column;
+  border : 3rem solid #151921;
+  border-top: 2rem solid #151921;
 }
 #scene-settings .head-settings {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 0 1.5rem;
   background: #151921;
   z-index: 1;
   margin: 0;
@@ -50,6 +52,7 @@
   text-align: center;
   width: 0;
   flex-basis: 0;
+  z-index: -1;
 }
 #scene-settings .settings-container .list .settings_language label {
   padding: 1rem;

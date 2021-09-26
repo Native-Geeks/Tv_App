@@ -37,18 +37,29 @@ Snippet_Movie_List = (function(Snippet) {
 			if(movies.length && !this.isMovieRendered){
 
 				var tmp = this.tmpFill();
+				var index = 0;
 
 				function fillItems(movie){
 						return Mustache.render(tmp,movie);
 				}
 
 				movies.forEach(movie => {
-					if(movie.strem_icon==null)
-						movie.strem_icon = movie.cover;
-					this.$el.find('.items[data-id='+movie.category_id+'] ul').append(fillItems(movie))
+					movie.index = index;
+					this.$el.find('.items[data-id='+movie.category_id+'] ul').append(fillItems(movie));
+					index +=1;
 				});
 			}
 			this.isMovieRendered = true;
+			
+			//For deleting the empty categories
+			for(element in this.$el.find('.items ul') ){
+				try{
+					if(!this.$el.find('.items ul')[element].childElementCount)
+					{
+						this.$el.find('.items ul')[element].parentNode.remove();
+					}
+				}catch(err){}
+			}
 		},
 		
         
@@ -118,7 +129,7 @@ Snippet_Movie_List = (function(Snippet) {
 					this.transformX = 0;
 					break;
 				case 'right' :
-					this.transformX -=156;
+					this.transformX -=158;
 					this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
 					Focus.to($nowEl.next());
 					//console.log( this.$el.find('.items').first())
@@ -135,7 +146,7 @@ Snippet_Movie_List = (function(Snippet) {
 					else
 					{
 						Focus.to($nowEl.prev());
-						this.transformX +=156;
+						this.transformX +=158;
 						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
 					}
 						
@@ -144,17 +155,22 @@ Snippet_Movie_List = (function(Snippet) {
 								console.log(element);
 						}); */
 						break; 
-			}
-			
-
+			}			
 		},
 
 		onFocus:function($el){
-			//console.log($el);
+			var index = $el.attr('data-index');
+			console.log(this.$movies[index]);
+			$('#scene-movie #filmName').text(this.$movies[index].name);
+			$('#scene-movie #filmYear').text(this.$movies[index].data.info.releasedate);
+			$('#scene-movie #filmDuration').text(this.$movies[index].data.info.duration);
+			$('#scene-movie #filmRating').text(this.$movies[index].data.info.rating);
+			$('#scene-movie #filmDescription').text(this.$movies[index].data.info.plot);
+			$('#scene-movie #trailer img').attr('src',this.$movies[index].data.info.movie_image);
 		},
 
 		tmpFill:function(){
-			return '<li class="item focusable" data-type="{{stream_type}}" data-id="{{stream_id}}" data-name="{{name}}" data-img="{{stream_icon}}" data-category="{{category_id}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
+			return '<li class="item focusable" data-id="{{stream_id}}" data-index="{{index}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
 		},
         
 		create: function() {

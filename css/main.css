@@ -75,13 +75,6 @@ body {
 	background-color: rgb(19, 20, 22);
 	opacity: 0.7;
 }
-#trailer>div{
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 28px -22px 16px #151921;
-}
 .header{
     background-color: #151921;
     position: absolute;
@@ -98,9 +91,26 @@ body {
     height: 50vh;
     z-index: 1;
 }
+#trailer>div{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    box-shadow:inset 15px -15px 12px rgba(21,25,33, 0.6)
+}
  #trailer img{
     height: 100%;
-    
+	border-radius: 0 0 0 0.75rem;
+}
+.header #filmName{
+	margin-top: 2rem;
+}
+.header .underHeader{
+	margin: 0.25rem 0;
+}
+.header #filmDescription{
+	text-align: justify;
+    max-width: 46%;
 }
 #snippet-movie-list ,#snippet-series-list {
 	transition: .3s;

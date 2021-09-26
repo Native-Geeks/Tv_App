@@ -198,6 +198,7 @@ Scene_Settings = (function (Scene) {
               this.$el.find(".list .settings_language[data-id='" + id + "']")
             );
             this.active.css({ background: "#151617" });
+            this.isTimeZone = true;
           }
           if (action === "timezone") {
             this.active = this.$el.find(".focus");
