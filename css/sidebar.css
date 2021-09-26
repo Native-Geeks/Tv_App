@@ -1,4 +1,5 @@
 .sidebar{
+    z-index: 100;
     transition: .3s;
     display: flex;
     position: fixed;

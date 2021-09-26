@@ -1,0 +1,14 @@
+.underHeader{
+    display: flex;
+    align-items: center;
+}
+.underHeader span{
+    margin-right: 0.5rem;
+}
+.underHeader span:last-child{
+    border: 1px solid white; 
+    border-radius: 5px; 
+    padding: 0 2px;
+    font-weight: 600;
+    font-size: 14px;
+}
