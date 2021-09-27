@@ -144,3 +144,29 @@ body {
 #snippet-series-list ul .focus,#snippet-movie-list ul .focus{
     border: 2px solid white;
 }
+#snippet-movie-details , #snippet-serie-details{
+	top: 50%;
+	left: 4rem;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	z-index: 2;
+}
+#snippet-movie-details button:first-of-type, #snippet-serie-details button:first-of-type{
+	margin-top: 1rem;
+}
+#snippet-movie-details button , #snippet-serie-details button{
+	display: flex;
+	color: white;
+}
+#snippet-movie-details button i, #snippet-serie-details button i{
+	margin-right:  1rem ;
+}
+#snippet-movie-details .focus, #snippet-serie-details .focus{
+	border:2px solid white;
+}
+#snippet-movie-details label, #snippet-serie-details label{
+	color: rgb(207, 207, 207);
+	margin-bottom: .25rem;
+	font-size: 14px;
+}

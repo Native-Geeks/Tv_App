@@ -62,7 +62,18 @@
             switch(direction){
 				case 'up': Focus.to(this.getFocusable(-1,true)); break;
 				case 'down': Focus.to(this.getFocusable(1,true)); break;
-				case 'right': if(Router.activeSceneName !== 'home'){Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); this.close();} return;
+				case 'right': 
+					if(Router.activeSceneName !== 'home')
+					{
+						console.log($('#scene-'+Router.activeSceneName+' .lastActive'));
+						if($('#scene-'+Router.activeSceneName+' .lastActive').length){
+							Focus.to($('#scene-'+Router.activeSceneName+' .lastActive'));}
+						else{
+							Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); 
+						}
+						this.close();
+					} 
+					return;
 			}
 		},
 

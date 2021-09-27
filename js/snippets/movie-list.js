@@ -10,6 +10,7 @@ Snippet_Movie_List = (function(Snippet) {
 			this.transformX = 0;
 			this.$el.find('.items').first().find('ul').css({transform:'translateX('+this.transformX+'px)'});
 			this.top = this.$el[0].offsetTop;
+			this.cp = 0;
 			
 			this.render();
 			this.show();
@@ -74,15 +75,34 @@ Snippet_Movie_List = (function(Snippet) {
 		},
         
 		onEnter: function($el, event) {
-            
+			if(this.cp>0)
+			{
+				var index = $el.attr('data-index');
+				this.parent.movie = this.$movies[index];
+				this.parent.details.show();
+				this.topAdded = $('#snippet-movie-details')[0].offsetTop+$('#snippet-movie-details')[0].offsetHeight+16 - (window.innerHeight/2);
+				this.top += this.topAdded;
+				this.$el.css('top',this.top);
+				$el.addClass('lastActive');
+				Focus.to($('#scene-movie #snippet-movie-details .btn').first());
+			}
+			this.cp++;
 		},
         
 		navigate: function(direction) {
 			var $nowEl = this.$el.find('.items .focus');
-			
+			if(this.$el.find('.items .lastActive').length)
+			{
+				$nowEl = this.$el.find('.items .lastActive');
+			}
+
             switch(direction)
 			{
 				case 'down' : 
+					if($nowEl.hasClass('lastActive'))
+					{
+						$nowEl.removeClass('lastActive');
+					}
 					if(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().length)
 					{
 						this.parentIsHovered += 1;
@@ -106,6 +126,10 @@ Snippet_Movie_List = (function(Snippet) {
 					}
 					break;
 				case 'up' : 
+					if($nowEl.hasClass('lastActive'))
+					{
+						$nowEl.removeClass('lastActive');
+					}
 					if(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().length)
 					{
 						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).find('.active').removeClass('active');
@@ -132,7 +156,11 @@ Snippet_Movie_List = (function(Snippet) {
 					}
 					break;
 				case 'right' :
-					if($nowEl.next().length)
+					if($nowEl.hasClass('lastActive'))
+					{
+						$nowEl.removeClass('lastActive');
+					}
+					else if($nowEl.next().length)
 					{
 						this.transformX -=158;
 						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
@@ -142,6 +170,7 @@ Snippet_Movie_List = (function(Snippet) {
 				case 'left' :
 					if(this.transformX === 0)
 					{
+						$nowEl.addClass('lastActive');
 						Focus.to($('.sidebar ul .active'));
 						$('.sidebar').addClass('onfocus');
 					}
@@ -151,13 +180,8 @@ Snippet_Movie_List = (function(Snippet) {
 						this.transformX +=158;
 						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
 					}
-						
-						//console.log( this.$el.find('.items').first())
-						/*this.$el.find('.items').forEach(element => {
-								console.log(element);
-						}); */
-						break; 
-			}			
+					break; 
+			}
 		},
 
 		onFocus:function($el){
@@ -182,7 +206,7 @@ Snippet_Movie_List = (function(Snippet) {
 			
 			
 			this.timeOut = setTimeout(()=>{
-				$('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[index].data.info.youtube_trailer+'?controls=0&autoplay=1&mute=1');
+				$('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[index].data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.$movies[index].data.info.youtube_trailer);
 				$('#scene-movie #trailer img').hide();
 				$('#scene-movie #trailer iframe').show();
 			},3500);
