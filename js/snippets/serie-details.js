@@ -1,10 +1,10 @@
-Snippet_Movie_Details = (function(Snippet) {
+Snippet_Serie_Details = (function(Snippet) {
 
-	var Snippet_Movie_Details = function() {
+	var Snippet_Serie_Details = function() {
 	this.construct.apply(this, arguments);
 	};
 
-	$.extend(true, Snippet_Movie_Details.prototype, Snippet.prototype, {
+	$.extend(true, Snippet_Serie_Details.prototype, Snippet.prototype, {
         
 		init: function(){
             this.on("show",function(){
@@ -37,9 +37,9 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.player.show();
                         break;
                     case 'trailer': 
-                        $('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.movie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.movie.data.info.youtube_trailer);
-                        $('#scene-movie #trailer img').hide();
-                        $('#scene-movie #trailer iframe').show();
+                        $('#scene-serie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.movie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.movie.data.info.youtube_trailer);
+                        $('#scene-serie #trailer img').hide();
+                        $('#scene-serie #trailer iframe').show();
                         break;
                     case 'cc': 
                     Subtitles.show();
@@ -79,10 +79,10 @@ Snippet_Movie_Details = (function(Snippet) {
         },
         
 		create: function() {
-			return $('#snippet-movie-details');
+			return $('#snippet-serie-details');
 		}
 	});
 
-	return Snippet_Movie_Details;
+	return Snippet_Serie_Details;
 
 })(Snippet);

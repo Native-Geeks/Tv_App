@@ -1,47 +1,13 @@
-/*
- *******************************************************************************
- * Copyright (c) 2013 Mautilus, s.r.o. (Czech Republic)
- * All rights reserved
- *  
- * Questions and comments should be directed https://github.com/mautilus/sdk/issues
- *
- * You may obtain a copy of the License at LICENSE.txt
- *******************************************************************************
- */
-
-/**
- * Subtitles class
- * Own implementation of subtitles independently of all platfroms
- * 
- * @author Mautilus s.r.o.
- * @class Subtitles
- * @singleton
- * @mixins Events
- */
-
 Subtitles = (function(Events) {
-	var Subtitles = {
-		/**
-		 * @property {Object} config General config hash
-		 */
-		config: null,
-	};
+	var Subtitles = {config: null,};
 
 	$.extend(true, Subtitles, Events, {
-		/**
-		 * Initialise Subtitles class
-		 * 
-		 */
+		
 		init: function(config) {
 			this.configure(config);
-
-			/**
-			 * @property {Number} time Current playback time in [ms]
-			 */
+			
 			this.time = 0;
-			/**
-			 * @property {Boolean} playing Player state
-			 */
+			
 			this.playing = false;
 
 			this.interval = null;
@@ -51,9 +17,7 @@ Subtitles = (function(Events) {
 			this.subs = {};
 			this.region_els = {};
 			this.cellResolution = [32, 15];
-			/**
-			 * @property {Object} defaultStyle defined default style of subtitles
-			 */
+			
 			this.defaultStyle = {
 				textAlign: 'center',
 				color: 'white',
@@ -65,10 +29,7 @@ Subtitles = (function(Events) {
 				displayAlign: 'before',
 				lineHeight: '135%'
 			};
-
-			/**
-			 * @property {Object} $el Wrapper element
-			 */
+			
 			this.$el = $('<div id="subtitles-wrap" />').appendTo('body');
 
 			this.$el.css({
@@ -113,43 +74,22 @@ Subtitles = (function(Events) {
 				}
 			}, this);
 		},
-
-		/**
-		 * Set class config hash
-		 * 
-		 * @param {Object} config Hash of parameters
-		 */
+		
 		configure: function(config) {
 			this.config = $.extend(true, this.config || {}, config);
 		},
-
-		/**
-         * Internal player timer
-		 * @private
-		 */
+		
 		tick: function() {
 			if (this.playing) {
 				this.setTime(this.time + 100);
 			}
 		},
 
-		/**
-         * Time updating inside this class and call rendering function
-		 * @private
-		 */
 		setTime: function(time) {
 			this.time = time;
 			this.render();
 		},
-
-		/**
-		 * Set TTML xml subtitles
-         * Parsing subtitles, start and end time, getting lines in each subtitle, get and prepare style of each subtitle
-         * and filling-in private attributes for rendering subtitles
-		 * 
-		 * @param {String} xml XML file
-		 * @param {Number} [timeOffset=0] Time offset in [ms]
-		 */
+		
 		setTTML: function(xml, timeOffset) {
 			var scope = this, subs = {}, regions = {}, styles = {}, body, head, region, cellResolution, bodyStyles, isFirstStyle = true,
 				rgba, getTime, getLines, getStyleAttrs, xml2html;
@@ -365,16 +305,7 @@ Subtitles = (function(Events) {
 			scope.styles = $.extend(true, this.styles, styles);
 			scope.subs = $.extend(true, this.subs, subs);
 		},
-
-		/**
-		 * Set SRT subtitles
-		 * 
-		 * example: https://www.npmjs.com/package/subtitles-parser
-		 * example: https://raw.githubusercontent.com/bazh/subtitles-parser/master/index.js
-		 * license: MIT
-		 * 
-		 * @param {String} subtitles
-		 */
+		
 		setSRT: function(srt) {
 			/**
 			 * Time to miliseconds
@@ -441,13 +372,7 @@ Subtitles = (function(Events) {
 		    }
 
 		},
-
-		/**
-		 * Start playback in given format
-		 * 
-		 * @param {String} format `ttml`, `srt`
-		 * @param {Object/String} [data] XML or SRT data
-		 */
+		
 		play: function(format, data) {
 			var scope = this;
 
@@ -469,10 +394,7 @@ Subtitles = (function(Events) {
 				scope.tick();
 			}, 100);
 		},
-
-		/**
-		 * Stop playback and clear data
-		 */
+		
 		stop: function() {
 			this.playing = false;
 
@@ -489,34 +411,24 @@ Subtitles = (function(Events) {
 			}
 		},
 
-		/**
-         * Update layout of subtitles related with player size
-		 * @private
-		 */
 		show: function() {
+			this.renderAudioCC();
 			this.isVisible = true;
-
 			this.$el.css({
 				width: Player.width,
 				height: Player.height,
-				left: Player.left,
-				top: Player.top
+				left: $('#snippet-movie-details')[0].offsetLeft+$('#snippet-movie-details')[0].offsetWidth+16,
+				top: window.innerHeight/4
 			}).show();
+			Focus.to(this.$el.find('.focusable').first());
+			this.$el.addClass('show_details');
 		},
-
-		/**
-         * Hide subtitles
-		 * @private
-		 */
+		
 		hide: function() {
 			this.isVisible = false;
-
 			this.$el.hide();
 		},
-
-		/**
-		 * @private
-		 */
+		
 		style2css: function(style) {
 			if (style.fontFamily) {
 				switch (style.fontFamily) {
@@ -545,10 +457,42 @@ Subtitles = (function(Events) {
 			return style;
 		},
 
-		/**
-         * Get time when subtitles should be hidden
-		 * @private
-		 */
+		renderAudioCC: function () {
+            if(!this.isRendered)
+            {
+				this.$el.empty();
+                var tmpAudio = this.tmpAudio();
+                var tmpCC = this.tmpCC();
+
+				function fillAudio(audio) {
+					return Mustache.render(tmpAudio, audio);
+				}
+				function fillCC(sub) {
+					return Mustache.render(tmpCC, sub);
+				}
+
+                if (CONFIG.player.Audio.length) {
+					this.$el.append('<ul id="audio"><h6>Audios</h6></ul>');
+                    CONFIG.player.Audio.forEach((audio) => {
+                        this.$el.find("#audio").append(fillAudio(audio));
+                    });
+                }
+                if (CONFIG.player.Subtitles.length) {
+					this.$el.append('<ul id="cc"><h6>Subtitles</h6></ul>');
+                    CONFIG.player.Subtitles.forEach((sub) => {
+                        this.$el.find("#cc").append(fillCC(sub));
+                    });
+                }
+            }            
+        },
+
+		tmpAudio: function () {
+            return "<li class='focusable' data-id='{{id}}'>{{title}}</li>";
+        },
+        tmpCC: function () {
+            return "<li class='focusable' data-id='{{id}}'>{{title}}</li>";
+        },
+		
 		getMaxEndTime: function(arr) {
 			var times = [];
 			for (var i in arr) {
@@ -556,14 +500,7 @@ Subtitles = (function(Events) {
 			}
 			return (times.sort().reverse())[0];
 		},
-
-		/**
-         * Prepare CSS style for subtitle
-		 * @private
-         * @param {Object} css style from received subtitle file related with concrete subtitle string
-         * @param {Object} [cssOverride] css which shoud overwrite css properties
-         * @returns {Object} with css style 
-		 */
+		
 		getStyles: function(css, cssOverride) {
 			var o = $.extend({}, this.defaultStyle);
 			for (var i in css) {
@@ -576,13 +513,7 @@ Subtitles = (function(Events) {
 
 			return this.style2css(o);
 		},
-
-		/**
-         * Render region. It is required for subtitle rendering
-		 * @private
-         * @param {Object} regionId id which region be rendered
-         * @returns {Object} jQuery element (region)
-		 */
+		
 		renderRegion: function(regionId) {
 			var $el, $wrap, cells2px, colWidth, rowHeight;
 
@@ -639,11 +570,7 @@ Subtitles = (function(Events) {
 
 			return $wrap;
 		},
-
-		/**
-         * render subtitle related with current playing time
-		 * @private
-		 */
+		
 		render: function() {
 			var $el, $wrap;
 
@@ -722,6 +649,15 @@ Subtitles = (function(Events) {
 	                    return;
 	                }
 	            }
+			}
+		},
+
+		navigate: function(direction) {
+			console.log(direction);
+			switch(direction)
+			{
+				case 'up': Focus.to(this.getFocusable(-1,true)); break;
+				case 'down': Focus.to(this.getFocusable(1,true)); break;
 			}
 		}
 	});

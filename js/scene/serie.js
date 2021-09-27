@@ -17,18 +17,14 @@ Scene_Serie = (function(Scene) {
 			console.log(CONFIG.VOD_LIST_X);
 			console.log(CONFIG.SERIES);
 			console.log(CONFIG.SERIES_LIST_X);*/
+			this.list = new Snippet_Movie_List(this);
+			this.details = new Snippet_Movie_Details(this);
+			this.player = new Snippet_Player(this);
+			this.list.show();
 		},
 
-		activate: function(account,sidebar){
+		activate: function(sidebar){
 			this.sidebar  = sidebar;
-			this.sidebar.show();
-			this.sidebar.open();
-			try{
-				this.sidebar.$el.find('#profile_name').text(account.name);
-			}catch(err){}
-			Focus.to(this.sidebar.$el.find('.focusable[data-action="Live"]'));
-			if(account != null)
-				this.account = account;
 		},
 
 		onReturn:function($el,e,stop){

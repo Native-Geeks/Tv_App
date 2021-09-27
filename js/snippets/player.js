@@ -8,9 +8,6 @@ Snippet_Player = (function (Snippet) {
             var title = "Just testing before real launch";
             $("#vid-Title").text(title);
             this.$controles = this.$el.find("#controles");
-            this.$watchLine = this.$el.find("#real-time");
-            this.$vidTime = this.$el.find("#timer");
-            this.$vidDuration = this.$el.find("#duration");
             this.$btnPlay = this.$el.find("#play");
             this.$AudioCCList = this.$el.find("#audio-cc-list");
             this.topIsFocused = false;
@@ -18,13 +15,16 @@ Snippet_Player = (function (Snippet) {
             this.playIsFocused = true;
             Focus.to(this.$el.find("#play-pause"));
 
+            function updateControllers(currentTime,duration){
+                this.$el.find("#timer").text(currentTime);
+                this.$el.find("#duration").text(this.timer(duration));
+                this.$el.find("#real-time").width(
+                        (currentTime / duration) * 100 + "%"
+                    );
+            }
             //update timer
             Player.on("timeupdate",function (time) {
-                    this.$vidTime.text(this.timer(Player.currentTime));
-                    this.$vidDuration.text(this.timer(Player.duration));
-                    this.$watchLine.width(
-                        (Player.currentTime / Player.duration) * 100 + "%"
-                    );
+                updateControllers(Player.currentTime,Player.duration);
             });
 
             Player.on("end",function () {
@@ -57,14 +57,11 @@ Snippet_Player = (function (Snippet) {
             );
 
             this.on("show",function() {
-                this.$el.css({display:'none'});
-                
-                
                 $('.player').css('opacity',1);
                 Player.play(this.parent.videoUrl);
                 setTimeout(()=>{
-                    this.$el.css({display:'inline'});
-                },500);
+                    this.$el.css({opacity:1});
+                },1500);
                 
             });
 

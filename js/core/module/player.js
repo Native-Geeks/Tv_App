@@ -254,7 +254,6 @@ Player = (function(Events, Deferrable) {
 			this.el = document.createElement('video');
 			this.$el = $(this.el).addClass('player');
 			this.$el.appendTo('body');
-			this.$el.css("position", "absolute");
 
 			this.el.addEventListener('waiting', function() {
 				scope.state(scope.STATE_BUFFERING);
@@ -346,12 +345,15 @@ Player = (function(Events, Deferrable) {
 				this.top = (typeof attrs.top !== 'undefined' ? attrs.top : this.top);
 				this.left = (typeof attrs.left !== 'undefined' ? attrs.left : this.left);
 
-				this.$el.css({
-					width: this.width,
-					height: this.height,
-					left: this.left,
-					top: this.top
-				});
+				setTimeout(()=>{
+					this.$el.css({
+						width: this.width,
+						height: this.height,
+						left: this.left,
+						top: this.top
+					});
+				},500);
+				
 
 				this.$el.show();
 

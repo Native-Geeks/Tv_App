@@ -10,21 +10,7 @@ Snippet_Serie_List = (function(Snippet) {
 			this.transformX = 0;
 			this.$el.find('.items').first().find('ul').css({transform:'translateX('+this.transformX+'px)'});
 			this.top = this.$el[0].offsetTop;
-			
-			// Show/Hide
-            this.on('show', function() {
-                this.uiVisible = true;
-                if (!this.$el.hasClass('ui-visible')) {
-                    this.$el.addClass('ui-visible');
-                }
-            }, this);
-
-            // Hide events
-            this.on('hide', function() {
-                if (!this.uiVisible) return;
-                this.uiVisible = false;
-                this.$el.removeClass('ui-visible');
-            }, this);
+			this.cp = 0;
 			
 			this.render();
 			this.show();
@@ -32,70 +18,50 @@ Snippet_Serie_List = (function(Snippet) {
         
 		render: function() {
 			this.$el.empty();
-			this.renderLive(CONFIG.LIVE_LIST_X);
-			this.renderMovie(CONFIG.VOD_LIST_X);
-			this.renderSerie(CONFIG.SERIES_LIST_X);
+			this.$movies = CONFIG.SERIES_LIST_X;
+			this.renderCategories(CONFIG.SERIES);
+			this.renderMovies(this.$movies);
 			this.parentIsHovered = 0;
 		},
 
-		renderLive:function(lives){
-			if(lives.length && !this.isLiveRendered){
-				this.$el.append("<div class='items'><h4>Lives</h1><ul>");
-
-				var tmp = this.tmpFill();
-
-				function fillItems(live){
-						return Mustache.render(tmp,live);
-				}
-
-				lives.forEach(live => {
-					if(live.strem_icon==null)
-						live.strem_icon = live.cover;
-
-					this.$le.find('ul').last().append(fillItems(live))
+		renderCategories:function(categories){
+			if(categories.length && !this.isCategoriesRendered){
+				categories.forEach(category => {
+					this.$el.append('<div class="items" data-id="'+category.category_id+'"><h4>'+category.category_name+'</h1><ul></ul></div>');
 				});
 			}
-			this.isLiveRendered = true;
+			this.isCategoriesRendered = true;
 			this.transformX = 0;
 		},
 
-		renderMovie:function(movies){
+		renderMovies:function(movies){
 			if(movies.length && !this.isMovieRendered){
-				this.$el.append("<div class='items'><h4>Movies</h1><ul>");
 
 				var tmp = this.tmpFill();
+				var index = 0;
 
 				function fillItems(movie){
 						return Mustache.render(tmp,movie);
 				}
 
 				movies.forEach(movie => {
-					if(movie.strem_icon==null)
-					movie.strem_icon = movie.cover;
-					this.$el.find('ul').last().append(fillItems(movie))
+					movie.index = index;
+					this.$el.find('.items[data-id='+movie.category_id+'] ul').append(fillItems(movie));
+					index +=1;
 				});
 			}
 			this.isMovieRendered = true;
-		},
-
-		renderSerie:function(movies){
-			if(movies.length && !this.isSerieRendered){
-				this.$el.append("<div class='items'><h4>Series</h1><ul>");
-
-				var tmp = this.tmpFill();
-
-				function fillItems(movie){
-						return Mustache.render(tmp,movie);
-				}
-
-				movies.forEach(movie => {
-					movie.stream_icon = movie.cover;
-					this.$el.find('ul').last().append(fillItems(movie))
-				});
+			
+			//For deleting the empty categories
+			for(element in this.$el.find('.items ul') ){
+				try{
+					if(!this.$el.find('.items ul')[element].childElementCount)
+					{
+						this.$el.find('.items ul')[element].parentNode.remove();
+					}
+				}catch(err){}
 			}
-			this.isSerieRendered = true;
 		},
-		
         
 		activate: function() {
 		},
@@ -109,97 +75,146 @@ Snippet_Serie_List = (function(Snippet) {
 		},
         
 		onEnter: function($el, event) {
-            
+			if(this.cp>0)
+			{
+				var index = $el.attr('data-index');
+				this.parent.movie = this.$movies[index];
+				this.parent.details.show();
+				this.topAdded = $('#snippet-movie-details')[0].offsetTop+$('#snippet-movie-details')[0].offsetHeight+16 - (window.innerHeight/2);
+				this.top += this.topAdded;
+				this.$el.css('top',this.top);
+				$el.addClass('lastActive');
+				Focus.to($('#scene-movie #snippet-movie-details .btn').first());
+			}
+			this.cp++;
 		},
         
 		navigate: function(direction) {
 			var $nowEl = this.$el.find('.items .focus');
+			if(this.$el.find('.items .lastActive').length)
+			{
+				$nowEl = this.$el.find('.items .lastActive');
+			}
+
             switch(direction)
 			{
 				case 'down' : 
-					//Focus.to(this.$el.find('.items').next().find('ul .item').first())
-					this.parentIsHovered += 1;
-					this.top -= 231.27;
-					this.$el.css('top',this.top);
-					this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).find('.active').removeClass('active');
-					$nowEl.addClass('active');
-					
-					this.transformX = 0;
-
-					if(!this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').length)
+					if($nowEl.hasClass('lastActive'))
 					{
-						Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('li').first());
-						this.transformX =0;
-						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'});
+						$nowEl.removeClass('lastActive');
 					}
-					else
+					if(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().length)
 					{
-						Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('li').first());
-						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').removeClass('active');
+						this.parentIsHovered += 1;
+						this.top -= 256.67;
+						this.$el.css('top',this.top);
+						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).find('.active').removeClass('active');
+						$nowEl.addClass('active');
+						
+						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).css('opacity',0);
+						if(!this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('.active').length)
+						{
+							Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('li').first());
+							this.transformX = 0;
+						}
+						else
+						{
+								this.transformX = -this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('li.active')[0].offsetLeft;
+								Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('li.active'));
+								this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).next().find('.active').removeClass('active');
+						}
 					}
-
 					break;
 				case 'up' : 
-				this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).find('.active').removeClass('active');
-					$nowEl.addClass('active');
-					if(!this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').length)
+					if($nowEl.hasClass('lastActive'))
 					{
-						Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('li').first());
-						this.transformX =0;
-						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'});
+						$nowEl.removeClass('lastActive');
 					}
-					else
+					if(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().length)
 					{
-						Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active'));
-						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').removeClass('active');
+						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).find('.active').removeClass('active');
+						$nowEl.addClass('active');
+						this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().css('opacity',1);
+						if(!this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').length)
+						{
+							Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('li').first());
+							this.transformX =0;
+						}
+						else
+						{
+							this.transformX = -this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('li.active')[0].offsetLeft;
+							Focus.to(this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active'));
+							this.$el.find(this.$el.find($nowEl[0].parentNode)[0].parentNode).prev().find('.active').removeClass('active');
+						}
+						
+						if(this.top<(this.parent.$el[0].offsetHeight/2))
+						{
+							this.parentIsHovered -= 1;
+							this.top += 256.67;
+							this.$el.css('top',this.top);
+						}
 					}
-					
-					if(this.top<(this.parent.$el[0].offsetHeight/2))
-					{
-						this.parentIsHovered -= 1;
-						this.top += 231.27;
-						this.$el.css('top',this.top);
-					}					
-					this.transformX = 0;
 					break;
 				case 'right' :
-					this.transformX -=304;
-					this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
-					Focus.to($nowEl.next());
-					//console.log( this.$el.find('.items').first())
-					/*this.$el.find('.items').forEach(element => {
-							console.log(element);
-					}); */
+					if($nowEl.hasClass('lastActive'))
+					{
+						$nowEl.removeClass('lastActive');
+					}
+					else if($nowEl.next().length)
+					{
+						this.transformX -=158;
+						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
+						Focus.to($nowEl.next());
+					}
 					break; 
-					case 'left' :
+				case 'left' :
 					if(this.transformX === 0)
 					{
-						Focus.to($('.sidebar ul .sidebar-btn').first());
+						$nowEl.addClass('lastActive');
+						Focus.to($('.sidebar ul .active'));
 						$('.sidebar').addClass('onfocus');
 					}
 					else
 					{
 						Focus.to($nowEl.prev());
-						this.transformX +=304;
+						this.transformX +=158;
 						this.$el.find($nowEl[0].parentNode).css({transform:'translateX('+this.transformX+'px)'})
 					}
-						
-						//console.log( this.$el.find('.items').first())
-						/*this.$el.find('.items').forEach(element => {
-								console.log(element);
-						}); */
-						break; 
+					break; 
 			}
-			
-
 		},
 
 		onFocus:function($el){
-			//console.log($el);
+			clearTimeout(this.timeOut);
+			$('#scene-movie #trailer iframe').removeAttr("src");
+			$('#scene-movie #trailer iframe').hide();232
+			$('#scene-movie #trailer img').show();
+			var index = $el.attr('data-index');
+			var date = new Date();
+			date.setHours(this.$movies[index].data.info.duration.split(':')[0]);
+			date.setMinutes(this.$movies[index].data.info.duration.split(':')[1]);
+			var duration = "";
+			if(date.getHours()){duration+= date.getHours()+" h";}
+			if(date.getMinutes()){duration+= date.getMinutes()+" min";}
+
+			$('#scene-movie #filmName').text(this.$movies[index].name);
+			$('#scene-movie #filmYear').text(new Date(this.$movies[index].data.info.releasedate).getFullYear());
+			$('#scene-movie #filmDuration').text(duration);
+			$('#scene-movie #filmRating').text(this.$movies[index].data.info.rating);
+			$('#scene-movie #filmDescription').text(this.$movies[index].data.info.plot);
+			$('#scene-movie #trailer img').attr('src',this.$movies[index].data.info.movie_image);
+			
+			
+			this.timeOut = setTimeout(()=>{
+				$('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[index].data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.$movies[index].data.info.youtube_trailer);
+				$('#scene-movie #trailer img').hide();
+				$('#scene-movie #trailer iframe').show();
+			},3500);
+			
 		},
 
 		tmpFill:function(){
-			return '<li class="item focusable" data-type="{{stream_type}}" data-id="{{stream_id}}" data-name="{{name}}" data-img="{{stream_icon}}" data-category="{{category_id}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
+			return '<li class="item focusable" data-id="{{stream_id}}" data-index="{{index}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
 		},
         
 		create: function() {

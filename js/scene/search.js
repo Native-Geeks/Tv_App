@@ -9,7 +9,6 @@ Scene_Search = (function (Scene) {
 
             this.input = new Input("font-size: x-large;");
             this.input.create(this.$el.find("#search-input"));
-            console.log(this.input);
             this.input.setValue("");
             this.input.blur();
         },
