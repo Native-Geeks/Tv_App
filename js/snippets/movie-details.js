@@ -30,6 +30,8 @@ Snippet_Movie_Details = (function(Snippet) {
             var action = $el.attr('data-action');
             switch(action){
                 case 'watch': 
+                    this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
+                    this.parent.player.show();
                     break;
                 case 'trailer': 
                     break;
@@ -41,17 +43,18 @@ Snippet_Movie_Details = (function(Snippet) {
 		},
         
 		navigate: function(direction) {
-            if(this.getFocusable(1,true).length){
-                switch(direction)
+            switch(direction)
                 {
                     case 'up': Focus.to(this.getFocusable(-1,true)); break;
-                    case 'down': Focus.to(this.getFocusable(1,true)); break;
+                    case 'down': 
+                        if(this.getFocusable(1,true).length){
+                            Focus.to(this.getFocusable(1,true)); 
+                        }
+                        else{
+                            this.onReturn();
+                        }
+                        break;
                 }
-            }
-            else{
-                this.onReturn();
-            }
-            
 		},
 
 		onFocus:function($el){

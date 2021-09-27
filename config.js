@@ -10,6 +10,34 @@ CONFIG = {
 	},
 	player: {
 	  muted: true,
+	  Audio: [
+        {
+            id: 1,
+            title: "audio 1",
+        },
+        {
+            id: 2,
+            title: "audio 1",
+        },
+        {
+            id: 3,
+            title: "audio 3",
+        },
+    ],
+    Subtitles: [
+        {
+            id: 1,
+            title: "sub 1",
+        },
+        {
+            id: 2,
+            title: "sub 1",
+        },
+        {
+            id: 3,
+            title: "sub 3",
+        },
+    ],
 	},
 	ajax: {
 	  timeout: 60000,

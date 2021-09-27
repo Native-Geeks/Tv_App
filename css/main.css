@@ -93,7 +93,7 @@ body {
     height: 100%;
 	border-radius: 0 0 0 0.75rem;
 }
-#trailer iframe{width: 750px;display: none;}
+#trailer iframe{width: 741px;display: none;}
 .header{
 	display: flex;
 	flex-direction: column;

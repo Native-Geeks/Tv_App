@@ -65,7 +65,6 @@
 				case 'right': 
 					if(Router.activeSceneName !== 'home')
 					{
-						console.log($('#scene-'+Router.activeSceneName+' .lastActive'));
 						if($('#scene-'+Router.activeSceneName+' .lastActive').length){
 							Focus.to($('#scene-'+Router.activeSceneName+' .lastActive'));}
 						else{
