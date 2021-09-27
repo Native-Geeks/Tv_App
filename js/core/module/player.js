@@ -347,8 +347,8 @@ Player = (function(Events, Deferrable) {
 
 				setTimeout(()=>{
 					this.$el.css({
-						width: this.width,
-						height: this.height,
+						width: '100vw',
+						height: '100vh',
 						left: this.left,
 						top: this.top
 					});
