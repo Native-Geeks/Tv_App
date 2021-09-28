@@ -113,7 +113,7 @@ body {
     max-width: 44%;
 	z-index: 11;
 }
-#snippet-movie-list ,#snippet-series-list {
+#snippet-movie-list ,#snippet-serie-list {
 	transition: .3s;
 	position: absolute;
 	top: 50vh;
@@ -122,26 +122,26 @@ body {
 	margin-bottom: 1.25rem;
 	z-index: 1;
 }
-#snippet-movie-list .items,#snippet-series-list .items{
+#snippet-movie-list .items,#snippet-serie-list .items{
 	margin-bottom: 1rem;
 	transition: .3s;
 }
-#snippet-movie-list .items ul,#snippet-series-list .items ul{
+#snippet-movie-list .items ul,#snippet-serie-list .items ul{
 	transition: .3s;
     padding: 0.25rem 0 0;
     display: inline-flex;
     margin: 0;
 }
-#snippet-movie-list .item img  ,#snippet-series-list  .item img{
+#snippet-movie-list .item img  ,#snippet-serie-list  .item img{
 	height: 100%;
 	width: 100%;
 }
-#snippet-movie-list .item  ,#snippet-series-list  .item{
+#snippet-movie-list .item  ,#snippet-serie-list  .item{
 	width: 150px;
 	height: 200px;
 	margin-right: 0.5rem ;
 }
-#snippet-series-list ul .focus,#snippet-movie-list ul .focus{
+#snippet-serie-list ul .focus,#snippet-movie-list ul .focus{
     border: 2px solid white;
 }
 #snippet-movie-details , #snippet-serie-details{
@@ -151,6 +151,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	z-index: 2;
+}
+#snippet-movie-details .active, #snippet-serie-details .active{
+	background: white;
+    color: #151921;
+    font-weight: 600;
 }
 #snippet-movie-details button:first-of-type, #snippet-serie-details button:first-of-type{
 	margin-top: 1rem;

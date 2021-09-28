@@ -412,12 +412,17 @@ Subtitles = (function(Events) {
 		},
 
 		show: function() {
+			var left = 0;
+			if(Router.activeSceneName === 'movie' || Router.activeSceneName === 'serie' ){
+				left = $('#snippet-'+Router.activeSceneName+'-details')[0].offsetLeft+$('#snippet-'+Router.activeSceneName+'-details')[0].offsetWidth+16
+			}
+			
 			this.renderAudioCC();
 			this.isVisible = true;
 			this.$el.css({
 				width: Player.width,
 				height: Player.height,
-				left: $('#snippet-movie-details')[0].offsetLeft+$('#snippet-movie-details')[0].offsetWidth+16,
+				left: left,
 				top: window.innerHeight/4
 			}).show();
 			Focus.to(this.$el.find('.focusable').first());

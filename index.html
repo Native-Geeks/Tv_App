@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="css/error.css" />
         <link rel="stylesheet" type="text/css" href="css/player.css" />
         <link rel="stylesheet" type="text/css" href="css/subtitles.css" />
+        <link rel="stylesheet" type="text/css" href="css/serie-episodes.css" />
 
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
@@ -86,8 +87,10 @@
         <script src="js/snippets/movie-list.js"></script>
         <script src="js/snippets/serie-list.js"></script>
         <script src="js/snippets/movie-details.js"></script>
-        <script src="js/snippets/seie-details.js"></script>
+        <script src="js/snippets/serie-details.js"></script>
+        <script src="js/snippets/serie-episodes.js"></script>
         <script src="js/snippets/player.js"></script>
+        <script src="js/snippets/subtitles.js"></script>
 
         <script src="config.js"></script>
         <script src="js/app.js"></script>
@@ -247,7 +250,7 @@
                     <option value="series">Series</option>
                     <option value="lives">Lives</option>
                 </select>
-                <input type="search" placeholder="Search" id="search-input" class="form-control focusable" />
+                <div type="search" placeholder="Search" id="search-input" class="form-control" ></div>
             </div>
             <div id="container"></div>
         </div>
@@ -288,11 +291,31 @@
             </div>
         </div>
         <div id="scene-serie" class="scene" style="display: none">
-            <div class="header"></div>
+            <div class="header">
+                <h2 id="filmName"></h2>
+                <div class="underHeader">
+                    <span id="filmYear"></span>
+                    <span id="filmDuration"></span>
+                    <span id="filmRating"></span>
+                </div>
+                <p id="filmDescription"></p>
+            </div>
             <div id="trailer">
+                <div></div>
+                <iframe src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <img alt="trailer" src="https://a-static.besthdwallpaper.com/oblivion-movie-poster-wallpaper-11407_L.jpg" />
             </div>
-            <div id="snippet-home-list"></div>
+            <div id="snippet-serie-list"></div>
+            <div id="snippet-serie-details" style="display: none;">
+                <label>Director : <span id="director"></span></label>
+                <label id="genre"></label>
+                <button class="btn focusable" data-action="watch"><i class="bi bi-play-fill"></i>Watch serie</button>
+                <button class="btn focusable" data-action="trailer"><i class="bi bi-collection-play-fill"></i>Watch trailer</button>
+                <button class="btn focusable" data-action="episodes"><i class="bi bi-bar-chart-steps"></i>Saisons and episodes</button>
+                <button class="btn focusable" data-action="cc"><i class="bi bi-badge-cc-fill"></i>Audio and CC</button>
+                <button class="btn focusable" data-action="later"><i class="bi bi-plus-square-fill"></i>Add to watch later</button>
+            </div>
+            <div id="snippet-serie-episodes" style="display: none;"></div>
         </div>
         <div id="scene-settings" class="scene" style="display: none">
             <h1 class="head-settings">Settings</h1>
@@ -380,12 +403,14 @@
                 </div>
                 <div id="bottom-controles">
                     <div id="bottom-elements">
-                        <span id="play-pause" class="focusable down">
-                            <i id="play" class="fas fa-pause"></i>
-                        </span>
+                        <label>
+                            <span id="play-pause" class="focusable down">
+                                <i id="play" class="fas fa-pause"></i>
+                            </span>
+                        </label>
                         <span id="timer" class="down">00:00</span>
                         <div class="progress-bar down">
-                            <div id="real-time" class="focusable"></div>
+                            <div id="real-time"></div>
                         </div>
                         <span id="duration" class="down">00:00</span>
                     </div>

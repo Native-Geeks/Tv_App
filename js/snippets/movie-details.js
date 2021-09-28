@@ -33,6 +33,7 @@ Snippet_Movie_Details = (function(Snippet) {
                 var action = $el.attr('data-action');
                 switch(action){
                     case 'watch': 
+                        $el.addClass('lastActivePlayer');
                         this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
                         this.parent.player.show();
                         break;
@@ -42,7 +43,8 @@ Snippet_Movie_Details = (function(Snippet) {
                         $('#scene-movie #trailer iframe').show();
                         break;
                     case 'cc': 
-                    Subtitles.show();
+                        $el.addClass('active');
+                        this.parent.subtitles.show();
                         break;
                     case 'later': 
                         break;

@@ -20,7 +20,7 @@ App = (function(Events, Deferrable) {
 			Router.addScene('home', new Scene_Home);
 			Router.addScene('live', new Scene_Live);
 			Router.addScene('movie', new Scene_Movie);
-			Router.addScene('series', new Scene_Serie);
+			Router.addScene('serie', new Scene_Serie);
 			
 			
 			Router.go('splash',this.sidebar);

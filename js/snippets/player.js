@@ -5,20 +5,19 @@ Snippet_Player = (function (Snippet) {
 
     $.extend(true, Snippet_Player.prototype, Snippet.prototype, {
         init: function () {
-            var title = "Just testing before real launch";
-            $("#vid-Title").text(title);
+
             this.$controles = this.$el.find("#controles");
             this.$btnPlay = this.$el.find("#play");
-            this.$AudioCCList = this.$el.find("#audio-cc-list");
-            this.topIsFocused = false;
-            this.ccIsFocused = false;
-            this.playIsFocused = true;
-            Focus.to(this.$el.find("#play-pause"));
+            
+            function timer(s) {
+                if (s < 3600000) return new Date(s).toISOString().substr(14, 5);
+                else return new Date(s).toISOString().substr(11, 8);
+            }
 
             function updateControllers(currentTime,duration){
-                this.$el.find("#timer").text(currentTime);
-                this.$el.find("#duration").text(this.timer(duration));
-                this.$el.find("#real-time").width(
+                $("#snippet-player #timer").text(timer(currentTime));
+                $("#snippet-player #duration").text(timer(duration));
+                $("#snippet-player #real-time").width(
                         (currentTime / duration) * 100 + "%"
                     );
             }
@@ -57,45 +56,26 @@ Snippet_Player = (function (Snippet) {
             );
 
             this.on("show",function() {
+                if(Router.activeSceneName === 'serie') {$("#vid-Title").text(this.parent.serie.name);}
+                else if(Router.activeSceneName === 'movie')  {$("#vid-Title").text(this.parent.movie.name);}
+                
                 $('.player').css('opacity',1);
+                this.playIsFocused = true;
                 Player.play(this.parent.videoUrl);
+
                 setTimeout(()=>{
                     this.$el.css({opacity:1});
+                    Focus.to(this.$el.find("#play-pause"));
+                    this.setTimeout = setTimeout(()=>{
+                        this.$el.find('#controles').css({opacity:0});
+                        this.$el.find('#vid-Title').css({opacity:0});
+                        this.isHiding = true;
+                    },2000);
                 },1500);
-                
+
             });
-
-            this.renderAudioCC();
         },
 
-        renderAudioCC: function () {
-            if(!this.isRendered)
-            {
-                this.$AudioCCList.empty();
-                var tmpAudio = this.tmpAudio();
-                var tmpCC = this.tmpCC();
-                if (CONFIG.player.Audio.length) {
-                    this.$AudioCCList.append("<ul id ='Audios'>Audios</ul>");
-                    CONFIG.player.Audio.forEach((audio) => {
-                        this.$AudioCCList.find("#Audios").append(fillAudio(audio));
-                        function fillAudio(audio) {
-                            return Mustache.render(tmpAudio, audio);
-                        }
-                    });
-                }
-                if (CONFIG.player.Subtitles.length) {
-                    this.$AudioCCList.append("<ul id ='CCs'>Subtitle</ul>");
-    
-                    CONFIG.player.Subtitles.forEach((sub) => {
-                        this.$AudioCCList.find("#CCs").append(fillCC(sub));
-    
-                        function fillCC(sub) {
-                            return Mustache.render(tmpCC, sub);
-                        }
-                    });
-                }
-            }            
-        },
         tmpAudio: function () {
             return "<li class='focusable audCC' data-id='{{id}}'>{{title}}</li>";
         },
@@ -110,59 +90,59 @@ Snippet_Player = (function (Snippet) {
         onEnter: function ($el, event) {
             var action = $el.attr("id");
             switch (action) {
-                case "play-pause": this.playPause(); break;
-                case "back": this.onReturn(); break;
-                case "reply": this.reply(); break;
-                case "cc": this.cc(); break;
-                case "next": break;
+                    case "play-pause": this.playPause(); break;
+                    case "back": this.onReturn(); break;
+                    case "reply": this.reply(); break;
+                    case "cc": this.cc(); break;
+                    case "next": break;
             }
         },
 
         navigate: function (direction) {
-            switch (direction) {
-                case "up":
-                    if (this.ccIsFocused) { if (this.getFocusable(-1, true).hasClass("audCC")){Focus.to(this.getFocusable(-1, true));} } 
-                    else if (this.playIsFocused) {
-                        Focus.to(this.$el.find("#top-controles .focusable").first());
-                        this.topIsFocused = true;
-                        this.playIsFocused = false;
-                        this.$nowEl = this.$el.find("#top-controles .focus");
-                    }
-                    break;
-                case "left":
-                    if (this.topIsFocused) {
-                        Focus.to(this.$nowEl.prev());
-                        this.$nowEl = this.$el.find("#top-controles .focus");
-                    } else if (this.ccIsFocused) {
-                        $("#audio-cc-list").hide();
-                        Focus.to(this.$el.find("#top-controles .focusable").first());
-                        this.topIsFocused = true;
-                        this.ccIsFocused = false;
-                        this.$nowEl = this.$el.find("#top-controles .focus");
-                        this.$controles.show();
-                    }
-                    break;
-                case "right":
-                    if (this.topIsFocused) {
-                        Focus.to(this.$nowEl.next());
-                        this.$nowEl = this.$el.find("#top-controles .focus");}
-                    break;
-                case "down":
-                    if (this.topIsFocused) {
-                        Focus.to(this.$el.find("#play-pause"));
-                        this.topIsFocused = false;
-                        this.playIsFocused = true;
-                    } else if (this.ccIsFocused) { if (this.getFocusable(1, true).hasClass("audCC")){Focus.to(this.getFocusable(1, true));}}
-                    break;
+            try{
+                clearTimeout(this.setTimeout);
+            }catch(err){}
+
+            if(!this.isHiding)
+            {
+                $nowEl = this.$el.find('#controles .focus');
+                switch (direction) {
+                    case "up":
+                        if (this.playIsFocused) {
+                            Focus.to(this.$el.find("#top-controles .focusable").first());
+                            this.playIsFocused = false;
+                        }
+                        break;
+                    case "left":
+                        Focus.to($nowEl.prev());
+                        break;
+                    case "right":
+                        Focus.to($nowEl.next());
+                        break;
+                    case "down":
+                        if (!this.playIsFocused) {
+                            Focus.to(this.$el.find("#play-pause"));
+                            this.playIsFocused = true;
+                        }
+                        break;
+                }
             }
+            this.$el.find('#controles').css({opacity:1});
+            this.$el.find('#vid-Title').css({opacity:1});
+            this.isHiding = false;
+            this.setTimeout = setTimeout(()=>{
+                this.$el.find('#controles').css({opacity:0});
+                this.$el.find('#vid-Title').css({opacity:0});
+                this.isHiding = true;
+            },2000);
         },
 
         onReturn: function ($el, e, stop) {
-            this.$btnPlay.addClass("fa-play");
-            this.$btnPlay.removeClass("fa-pause");
             Player.pause();
             Player.hide();
-            this.$el.hide();
+            this.hide();
+            Focus.to(this.parent.$el.find('.lastActivePlayer'));
+            this.parent.$el.find('.lastActivePlayer').removeClass('lastActivePlayer');
         },
 
         create: function () {
@@ -192,24 +172,6 @@ Snippet_Player = (function (Snippet) {
             this.$btnPlay.addClass("fa-pause");
             Player.currentTime = 0;
             Player.play();
-        },
-
-        cc: function () {
-            if (CONFIG.Audio.length && CONFIG.Subtitles.length) {
-                this.$AudioCCList.show();
-                this.$controles.hide();
-                this.ccIsFocused = true;
-                this.topIsFocused = false;
-                if (CONFIG.Audio.length)
-                    Focus.to(this.$el.find("#Audios .focusable").first());
-                else if (CONFIG.Subtitles.length)
-                    Focus.to(this.$el.find("#CCs .focusable").first());
-            }
-        },
-
-        timer: function (s) {
-            if (s < 3600000) return new Date(s).toISOString().substr(14, 5);
-            else return new Date(s).toISOString().substr(11, 8);
         },
     });
 

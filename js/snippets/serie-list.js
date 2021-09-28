@@ -78,13 +78,13 @@ Snippet_Serie_List = (function(Snippet) {
 			if(this.cp>0)
 			{
 				var index = $el.attr('data-index');
-				this.parent.movie = this.$movies[index];
+				this.parent.serie = this.$movies[index];
 				this.parent.details.show();
-				this.topAdded = $('#snippet-movie-details')[0].offsetTop+$('#snippet-movie-details')[0].offsetHeight+16 - (window.innerHeight/2);
+				this.topAdded = $('#snippet-serie-details')[0].offsetTop+$('#snippet-serie-details')[0].offsetHeight+16 - (window.innerHeight/2);
 				this.top += this.topAdded;
 				this.$el.css('top',this.top);
 				$el.addClass('lastActive');
-				Focus.to($('#scene-movie #snippet-movie-details .btn').first());
+				Focus.to($('#scene-serie #snippet-serie-details .btn').first());
 			}
 			this.cp++;
 		},
@@ -186,9 +186,9 @@ Snippet_Serie_List = (function(Snippet) {
 
 		onFocus:function($el){
 			clearTimeout(this.timeOut);
-			$('#scene-movie #trailer iframe').removeAttr("src");
-			$('#scene-movie #trailer iframe').hide();232
-			$('#scene-movie #trailer img').show();
+			$('#scene-serie #trailer iframe').removeAttr("src");
+			$('#scene-serie #trailer iframe').hide();232
+			$('#scene-serie #trailer img').show();
 			var index = $el.attr('data-index');
 			var date = new Date();
 			date.setHours(this.$movies[index].data.info.duration.split(':')[0]);
@@ -197,24 +197,24 @@ Snippet_Serie_List = (function(Snippet) {
 			if(date.getHours()){duration+= date.getHours()+" h";}
 			if(date.getMinutes()){duration+= date.getMinutes()+" min";}
 
-			$('#scene-movie #filmName').text(this.$movies[index].name);
-			$('#scene-movie #filmYear').text(new Date(this.$movies[index].data.info.releasedate).getFullYear());
-			$('#scene-movie #filmDuration').text(duration);
-			$('#scene-movie #filmRating').text(this.$movies[index].data.info.rating);
-			$('#scene-movie #filmDescription').text(this.$movies[index].data.info.plot);
-			$('#scene-movie #trailer img').attr('src',this.$movies[index].data.info.movie_image);
+			$('#scene-serie #filmName').text(this.$movies[index].name);
+			$('#scene-serie #filmYear').text(new Date(this.$movies[index].data.info.releasedate).getFullYear());
+			$('#scene-serie #filmDuration').text(duration);
+			$('#scene-serie #filmRating').text(this.$movies[index].data.info.rating);
+			$('#scene-serie #filmDescription').text(this.$movies[index].data.info.plot);
+			$('#scene-serie #trailer img').attr('src',this.$movies[index].data.info.movie_image);
 			
 			
 			this.timeOut = setTimeout(()=>{
-				$('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[index].data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.$movies[index].data.info.youtube_trailer);
-				$('#scene-movie #trailer img').hide();
-				$('#scene-movie #trailer iframe').show();
+				$('#scene-serie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[index].data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.$movies[index].data.info.youtube_trailer);
+				$('#scene-serie #trailer img').hide();
+				$('#scene-serie #trailer iframe').show();
 			},3500);
 			
 		},
 
 		tmpFill:function(){
-			return '<li class="item focusable" data-id="{{stream_id}}" data-index="{{index}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
+			return '<li class="item focusable" data-id="{{series_id}}" data-index="{{index}}"><img src="{{cover}}" alt="{{name}}"/></li>'
 		},
         
 		create: function() {

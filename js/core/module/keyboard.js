@@ -1,26 +1,3 @@
-/*
- *******************************************************************************
- * Copyright (c) 2013 Mautilus, s.r.o. (Czech Republic)
- * All rights reserved
- *  
- * Questions and comments should be directed https://github.com/mautilus/sdk/issues
- *
- * You may obtain a copy of the License at LICENSE.txt
- *******************************************************************************
- */
-
-/**
- * Keyboard class
- * TODO - config override for layouts
- * 
- * Limitations - Samsung - this virtual Keyboard doesn't work with External USB keyboard (keys a-z). It won't be fixed: http://www.samsungdforum.com/SamsungDForum/ForumView/df3455b529adf7c4?forumID=a44c9c78b565ea69
- * 
- * @author Mautilus s.r.o.
- * @class Keyboard
- * @abstract
- * @mixins Events
- */
-
 Keyboard = (function (Events) {
 	var Keyboard = {};
 
@@ -42,89 +19,27 @@ Keyboard = (function (Events) {
 				"SPECIAL": {
 					layout: [
 						[
-							{ v: ".com", s: 2, t: "K" },
-							{ v: "#", t: "K" },
-							{ v: "$", t: "K" },
-							{ v: "%", t: "K" },
-							{ v: "-", t: "K" },
-							{ v: "_", t: "K" },
-							{ v: "+", t: "K" },
-							{ v: "(", t: "K" },
-							{ v: ")", t: "K" },
-							{ v: "/", s: 1, t: "K" },
-							{ v: "*", s: 1, t: "K" },
-							{ v: "BSP", t: "F" },
-							{ v: "7", t: "N" },
-							{ v: "8", t: "N" },
-							{ v: "9", t: "N" }
-						],
-						[
-							{ v: ".net", s: 2, t: "K" },
-							{ v: "\"", t: "K" },
-							{ v: "'", t: "K" },
-							{ v: ":", t: "K" },
-							{ v: ";", t: "K" },
-							{ v: "?", t: "K" },
-							{ v: "~", t: "K" },
-							{ v: "`", t: "K" },
-							{ v: "|", t: "K" },
-							{ v: "@", s: 1, t: "K" },
-							{ v: "Done", id: "done", t: "F", s: 2 },
-							{ v: "4", t: "N" },
-							{ v: "5", t: "N" },
-							{ v: "6", t: "N" }
-						],
-						[
-							{ v: ".cz", s: 2, t: "K" },
-							{ v: "{", t: "K" },
-							{ v: "}", t: "K" },
-							{ v: "^", t: "K" },
-							{ v: "=", t: "K" },
-							{ v: "[", t: "K" },
-							{ v: "]", t: "K" },
-							{ v: "\\", t: "K" },
-							{ v: "<", t: "K" },
-							{ v: ">", t: "K" },
-							{ v: "!", t: "K" },
-							{ v: "&", t: "K" },
 							{ v: "1", t: "N" },
 							{ v: "2", t: "N" },
-							{ v: "3", t: "N" }
+							{ v: "3", t: "N" },
+							{ v: "4", t: "N" },
+							{ v: "5", t: "N" },
+							{ v: "6", t: "N" },
+							{ v: "7", t: "N" },
+							{ v: "8", t: "N" },
+							{ v: "9", t: "N" },
+							{ v: "0", t: "N" }
 						],
 						[
-							{ v: "", s: 3, t: "F" }, // empty space
-							{ v: "GEAR", s: 1, t: "F" },
-							{ v: ".", s: 1, t: "K" },
+							{ v: "Eng..", s:3, t:"N"},
 							{ v: "SPACE", s: 4, t: "F" },
-							{ v: ",", t: "K" },
-							{ v: "CA", s: 1, t: "F" },
-							{ v: "LC", t: "F" },
-							{ v: "RC", t: "F" },
-							{ v: "0", s: 1, t: "N" },
-							{ v: "", s: 2, t: "F" }, // empty space
+							{ v: "Done", id: "done", t: "F", s: 3 }
 						]
-					]
-				},
-				"ONELAYOUT": { // override for one layout - bottom 4th line
-					layout: [
-						{ v: ".cz", s: 2, t: "K" },
-						{ v: ".com", s: 2, t: "K" },
-						{ v: ".", s: 1, t: "K" },
-						{ v: "SPACE", s: 4, t: "F" },
-						{ v: "@", s: 1, t: "K" },
-						{ v: "CA", s: 1, t: "F" },
-						{ v: "LC", t: "F" },
-						{ v: "RC", t: "F" },
-						{ v: "0", s: 1, t: "N" },
-						{ v: "/", s: 1, t: "K" },
-						{ v: "*", s: 1, t: "K" }
-					]
+					],
 				},
 				"EN": {
 					layout: [
 						[
-							{ v: "+", t: "K" },
-							{ v: "$", t: "K" },
 							{ v: "q", t: "K" },
 							{ v: "w", t: "K" },
 							{ v: "e", t: "K" },
@@ -135,13 +50,9 @@ Keyboard = (function (Events) {
 							{ v: "i", t: "K" },
 							{ v: "o", t: "K" },
 							{ v: "p", t: "K" },
-							{ v: "BSP", t: "F" },
-							{ v: "7", t: "N" },
-							{ v: "8", t: "N" },
-							{ v: "9", t: "N" }
+							
 						],
 						[
-							{ v: "Caps Lock", s: 2, t: "F", id: "CAPSLOCK" },
 							{ v: "a", t: "K" },
 							{ v: "s", t: "K" },
 							{ v: "d", t: "K" },
@@ -150,15 +61,9 @@ Keyboard = (function (Events) {
 							{ v: "h", t: "K" },
 							{ v: "j", t: "K" },
 							{ v: "k", t: "K" },
-							{ v: "l", t: "K" },
-							{ v: "Done", id: "done", t: "F", s: 2 },
-							{ v: "4", t: "N" },
-							{ v: "5", t: "N" },
-							{ v: "6", t: "N" }
+							{ v: "l", t: "K" }
 						],
 						[
-							{ v: "SHIFT", s: 2, t: "F" },
-							{ v: "&", t: "K" },
 							{ v: "z", t: "K" },
 							{ v: "x", t: "K" },
 							{ v: "c", t: "K" },
@@ -166,97 +71,15 @@ Keyboard = (function (Events) {
 							{ v: "b", t: "K" },
 							{ v: "n", t: "K" },
 							{ v: "m", t: "K" },
-							{ v: "_", t: "K" },
-							{ v: "-", t: "K" },
-							{ v: "#", t: "K" },
-							{ v: "1", t: "N" },
-							{ v: "2", t: "N" },
-							{ v: "3", t: "N" }
+							{ v: "BSP",s: 2, t: "F" } ,
 						],
 						[
-							{ v: "Arabic", s: 3, t: "F", id: "LANGCHANGE" },
-							{ v: "GEAR", s: 1, t: "F" },
-							{ v: ".", s: 1, t: "K" },
+							{ v: "123...", s:3, t:"N"},
 							{ v: "SPACE", s: 4, t: "F" },
-							{ v: "@", s: 1, t: "K" },
-							{ v: "CA", s: 1, t: "F" },
-							{ v: "LC", t: "F" },
-							{ v: "RC", t: "F" },
-							{ v: "0", s: 1, t: "N" },
-							{ v: "/", s: 1, t: "K" },
-							{ v: "*", s: 1, t: "K" }
+							{ v: "Done", id: "done", t: "F", s: 3 }
 						]
 					]
 				},
-				"AR": {
-					layout: [
-						[
-							{ v: "ض", t: "K" },
-							{ v: "ص", t: "K" },
-							{ v: "ث", t: "K" },
-							{ v: "ق", t: "K" },
-							{ v: "ف", t: "K" },
-							{ v: "غ", t: "K" },
-							{ v: "ع", t: "K" },
-							{ v: "ه", t: "K" },
-							{ v: "خ", t: "K" },
-							{ v: "ح", t: "K" },
-							{ v: "ج", t: "K" },
-							{ v: "د", t: "K" },
-							{ v: "BSP", t: "F" },
-							{ v: "7", t: "N" },
-							{ v: "8", t: "N" },
-							{ v: "9", t: "N" }
-						],
-						[
-							{ v: "ش", t: "K" },
-							{ v: "س", t: "K" },
-							{ v: "ي", t: "K" },
-							{ v: "ب", t: "K" },
-							{ v: "ل", t: "K" },
-							{ v: "ا", t: "K" },
-							{ v: "ت", t: "K" },
-							{ v: "ن", t: "K" },
-							{ v: "م", t: "K" },
-							{ v: "ك", t: "K" },
-							{ v: "ط", t: "K" },
-							{ v: "منتهى", id: "done", t: "F", s: 2 },
-							{ v: "4", t: "N" },
-							{ v: "5", t: "N" },
-							{ v: "6", t: "N" }
-						],
-						[
-							{ v: "#", t: "K" },
-							{ v: "ئ", t: "K" },
-							{ v: "ء", t: "K" },
-							{ v: "ؤ", t: "K" },
-							{ v: "ر", t: "K" },
-							{ v: "لا", t: "K" },
-							{ v: "ى", t: "K" },
-							{ v: "ة", t: "K" },
-							{ v: "و", t: "K" },
-							{ v: "ز", t: "K" },
-							{ v: "ظ", t: "K" },
-							{ v: "_", t: "K" },
-							{ v: "-", t: "K" },
-							{ v: "1", t: "N" },
-							{ v: "2", t: "N" },
-							{ v: "3", t: "N" }
-						],
-						[
-							{ v: "English", s: 3, t: "F", id: "LANGCHANGE" },
-							{ v: ".", s: 1, t: "K" },
-							{ v: "SPACE", s: 5, t: "F" },
-							{ v: "@", s: 1, t: "K" },
-							{ v: "CA", s: 1, t: "F" },
-							{ v: "LC", t: "F" },
-							{ v: "RC", t: "F" },
-							{ v: "0", s: 1, t: "N" },
-							{ v: "/", s: 1, t: "K" },
-							{ v: "*", s: 1, t: "K" }
-						]
-					]
-				}
 			};
 
 			this.initEvents();
@@ -401,16 +224,7 @@ Keyboard = (function (Events) {
 				this.insertValue(value, "LETTER");
 			}
 			else if (selElem.t == "N") {
-				this.insertValue(selElem.v, "NUMERIC");
-			}
-			else if (selElem.t == "F") {
-				if (selElem.v == "SPACE") {
-					this.insertValue(" ", "SPACE");
-				}
-				else if (selElem.id === "done") {
-					this.exit();
-				}
-				else if (selElem.v == "GEAR") {
+				if (selElem.v == "123...") {
 					this.specialState = !this.specialState;
 					
 					if (this.specialState) {
@@ -420,68 +234,50 @@ Keyboard = (function (Events) {
 						this.createKeys(this.layouts["SPECIAL"].layout);
 						this.input.moveCaret(0, "end"); // move cursor to the end
 						// default focus
-						Focus.to(this.$el.find(".key[data-val='GEAR']"));
+						Focus.to(this.$el.find(".key[data-val='ENG..']"));
 					}
 					else {
 						// back to normal
 						this.capsLock = false;
 						this.shift = false;
 						this.createKeys();
-						Focus.to(this.$el.find(".key[data-val='GEAR']"));
+						Focus.to(this.$el.find(".key[data-val='ENG..']"));
 					}
 				}
-				else if (selElem.v == "CA") {
-					// clear all
-					this.input.clearAllText();
-					this.trigger("insert", ["", 0]); // callback function for inserted value
+				else if (selElem.v == "Eng..") {
+					this.specialState = !this.specialState;
+					
+					if (this.specialState) {
+						// show special keys
+						this.capsLock = false;
+						this.shift = false;
+						this.createKeys(this.layouts["SPECIAL"].layout);
+						this.input.moveCaret(0, "end"); // move cursor to the end
+						// default focus
+						Focus.to(this.$el.find(".key[data-val='123...']"));
+					}
+					else {
+						// back to normal
+						this.capsLock = false;
+						this.shift = false;
+						this.createKeys();
+						Focus.to(this.$el.find(".key[data-val='123...']"));
+					}
 				}
-				else if (selElem.v == "BSP") {
-					// call interface
-					this.input.backspace();
+				else{
+					this.insertValue(selElem.f, "NUMERIC");
 				}
-				else if (selElem.v == "LC") {
-					var direction = (this.lang == "AR" ? 1 : -1);
-					// call interface
-					this.input.moveCaret(direction);
+			}
+			else if (selElem.t == "F") {
+				if (selElem.v == "SPACE") {
+					this.insertValue(" ", "SPACE");
 				}
-				else if (selElem.v == "RC") {
-					var direction = (this.lang == "AR" ? -1 : 1);
-					// call interface
-					this.input.moveCaret(direction);
-				}
-				else if (selElem.id == "CAPSLOCK") {
-					this.capsLock = !this.capsLock;
-					var tt = (this.capsLock ? "uppercase" : "");
-
-					this.$el.find(".tt").each(function () {
-						$(this).css("text-transform", tt);
-					});
-				}
-				else if (selElem.v == "SHIFT") {
-					this.shift = !this.shift;
-					this.capsLock = false;
-
-					var tt = (this.shift ? "uppercase" : "");
-
-					this.$el.find(".tt").each(function () {
-						$(this).css("text-transform", tt);
-					});
-				}
-				else if (selElem.v == "English") {
-					this.switchLayout("EN");
-				}
-				else if (selElem.v == "Arabic") {
-					this.switchLayout("AR");
+				else if (selElem.id === "done") {
 				}
 			}
 			return false;
 		},
-		/**
-		 * Navigate using cursor keys.
-        * @param {Number} direction direction of moving
-        * @return {Boolean} Return FALSE to prevent event from bubeling
-        * @private
-		*/
+		
 		navigate: function (direction) {
 			this.position.x = parseInt(Focus.focused.attr("data-posx"), 10);
 			this.position.y = parseInt(Focus.focused.attr("data-posy"), 10);
@@ -492,13 +288,7 @@ Keyboard = (function (Events) {
 			else if (direction == "down") this.move(0, 1, "Y");
 			return false;
 		},
-		/**
-		* This function is called from navigate. It focus new key.
-        * @param {Number} dirX X-axis direction of moving
-        * @param {Number} dirY Y-axis direction of moving
-        * @param {String} axis X or Y axis
-        * @private
-		*/
+		
 		move: function (dirX, dirY, axis) {
 			// current x
 			var currentX = 0, layout = this.specialState ? this.layouts["SPECIAL"].layout : this.layouts[this.lang].layout;
@@ -577,6 +367,7 @@ Keyboard = (function (Events) {
 			}
 			else {
 				this.input.insert(value);
+				console.log(this.input);
 			}
 		},
 		/**
@@ -648,7 +439,7 @@ Keyboard = (function (Events) {
         * @param {String} [lang] Keyboard language 
 		*/
 		show: function (input, lang) {
-			if (!input) return;
+			if (!input){return;} 
 
 			this.input = input;
 			this.lang = this.getAvailableLang(lang || I18n.locale);
@@ -656,7 +447,7 @@ Keyboard = (function (Events) {
 			this.showKeyboard();
 			this.input.moveCaret(0, "end"); // move cursor to the end
 			this.$saveFocus = Focus.focused;
-			Focus.to(this.$el.find(".key[data-id='done']"));
+			Focus.to(this.$el.find(".key[data-val='Q']"));
 			document.body.onselectstart = function () { return false; };
 		},
 		/**
@@ -673,12 +464,7 @@ Keyboard = (function (Events) {
 			this.trigger("exit");
 			document.body.onselectstart = function () { return true; };
 		},
-		/**
-		 * Because of different of each line, createKeys() need to count each width of the line.
-        * @param {Number} line Index of line
-        * @returns {Number} size Size of lines
-        * @private
-		*/
+		
 		getLineSize: function(line) {
 			if (!line || line.length == 0) return 1; // 0 divide zero
 
@@ -690,11 +476,7 @@ Keyboard = (function (Events) {
 			}
 			return size;
 		},
-		/**
-		 * Create selected layout.
-        * @param {String} layout Layout identification
-        * @private
-		*/
+		
 		createKeys: function (layout) {
 			var $line = null, $key = null, $keyContent = null, signElemSize = 0;
 			if (!layout) layout = this.layouts[this.lang].layout;
@@ -736,17 +518,13 @@ Keyboard = (function (Events) {
 				}
 			}
 		},
-		/**
-		 * Only show element of keyboard.
-		*/
+		
 		showKeyboard: function () {
 
 			if(this.$cover) { this.$cover.show(); }
 			this.$el.show();
 		},
-		/**
-		 * Only hide element of keyboard.
-		*/
+		
 		hideKeyboard: function () {
 			if(this.$cover) { this.$cover.hide(); }
 			this.$el.hide();

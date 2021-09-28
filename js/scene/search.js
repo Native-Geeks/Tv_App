@@ -17,7 +17,9 @@ Scene_Search = (function (Scene) {
             this.showKeyboard();
         },
 
-        activate: function () {},
+        activate: function () {
+
+        },
 
         onReturn: function ($el, e, stop) {
             this.sidebar.hide();
@@ -26,7 +28,7 @@ Scene_Search = (function (Scene) {
 
         navigate: function(direction) {
             switch(direction){
-				case 'left': Focus.to($('.sidebar .active')); $('.sidebar').addClass('onfocus');return;
+				//case 'left': Focus.to($('.sidebar .active')); $('.sidebar').addClass('onfocus');return;
 			}
 		},
 
@@ -62,6 +64,7 @@ Scene_Search = (function (Scene) {
                 this
             );
         },
+        
         focus: function () {
             var $el = this.$el.find("#search-input");
             Focus.to($el);

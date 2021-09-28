@@ -53,7 +53,7 @@
 			if(action === 'Search') {this.close(); Router.go('search',this);}
 			if(action === 'Live') {this.close(); Router.go('live',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
 			if(action === 'Films') {this.close(); Router.go('movie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
-			if(action === 'Series') {this.close(); Router.go('series',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); }
+			if(action === 'Series') {this.close(); Router.go('serie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); }
 			if(action === 'Settings') {this.hide(); Router.go('settings',true); return;}
 			if(action === 'Quit')	{this.hide();Router.go('profiles');}
 		},

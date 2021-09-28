@@ -1,15 +1,13 @@
 #scene-search #search-Bar {
-    width: 400px;
+    width: 422px;
     height: 100%;
     background-color: rgba(38, 45, 59, 0.85);
     padding: 2rem .5rem .5rem 4rem;
 }
 
-#scene-search #search-Bar input , #scene-search #search-Bar select{
+#scene-search #search-Bar #search-input , #scene-search #search-Bar select{
+    width: calc(100% - .5rem);
     font-size: large;
-    margin-bottom: .55rem;
+    margin: 0 .5rem .55rem .5rem;
 }
-
-.line {
-    margin-bottom: 3px !important;
-}
+#scene-search #search-Bar #search-input span{color: #151921; font-size: large;}

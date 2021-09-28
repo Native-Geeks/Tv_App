@@ -13,8 +13,8 @@ Snippet_Serie_Details = (function(Snippet) {
 		},
         
 		render: function() {
-            this.$el.find('#director').text(this.parent.movie.data.info.director);
-            this.$el.find('#genre').text(this.parent.movie.data.info.genre);
+            this.$el.find('#director').text(this.parent.serie.data.info.director);
+            this.$el.find('#genre').text(this.parent.serie.data.info.genre);
             this.$el.css({top:this.parent.$el.find('#filmDescription')[0].offsetTop+this.parent.$el.find('#filmDescription')[0].offsetHeight+10});
             this.cp = 0;
 		},
@@ -33,17 +33,23 @@ Snippet_Serie_Details = (function(Snippet) {
                 var action = $el.attr('data-action');
                 switch(action){
                     case 'watch': 
-                        this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
+                        $el.addClass('lastActivePlayer');
+                        this.parent.videoUrl = this.parent.serie.data.episodes[0][0].stream_url;
                         this.parent.player.show();
                         break;
                     case 'trailer': 
-                        $('#scene-serie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.movie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.movie.data.info.youtube_trailer);
+                        $('#scene-serie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.serie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.serie.data.info.youtube_trailer);
                         $('#scene-serie #trailer img').hide();
                         $('#scene-serie #trailer iframe').show();
                         break;
-                    case 'cc': 
-                    Subtitles.show();
+                    case 'episodes': 
+                        $el.addClass('active');
+                        this.parent.episodes.show();
                         break;
+                    case 'cc': 
+                        $el.addClass('active');
+                        this.parent.subtitles.show();
+                            break;
                     case 'later': 
                         break;
                 }
@@ -71,6 +77,7 @@ Snippet_Serie_Details = (function(Snippet) {
 		},
 
         onReturn:function () {
+            
             this.hide();
             this.parent.list.top -= this.parent.list.topAdded;
             this.parent.list.$el.css({top:this.parent.list.top});

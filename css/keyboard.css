@@ -67,9 +67,9 @@
 .keyboard-content {
 	position: absolute;
 	top: calc(2 * 40px + 3rem);
-    left: 4rem;
+    left: 4.5rem;
 	z-index: 1;
-	width: 336px;
+	width: 350px;
 	height: 225px;
 	font-family: sans-serif;
 	font-weight: normal;
@@ -77,9 +77,8 @@
 
 	.keyboard-content .line {
 		width: 100%;
-		height: 50px;
-		line-height: 50px;
-		padding-bottom: 5rpx ;
+		height: 40px;
+		margin-bottom: 4px ;
 	}
 
 		.keyboard-content .line .key {
@@ -89,14 +88,16 @@
 			padding: 5px .5rem 5px 0;
 			vertical-align: top;
 			box-sizing: border-box;
+			font-size: 14px;
 		}
 
 			.keyboard-content .line .key .content {
-				background: black;
+				background: #414d66;
 				display: inline-block;
 				width: 100%;
 				height: 100%;
-				font-size: 28px;
+				font-size: 24px;
+				border-radius: 7px;
 			}
 
 		.keyboard-content .line.suggest {
@@ -142,12 +143,12 @@
 }
 
 .keyboard-content .line .key .BSP {
-	background: black url('../img/keyboard/backspace.png') no-repeat;
+	background: #414d66 url('../img/keyboard/backspace.png') no-repeat;
 	background-position: 17px center;
 }
 
 .keyboard-content .line .key .DONE {
-	background: black url('../img/keyboard/return.png') no-repeat;
+	background: #414d66;
 	background-position: 106px 5px;
 }
 
@@ -157,7 +158,7 @@
 }
 
 .keyboard-content .line .key .SPACE {
-	background: black url('../img/keyboard/space.png') no-repeat;
+	background: #414d66 url('../img/keyboard/space.png') no-repeat;
 	background-position: center center;
 }
 

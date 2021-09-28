@@ -377,24 +377,12 @@ Player = (function(Events, Deferrable) {
 				this.el.muted = false;
 			}
 		},
-		/**
-		 * Function is binded on duration change event
-		 * @param {Number} duration Content duration
-		 * @fires durationchange
-		 * @private
-		 */
+		
 		onDurationChange: function(duration) {
 			this.duration = Math.round(duration);
 			this.trigger('durationchange', this.duration);
-
-			console.info("Player Info >>>\n" + " URL: " + this.url + "\n" + " Duration: " + this.duration);
 		},
-		/**
-		 * Function is binded on time update event
-		 * @param {Number} time Current time
-		 * @fires timeupdate
-		 * @private
-		 */
+		
 		onTimeUpdate: function(time) {
 			time = Math.round(time);
 
@@ -403,11 +391,7 @@ Player = (function(Events, Deferrable) {
 				this.trigger('timeupdate', this.currentTime);
 			}
 		},
-		/**
-		 * Function is binded on end event
-		 * @fires end
-		 * @private
-		 */
+		
 		onEnd: function() {
 			if (this.looping && this.duration) {
 				this.seek(0);
@@ -418,24 +402,11 @@ Player = (function(Events, Deferrable) {
 				this.trigger('end', this.currentTime);
 			}
 		},
-		/**
-		 * Function is binded on error event
-		 * @param {Number} code Error code
-		 * @param {String} msg Message
-		 * @param {String} [details] Error details
-		 * @fires error
-		 * @private
-		 */
+		
 		onError: function(code, msg, details) {
 			this.trigger('error', code, msg, details);
 		},
 		
-		/**
-		 * Determine the media type from given media URL
-		 * @param {String} url
-		 * @return {String} mediaType the one from 'SMOOTH_STREAMING', 'WIDEVINE', 'MPEG-DASH', 'MP4', 'HLS' or ''
-		 * @private
-		 */
 		deriveMediaType: function(url) {
 			var mediaType;
 			if(url.match(/\/manifest/i)) {
@@ -454,13 +425,6 @@ Player = (function(Events, Deferrable) {
 			return mediaType;
 		},
 
-		/**
-		 * Set/Get current state
-		 *
-		 * @param {Number} state
-		 * @returns current state
-		 * @fires statechange
-		 */
 		state: function(state) {
 			if (typeof state !== 'undefined') {
 				if (this.currentState !== this.STATE_BUFFERING) {
@@ -474,10 +438,7 @@ Player = (function(Events, Deferrable) {
 
 			return this.currentState;
 		},
-		/**
-		 * Reset all states and properties
-		 * @fires reset
-		 */
+		
 		reset: function() {
 
 			this.url = null;
@@ -490,15 +451,7 @@ Player = (function(Events, Deferrable) {
 
 			this.trigger('reset');
 		},
-		/**
-		 * Show player and set it's position
-		 *
-		 * @param {Number} [width] Width of player
-		 * @param {Number} [height] Height of player
-		 * @param {Number} [left] Position from the left side
-		 * @param {Number} [top] Position from the top side
-		 * @fires show
-		 */
+		
 		show: function(width, height, left, top) {
 			this.native('show', {
 				width: width,
@@ -511,55 +464,28 @@ Player = (function(Events, Deferrable) {
 
 			this.trigger('show');
 		},
-		/**
-		 * Hide player
-		 * @fires hide
-		 */
+		
 		hide: function() {
 			this.native('hide');
 			this.trigger('hide');
 		},
-		/**
-		 * Show on fullscreen
-		 */
+		
 		fullscreen: function() {
 			return this.show(1280, 720, 0, 0);
 		},
-		/**
-		 * Set media URL
-		 *
-		 * @param {String} url
-		 * @fires url
-		 */
+		
 		setURL: function(url) {
 			this.reset();
 
 			this.url = url;
 			this.trigger('url', this.url);
 		},
-		/**
-		 * Set DRM configuration
-		 *
-		 * @param {Object} drmConfig DRM configuration hash. 
-		 * See {@link Player#property-drmConfig} or [Player Guide](#!/guide/player)
-		 */
+		
 		setDrm: function(drmConfig) {
 			this.drmConfig = drmConfig || {};
 			this.trigger('drmConfig', this.drmConfig);
 		},
-		/**
-		 * Start playback
-		 *
-		 * @param {String} [url] Url what should be played
-		 * @param {Number} [position] Seek position (ms)
-		 * @param {Object} [mediaOption] Additional media content information
-		 * @param {String} [mediaOption.mediaType] Media type ('SMOOTH_STREAMING', 'WIDEVINE', 'MPEG-DASH', 'MP4', 'HLS')
-		 * @param {Boolean} [mediaOption.mode4K=false] Set to TV to play UHD content. It Has an effect only on Tizen platform.
-		 * @param {Boolean} [mediaOption.isTimeshiftedLiveStream = false] (experimental) If content is time shifted (only for live stream). 
-		 * It can fix issue with counting playback time on Samsung Orsay.
-		 * @param {Boolean} [looping] If content should play again in the loop
-		 * @fires play
-		 */
+		
 		play: function(url, position, mediaOption, looping) {
 			if (!position && typeof url === 'number') {
 				position = url;
@@ -643,18 +569,7 @@ Player = (function(Events, Deferrable) {
 			this.startSeek();
 			this.trigger('seek', position);
 		},
-		/**
-		 * This function is called every time, when the player executes seek method.
-		 * Seek method fires: forward, rewind and seek inside the movie.
-		 * When the start seek is called, this method trigger seek-start and then it
-		 * starts interval, which each seconds is testing, if the Player state is playing.
-		 * If the condition is true, this method triggers seek-end. If within 20 seconds
-		 * movie does not play, this interval is cleared and seek-end is triggered.
-		 *
-		 * This functionality you can use for setting throbber progress inside video player.
-		 * @private 
-		 * @fires seek-end
-		 */
+		
 		startSeek: function() {
 			var scope = this,
 				remain = 20;

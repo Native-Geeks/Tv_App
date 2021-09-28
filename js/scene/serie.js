@@ -10,21 +10,19 @@ Scene_Serie = (function(Scene) {
 
 		},
 		
-		render: function() {			
-			/*console.log(CONFIG.LIVE);
-			console.log(CONFIG.LIVE_LIST_X);
-			console.log(CONFIG.VOD);
-			console.log(CONFIG.VOD_LIST_X);
-			console.log(CONFIG.SERIES);
-			console.log(CONFIG.SERIES_LIST_X);*/
-			this.list = new Snippet_Movie_List(this);
-			this.details = new Snippet_Movie_Details(this);
+		render: function() {
+			this.list = new Snippet_Serie_List(this);
+			this.details = new Snippet_Serie_Details(this);
+			this.episodes = new Snippet_Serie_Episodes(this);
 			this.player = new Snippet_Player(this);
+			this.episodes = new Snippet_Serie_Episodes(this);
+			this.subtitles = new Snippet_Subtitles(this);
 			this.list.show();
 		},
 
 		activate: function(sidebar){
 			this.sidebar  = sidebar;
+			Focus.to();
 		},
 
 		onReturn:function($el,e,stop){
