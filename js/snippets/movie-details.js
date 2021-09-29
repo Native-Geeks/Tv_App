@@ -24,7 +24,7 @@ Snippet_Movie_Details = (function(Snippet) {
 		},
         
 		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
+		   this.onEnter(this, arguments);
 		},
         
 		onEnter: function($el, event) {
@@ -48,12 +48,33 @@ Snippet_Movie_Details = (function(Snippet) {
                         break;
                     case 'later':
                         var id = this.parent.sidebar.account.id;
+                        if(Storage.get("watch_later")==null)
+                        {
+                            Storage.set("watch_later",{});
+                        }
                         var list = Storage.get("watch_later");
-                        console.log(this.parent.movie);
-                        eval("list.N"+(id)+" = []");
+                        if(list["N"+id]==null)
+                        {
+                            eval("list.N"+(id)+" = []");
+                        }
                         var lst = list["N"+id];
-                        console.log(list["N"+id]);
-                        lst.push("play");
+                        var film = this.parent.movie;
+                        if(lst.length)
+                        {
+                            for(movie in lst)
+                            {
+                                if(lst[movie].type == "movie" && lst[movie].id ==  film.stream_id)
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                        lst.push({
+                            type:"movie",
+                            id:film.stream_id,
+                            imgUrl:film.stream_icon
+                        });
+                                      
                         
                         Storage.set("watch_later",list);
                         break;
