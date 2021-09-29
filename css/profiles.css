@@ -1,0 +1,100 @@
+#scene-profiles{
+    display: flex;
+    text-align: center;
+    overflow: hidden;
+    justify-content: space-around !important;
+}
+#scene-profiles h4{
+    font-size: 32px;
+}  
+#scene-profiles #profile-list{
+    transition: .5s;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: -5rem 0;
+}
+#scene-profiles .focus{
+    z-index: 1;
+}
+#scene-profiles .card-profile{
+    margin-left: 1rem;
+}
+#scene-profiles .card-profile h6{
+	font-weight: 400;
+	margin-top: 5px;
+	color: rgb(226, 224, 224);
+	width: 150px;
+	height: 20px;
+}
+#scene-profiles .focus img {
+  border: 3px solid white;
+  box-shadow: 0 0 2000px 1000px #15192149;
+}
+#scene-profiles .focus h6{
+	font-weight: 600;
+    color: white;
+}
+#scene-profiles #profile-btn .focus{
+    border: 3px solid white;
+    color: white ;
+}
+#scene-profiles #profile-btn span{
+    transition: .3s;
+    display: none;
+}
+#scene-profiles #profile-btn .focus span{
+    display: unset;
+}
+#scene-profiles .btn {
+    margin: 5px;
+    color: rgb(153, 153, 153);
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 1.2rem;
+    padding: 0.25rem 0.57rem !important;
+    font-size: 1.25rem;
+}
+#scene-profiles #profile-list .btn{
+    margin : 5px ;
+    border-radius: 1rem;
+    padding: 0.25rem !important;}
+    #scene-profiles #profile-list .btn i{display: flex;}
+#scene-profiles #profile-list .btn:first-of-type{color: rgb(13,110,253); border-color: rgb(13,110,253);}
+#scene-profiles #profile-list .btn:last-child{color: rgb(220,53,69);border-color: rgb(220,53,69);}
+#scene-profiles #profile-list .card-profile .focus:first-of-type {
+    color: white;
+    background-color: rgb(13,110,253);
+}
+#scene-profiles #profile-list .card-profile .focus:last-child {
+    color: white;
+    background-color: rgb(220,53,69);
+}
+#scene-profiles #ExitModal{
+    background-color: #151921;
+    color: white;
+}
+#scene-profiles #ExitModal .modal-dialog{
+    margin-top: 37vh;
+} 
+#scene-profiles #ExitModal .modal-dialog .modal-content{
+    background-color: unset;
+    border: 0;
+}
+#scene-profiles #ExitModal .modal-dialog .modal-content .btn:first-child.focus{
+    color: rgb(13,110,253) !important;
+    border: 2px solid rgb(13,110,253);
+    background-color: transparent;
+}
+#scene-profiles #ExitModal .modal-dialog .modal-content .btn:last-child.focus{
+    color: rgb(220, 53, 69) !important;
+    border: 2px solid rgb(220, 53, 69);
+    background-color: transparent;
+}
+#scene-profiles #InfoModal *,#scene-profiles #DeleteModal *{
+    color: #151921;
+}
+.modal-footer .focus{
+    background: #0c0c0c;
+    color: white !important;
+}

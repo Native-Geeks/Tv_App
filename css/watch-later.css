@@ -1,0 +1,25 @@
+#scene-watch-later{
+    margin-left: 4rem;
+    width: calc(100vw - 4rem);
+}
+#scene-watch-later h3{ 
+    margin-top: 1.5rem;
+}
+#scene-watch-later .noItem{
+    top: 0;
+    left: 0cm;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#scene-watch-later .noItem .btn{
+    color: white;
+}
+#scene-watch-later  .focus{
+    font-weight: 600;
+    border : 2px solid white;
+}
