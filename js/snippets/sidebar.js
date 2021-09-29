@@ -91,7 +91,7 @@
 		},
 
 		tmpCenter:function(){
-			return '<li class="sidebar-btn focusable" data-action="{{label}}"><i class="{{class}}"></i><span>{{label}}</span></li>'
+			return '<li class="sidebar-btn focusable" data-action="{{label}}"><i class="{{class}}"></i><span data-i18n="{{i18n}}">{{label}}</span></li>'
 		},
         
 		create: function() {

@@ -35,7 +35,7 @@ Snippet_Movie_Details = (function(Snippet) {
                     case 'watch': 
                         $el.addClass('lastActivePlayer');
                         this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
-                        Player.play(this.parent.videoUrl);
+                         Player.play(this.parent.videoUrl);
                         this.parent.player.show();
                         break;
                     case 'trailer': 

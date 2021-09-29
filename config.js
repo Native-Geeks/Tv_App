@@ -230,31 +230,7 @@ CONFIG = {
 	  {
 		id: "POR",
 		name: "Portugues",
-	  },
-	  {
-		id: "AR",
-		name: "Arabe",
-	  },
-	  {
-		id: "FR",
-		name: "Frensh",
-	  },
-	  {
-		id: "EN",
-		name: "English",
-	  },
-	  {
-		id: "ES",
-		name: "Spain",
-	  },
-	  {
-		id: "GM",
-		name: "German",
-	  },
-	  {
-		id: "POR",
-		name: "Portugues",
-	  },
+	  }
 	],
 	colors_list: [
 	  {
@@ -389,6 +365,7 @@ CONFIG = {
 	sidebar: {
 	  center: [
 		{
+			i18n: "",
 		  class: "bi bi-search",
 		  label: "Search",
 		},

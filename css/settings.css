@@ -1,5 +1,9 @@
 #scene-settings {
+<<<<<<< HEAD
   padding: 0 1rem 2rem 0;
+=======
+  padding: 0 1rem 2rem;
+>>>>>>> 8a819f2144be72452b54ebab101ac4766838b34f
   display: flex;
   flex-direction: column;
   border : 3rem solid #151921;
@@ -7,7 +11,11 @@
 }
 #scene-settings .head-settings {
   text-align: center;
+<<<<<<< HEAD
   padding: 16px 0px 24px 0px;
+=======
+  padding: 1rem 0 1.5rem;
+>>>>>>> 8a819f2144be72452b54ebab101ac4766838b34f
   background: #151921;
   z-index: 1;
   margin: 0;
@@ -45,6 +53,10 @@
 }
 
 #scene-settings .settings-container .list {
+<<<<<<< HEAD
+=======
+  transition: all 0.3s , flex-basis 0s;
+>>>>>>> 8a819f2144be72452b54ebab101ac4766838b34f
   display: flex;
   flex-direction: column;
   font-size: 25px;
@@ -61,3 +73,13 @@
   color: #151921;
 
 }
+<<<<<<< HEAD
+=======
+#scene-settings #ResetModal h5{ 
+  color:#151921;
+}
+#scene-settings #ResetModal .modal-body{ 
+  text-align: center;
+  color:#151921;
+}
+>>>>>>> 8a819f2144be72452b54ebab101ac4766838b34f

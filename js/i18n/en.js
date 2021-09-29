@@ -14,5 +14,6 @@ I18n.translations.EN = {
 	"error_header": "Something went wrong",
 	"error_msg": "Sorry, we couldn't find the page you were looking for.",
 	"error_back": "To return to the profiles page click on the button bellow",
-	"error_btn": "Go back"
+	"error_btn": "Go back",
+	"sidebar_search" : "Search"
 };

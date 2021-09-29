@@ -135,7 +135,6 @@ Scene_Settings = (function (Scene) {
             return;
           }
           Focus.to($nowEl.prev());
-          console.log(this.top);
           if (this.isTimeZone && this.top < -5) {
             this.top += $nowEl[0].offsetHeight;
             this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
@@ -219,7 +218,7 @@ Scene_Settings = (function (Scene) {
               "data-id", 
               Storage.get('settings').color
             );
-            
+
             $('.settings-menu[data-action="timezone"] label').last()
             .text(Storage.get('settings').timezone);
 
@@ -381,7 +380,7 @@ Scene_Settings = (function (Scene) {
     create: function () {
       return $("#scene-settings");
     },
-
+    
   });
 
   return Scene_Settings;
