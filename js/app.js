@@ -23,7 +23,7 @@ App = (function(Events, Deferrable) {
 			Router.addScene('watch_later', new Scene_Watch_Later);
 			
 			
-			Router.go('splash',this.sidebar);
+			Router.go('settings',this.sidebar);
 		}
 	});
 
