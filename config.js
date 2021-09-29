@@ -365,38 +365,71 @@ CONFIG = {
 	sidebar: {
 	  center: [
 		{
-			i18n: "",
-		  class: "bi bi-search",
-		  label: "Search",
+			class: "bi bi-search",
+			i18n: "sidebar_search",
+			label:"Search"
 		},
 		{
-		  class: "bi bi-broadcast",
-		  label: "Live",
+			class: "bi bi-broadcast",
+			i18n: "sidebar_live",
+			label:"Live"
 		},
 		{
-		  class: "bi bi-film",
-		  label: "Films",
+			class: "bi bi-film",
+			i18n: "sidebar_films",
+			label:"Films"
 		},
 		{
-		  class: "bi bi-tv",
-		  label: "Series",
+			class: "bi bi-tv",
+			i18n: "sidebar_series",
+			label:"Series"
 		},
 		{
 			class: "bi bi-clock-history",
-			label: "Watch later",
+			i18n: "sidebar_watchlater",
+			label:"Watch later"
 		  },
 	  ],
 	  bottom: [
 		{
-		  class: "bi bi-gear",
-		  label: "Settings",
+			class: "bi bi-gear",
+			i18n: "sidebar_settings",
+			label:"Settings"
 		},
 		{
-		  class: "bi bi-arrow-left",
-		  label: "Quit",
+			class: "bi bi-arrow-left",
+			i18n: "sidebar_quitte",
+			label:"Quit"
 		},
 	  ],
 	},
+	series_button:[
+		{
+			action:"watch",
+			class:"bi bi-play-fill",
+			i18n:"serie_watch"
+		},
+		{
+			action:"trailer",
+			class:"bi bi-collection-play-fill",
+			i18n:"serie_trailer"
+		},
+		{
+			action:"episodes",
+			class:"bi bi-bar-chart-steps",
+			i18n:"serie_saisons_episodes"
+		},
+		{
+			action:"cc",
+			class:"bi bi-badge-cc-fill",
+			i18n:"serie_audio_cc"
+		},
+		{
+			action:"later",
+			class:"bi bi-plus-square-fill",
+			i18n:"serie_watchLater"
+		}
+	],
 	LIVE: [
 	  {
 		category_id: "2",
