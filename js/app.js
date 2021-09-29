@@ -15,7 +15,6 @@ App = (function(Events, Deferrable) {
 			Router.addScene('profiles', new Scene_Profiles);
 			Router.addScene('settings', new Scene_Settings);
 			Router.addScene('error', new Scene_Error);
-
 			Router.addScene('search', new Scene_Search);
 			Router.addScene('home', new Scene_Home);
 			Router.addScene('live', new Scene_Live);
@@ -23,7 +22,7 @@ App = (function(Events, Deferrable) {
 			Router.addScene('serie', new Scene_Serie);
 			
 			
-			Router.go('splash',this.sidebar);
+			Router.go('settings',this.sidebar);
 		}
 	});
 

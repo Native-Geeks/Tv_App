@@ -6,7 +6,17 @@ Scene_Splash = (function(Scene) {
 
 	$.extend(true, Scene_Splash.prototype, Scene.prototype, {
 		
-		init: function(){},
+		init: function(){
+			
+			if(Storage.get("settings") == null){
+				Storage.set("settings",{
+					lang:"EN",
+					color:"red",
+					timezone:"0",
+					epginfo:"Disabled"
+				});
+			}
+		},
 		
 		activate: function(sidebar) {
 			this.sidebar = sidebar;

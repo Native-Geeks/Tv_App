@@ -168,25 +168,22 @@ CONFIG = {
 		action: "language",
 		class: "fas fa-language",
 		i18n: "settings_menu_language",
-		id: "AR"
+		
 	  },
 	  {
 		action: "color",
 		class: "fas fa-palette",
 		i18n: "settings_menu_color",
-		id: "red"
 	  },
 	  {
 		action: "timezone",
 		class: "fas fa-clock",
 		i18n: "settings_menu_timezone",
-		id: "-1"
 	  },
 	  {
 		action: "epginfo",
 		class: "fas fa-calendar",
 		i18n: "settings_menu_epginfo",
-		id: "Disabled"
 	  },
 	  {
 		action: "about",
@@ -216,7 +213,7 @@ CONFIG = {
 	  },
 	  {
 		id: "FR",
-		name: "Fransh",
+		name: "Frensh",
 	  },
 	  {
 		id: "EN",
@@ -229,32 +226,6 @@ CONFIG = {
 	  {
 		id: "GM",
 		name: "German",
-	  },
-	  {
-		id: "RU",
-		name: "Russia",
-	  },
-	  {
-		id: "POR",
-		name: "Portugues",
-	  },{
-		id: "GM",
-		name: "German",
-	  },
-	  {
-		id: "RU",
-		name: "Russia",
-	  },
-	  {
-		id: "POR",
-		name: "Portugues",
-	  },{
-		id: "GM",
-		name: "German",
-	  },
-	  {
-		id: "RU",
-		name: "Russia",
 	  },
 	  {
 		id: "POR",
