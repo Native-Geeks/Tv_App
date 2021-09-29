@@ -15,5 +15,16 @@ I18n.translations.EN = {
 	"error_msg": "Sorry, we couldn't find the page you were looking for.",
 	"error_back": "To return to the profiles page click on the button bellow",
 	"error_btn": "Go back",
-	"sidebar_search" : "Search"
+	"sidebar_search" : "Search",
+	"sidebar_live" : "Live",
+	"sidebar_films" : "Films",
+	"sidebar_series" : "Series",
+	"sidebar_watchlater" : "Watch later",
+	"sidebar_settings" : "Settings",
+	"sidebar_quitte" : "Quit",
+	"serie_watch" : "Watch serie",
+	"serie_trailer" : "Watch trailer",
+	"serie_saisons_episodes" : "Saisons and episodes",
+	"serie_audio_cc" : "Audio and CC",
+	"serie_watchLater" : "Add to watch later",
 };

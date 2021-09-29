@@ -1,95 +1,118 @@
-Snippet_Serie_Details = (function(Snippet) {
+Snippet_Serie_Details = (function (Snippet) {
+  var Snippet_Serie_Details = function () {
+    this.construct.apply(this, arguments);
+  };
 
-	var Snippet_Serie_Details = function() {
-	this.construct.apply(this, arguments);
-	};
+  $.extend(true, Snippet_Serie_Details.prototype, Snippet.prototype, {
+    init: function () {
+      this.on("show", function () {
+        this.render();
+      });
+    },
 
-	$.extend(true, Snippet_Serie_Details.prototype, Snippet.prototype, {
-        
-		init: function(){
-            this.on("show",function(){
-                this.render();
-            });
-		},
-        
-		render: function() {
-            this.$el.find('#director').text(this.parent.serie.data.info.director);
-            this.$el.find('#genre').text(this.parent.serie.data.info.genre);
-            this.$el.css({top:this.parent.$el.find('#filmDescription')[0].offsetTop+this.parent.$el.find('#filmDescription')[0].offsetHeight+10});
-            this.cp = 0;
-		},
-        
-		onLangChange: function () {
+    render: function () {
+      this.$el.find("#director").text(this.parent.serie.data.info.director);
+      this.$el.find("#genre").text(this.parent.serie.data.info.genre);
+      this.$el.css({
+        top:
+          this.parent.$el.find("#filmDescription")[0].offsetTop +
+          this.parent.$el.find("#filmDescription")[0].offsetHeight +
+          10,
+      });
+      this.cp = 0;
+    },
 
-		},
-        
-		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
-		},
-        
-		onEnter: function($el, event) {
-            if(this.cp)
-            {
-                var action = $el.attr('data-action');
-                switch(action){
-                    case 'watch': 
-                        $el.addClass('lastActivePlayer');
-                        this.parent.videoUrl = this.parent.serie.data.episodes[0][0].stream_url;
-                        this.parent.player.show();
-                        break;
-                    case 'trailer': 
-                        $('#scene-serie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.serie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.serie.data.info.youtube_trailer);
-                        $('#scene-serie #trailer img').hide();
-                        $('#scene-serie #trailer iframe').show();
-                        break;
-                    case 'episodes': 
-                        $el.addClass('active');
-                        this.parent.episodes.show();
-                        break;
-                    case 'cc': 
-                        $el.addClass('active');
-                        this.parent.subtitles.show();
-                            break;
-                    case 'later': 
-                        break;
-                }
-            }
-            this.cp++;
-		},
-        
-		navigate: function(direction) {
-            switch(direction)
-                {
-                    case 'up': Focus.to(this.getFocusable(-1,true)); break;
-                    case 'down': 
-                        if(this.getFocusable(1,true).length){
-                            Focus.to(this.getFocusable(1,true)); 
-                        }
-                        else{
-                            this.onReturn();
-                        }
-                        break;
-                }
-		},
+    renderButton: function () {
+      var tplButton = this.templateButton();
 
-		onFocus:function($el){
-			
-		},
+      function fillButton(btn) {
+        return Mustache.render(tplButton, btn);
+      }
 
-        onReturn:function () {
-            
-            this.hide();
-            this.parent.list.top -= this.parent.list.topAdded;
-            this.parent.list.$el.css({top:this.parent.list.top});
-            Focus.to(this.parent.list.$el.find(' .lastActive'));
-            this.parent.list.$el.find(' .lastActive').removeClass('lastActive');
-        },
-        
-		create: function() {
-			return $('#snippet-serie-details');
-		}
-	});
+      CONFIG.series_button.foreach((btn) => {
+        this.$el.find(".div-button").append(fillButton(btn));
+      });
+      I18n.changeLanguage("EN");
+      console.log("dhfvjdfuv");
+    },
 
-	return Snippet_Serie_Details;
+    onClick: function ($el, event) {
+      this.onEnter.apply(this, arguments);
+    },
 
+    onEnter: function ($el, event) {
+      if (this.cp) {
+        var action = $el.attr("data-action");
+        switch (action) {
+          case "watch":
+            $el.addClass("lastActivePlayer");
+            this.parent.videoUrl =
+              this.parent.serie.data.episodes[0][0].stream_url;
+            this.parent.player.show();
+            break;
+          case "trailer":
+            $("#scene-serie #trailer iframe").attr(
+              "src",
+              "https://www.youtube-nocookie.com/embed/" +
+                this.parent.serie.data.info.youtube_trailer +
+                "?controls=0&autoplay=1&loop=1&mute=1&playlist=" +
+                this.parent.serie.data.info.youtube_trailer
+            );
+            $("#scene-serie #trailer img").hide();
+            $("#scene-serie #trailer iframe").show();
+            break;
+          case "episodes":
+            $el.addClass("active");
+            this.parent.episodes.show();
+            break;
+          case "cc":
+            $el.addClass("active");
+            this.parent.subtitles.show();
+            break;
+          case "later":
+            break;
+        }
+      }
+      this.cp++;
+    },
+
+    navigate: function (direction) {
+      switch (direction) {
+        case "up":
+          Focus.to(this.getFocusable(-1, true));
+          break;
+        case "down":
+          if (this.getFocusable(1, true).length) {
+            Focus.to(this.getFocusable(1, true));
+          } else {
+            this.onReturn();
+          }
+          break;
+      }
+    },
+
+    onFocus: function ($el) {},
+
+    onReturn: function () {
+      this.hide();
+      this.parent.list.top -= this.parent.list.topAdded;
+      this.parent.list.$el.css({ top: this.parent.list.top });
+      Focus.to(this.parent.list.$el.find(" .lastActive"));
+      this.parent.list.$el.find(" .lastActive").removeClass("lastActive");
+    },
+
+    onLangChange: function () {
+        I18n.translateHTML(this.$el);
+    },
+
+    templateButton: function () {
+      return '<button class="btn focusable" data-action="{{action}}"><i class="{{class}}"></i><label data-i18n="{{i18n}}"></label></button>';
+    },
+
+    create: function () {
+      return $("#snippet-serie-details");
+    },
+  });
+
+  return Snippet_Serie_Details;
 })(Snippet);

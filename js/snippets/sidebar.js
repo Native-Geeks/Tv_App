@@ -31,14 +31,14 @@
 				CONFIG.sidebar.bottom.forEach(item => {
 					this.$el.find('#sidebar-footer').append(fillBottom(item))
 				});
+				I18n.changeLanguage("EN");
+				
+				Focus.to(this.$el.find("#sidebar-list").first());
 			}
 			this.isRendered = true;
 		},
         
-		onLangChange: function () {
-
-		},
-        
+		
 		onClick: function($el, event) {
 		   this.onEnter.apply(this, arguments);
 		},
@@ -77,6 +77,10 @@
 			}
 		},
 
+		onLangChange: function () {
+			I18n.translateHTML(this.$el);
+		},
+        
 		onReturn:function(){
 			Focus.to($('.focusable').first());
 			this.hide();
@@ -86,12 +90,12 @@
 			this.$el.addClass('onfocus');
 		},
 
-		close:function(){
+		close:function(){ 
 			this.$el.removeClass('onfocus');
 		},
 
 		tmpCenter:function(){
-			return '<li class="sidebar-btn focusable" data-action="{{label}}"><i class="{{class}}"></i><span data-i18n="{{i18n}}">{{label}}</span></li>'
+			return '<li class="sidebar-btn focusable" data-action="{{label}}"><i class="{{class}}"></i><span data-i18n="{{i18n}}"></span></li>'
 		},
         
 		create: function() {
