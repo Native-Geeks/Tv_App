@@ -9,6 +9,9 @@ Snippet_Player = (function (Snippet) {
             this.$btnPlay = this.$el.find("#play");
             this.playIsFocused = true;
             this.firstTimePlay = true;
+            this.backward_speed = 30000;
+            this.forward_speed = 30000;
+            
             function timer(s) {
                 if (s < 3600000) return new Date(s).toISOString().substr(14, 5);
                 else return new Date(s).toISOString().substr(11, 8);
@@ -26,10 +29,12 @@ Snippet_Player = (function (Snippet) {
                 updateControllers(Player.currentTime, Player.duration);
             });
 
-            Player.on("end", function () {
-                this.$btnPlay.removeClass("fa-pause");
+            Player.on("end", function () { 
+                try{
+                    this.$btnPlay.removeClass("fa-pause");   
+                }catch{this.$btnPlay.removeClass("fa-play")};
                 this.$btnPlay.addClass("fa-redo");
-            });
+            },this);
 
             this.on("beforekey", function (keyCode) {
                 if (keyCode === Control.key.RETURN) {
@@ -64,8 +69,6 @@ Snippet_Player = (function (Snippet) {
                 this.$el.find("#controles").css({ opacity: 1 });
                 this.$el.find("#vid-Title").css({ opacity: 1 });
                 $(".player").css("opacity", 1);
-                Player.play(this.parent.videoUrl);
-                
                 //Focus.to(this.$el.find("#play-pause"));
                 
                 /*if(1===1){
@@ -97,7 +100,7 @@ Snippet_Player = (function (Snippet) {
         },
 
         onClick: function ($el, event) {
-            this.onEnter($el, event);
+            //this.onEnter($el, event);
         },
 
         onEnter: function ($el, event) {
@@ -117,8 +120,10 @@ Snippet_Player = (function (Snippet) {
                     break;
                 case "next":
                     break;
+                case "forward" :
+                    this.forward();
+                    break;
             }
-            //console.log(this.$el.find(".focus"));
         },
 
         navigate: function (direction) {
@@ -147,7 +152,6 @@ Snippet_Player = (function (Snippet) {
                     }
                     break;
             }
-            console.log(this.playIsFocused);
 
             /*}
             this.$el.find('#controles').css({opacity:1});
@@ -176,22 +180,22 @@ Snippet_Player = (function (Snippet) {
 
         playPause: function () {
             if(!this.firstTimePlay){
-                if (this.$btnPlay.hasClass("fa-play")) {
-                    this.$btnPlay.removeClass("fa-play");
-                    this.$btnPlay.addClass("fa-pause");
-                    Player.play();
-                } else if (this.$btnPlay.hasClass("fa-redo")) {
+                if (Player.currentTime === Player.duration) {
+                    console.log("g");
                     this.$btnPlay.removeClass("fa-redo");
                     this.$btnPlay.addClass("fa-pause");
                     Player.play();
-                } else {
-                    console.log("test if it clicked");
-                    this.$btnPlay.addClass("fa-play");
+                } else if (Player.currentState != Player.STATE_PLAYING) {
+                console.log(this.$btnPlay);
+                    this.$btnPlay.removeClass("fa-play");
+                    this.$btnPlay.addClass("fa-pause");
+                    Player.play();
+                } else if(Player.currentState === Player.STATE_PLAYING){
                     this.$btnPlay.removeClass("fa-pause");
+                    this.$btnPlay.addClass("fa-play");
                     Player.pause();
                 }
             }else{this.firstTimePlay = false}
-            
         },
 
         reply: function () {
@@ -201,6 +205,17 @@ Snippet_Player = (function (Snippet) {
             this.$btnPlay.addClass("fa-pause");
             Player.seek(0);
             Player.play();
+        },
+
+        forward: function(){
+            if ((Player.duration - Player.currentTime) < 60000) return false;
+            this.backward_speed = 60000;
+            this.forward_speed *= 2;
+            Player.pause();
+            this.playPause();
+            Player.currentTime += this.forward_speed;
+            Player.seek(Player.currentTime);
+            
         },
     });
 
