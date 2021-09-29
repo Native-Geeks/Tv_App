@@ -13,7 +13,6 @@ Snippet_Movie_List = (function(Snippet) {
 			this.cp = 0;
 			
 			this.render();
-			this.show();
 		},
         
 		render: function() {

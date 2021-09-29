@@ -4,7 +4,6 @@ Scene_Settings = (function (Scene) {
   };
 
   $.extend(true, Scene_Settings.prototype, Scene.prototype, {
-
     init: function () {
       this.$isLoadedSetting = false;
       this.$isloadedLang = false;
@@ -14,9 +13,8 @@ Scene_Settings = (function (Scene) {
       this.fromSideBar = false;
     },
 
-    activate:function(fromSideBar){
-      if(fromSideBar !=null)
-        this.fromSideBar = true;
+    activate: function (fromSideBar) {
+      if (fromSideBar != null) this.fromSideBar = true;
     },
 
     render: function () {
@@ -32,10 +30,18 @@ Scene_Settings = (function (Scene) {
         }
 
         CONFIG.settings_menu.forEach((setting) => {
-          if(setting.action==="language"){setting.id=Storage.get("settings").lang;}
-          if(setting.action==="color"){setting.id=Storage.get("settings").color;}
-          if(setting.action==="timezone"){setting.id=Storage.get("settings").timezone;}
-          if(setting.action==="epginfo"){setting.id=Storage.get("settings").epginfo;}
+          if (setting.action === "language") {
+            setting.id = Storage.get("settings").lang;
+          }
+          if (setting.action === "color") {
+            setting.id = Storage.get("settings").color;
+          }
+          if (setting.action === "timezone") {
+            setting.id = Storage.get("settings").timezone;
+          }
+          if (setting.action === "epginfo") {
+            setting.id = Storage.get("settings").epginfo;
+          }
           this.$el.find(".div-icon").append(fillSetting(setting));
         });
       }
@@ -69,7 +75,6 @@ Scene_Settings = (function (Scene) {
 
       CONFIG.timeZone_list.forEach((timezone) => {
         timezone.action = "timezone";
-
         this.$sub_menu.append(fillTimazone(timezone));
       });
 
@@ -85,7 +90,6 @@ Scene_Settings = (function (Scene) {
 
       CONFIG.colors_list.forEach((color) => {
         color.action = "color";
-
         this.$sub_menu.append(fillColors(color));
       });
       I18n.changeLanguage("EN");
@@ -111,14 +115,13 @@ Scene_Settings = (function (Scene) {
         return Mustache.render(tmpAbout, info);
       }
       var i = 0;
-      var infos =Device.getInfoSettings();
-      while(i<infos.length)
-      {
-        var info = {key:infos[i],info:infos[i+1]};
+      var infos = Device.getInfoSettings();
+      while (i < infos.length) {
+        var info = { key: infos[i], info: infos[i + 1] };
         this.$sub_menu.append(fillAbout(info));
-        i +=2;
+        i += 2;
       }
-      
+
       I18n.changeLanguage("EN");
     },
 
@@ -127,8 +130,9 @@ Scene_Settings = (function (Scene) {
       if (this.isOpened) $nowEl = this.$el.find(".list .focus");
       switch (direction) {
         case "up":
-          if(this.isModalOpened)
-          {return;}
+          if (this.isModalOpened) {
+            return;
+          }
           Focus.to($nowEl.prev());
           if (this.isTimeZone && this.top < -1) {
             this.top += 69.14;
@@ -136,8 +140,9 @@ Scene_Settings = (function (Scene) {
           }
           break;
         case "down":
-          if(this.isModalOpened)
-          {return;}
+          if (this.isModalOpened) {
+            return;
+          }
           Focus.to($nowEl.next());
           if (
             this.$sub_menu[0].scrollHeight - this.$sub_menu[0].offsetHeight >
@@ -150,13 +155,11 @@ Scene_Settings = (function (Scene) {
           }
           break;
         case "left":
-          if(this.isModalOpened)
-          {
-            Focus.to(this.$el.find('#ResetModal .modal-footer .focus').prev());
+          if (this.isModalOpened) {
+            Focus.to(this.$el.find("#ResetModal .modal-footer .focus").prev());
             return;
           }
-          if(this.isOpened)
-          {
+          if (this.isOpened) {
             Focus.to(this.active);
             this.isOpened = false;
             this.$sub_menu.empty();
@@ -165,14 +168,12 @@ Scene_Settings = (function (Scene) {
           }
           break;
         case "right":
-          if(this.isModalOpened)
-          {
-            Focus.to(this.$el.find('#ResetModal .modal-footer .focus').next());
+          if (this.isModalOpened) {
+            Focus.to(this.$el.find("#ResetModal .modal-footer .focus").next());
             return;
           }
-          if(!this.isOpened)
-          {
-            $el = this.$menu.find('.focus');
+          if (!this.isOpened) {
+            $el = this.$menu.find(".focus");
             this.onEnter($el);
           }
           break;
@@ -185,130 +186,162 @@ Scene_Settings = (function (Scene) {
       this.onEnter(this, arguments);
     },
 
-
     onEnter: function ($el, event) {
-      if(!this.fromSideBar)
-      {
+      if (!this.fromSideBar) {
         var action = $el.attr("data-action");
         var id = $el.attr("data-id");
-          if (this.isOpened) {
-        
+        if (this.isOpened) {
           this.isOpened = false;
           this.active.css({ background: "unset" });
           this.$sub_menu.css({ flexBasis: "0" });
           this.$sub_menu.empty();
           var stg = Storage.get("settings");
-          if(action === "language"){stg.lang = id;}
-          if(action === "color"){stg.color = id;}
-          if(action === "timezone"){stg.timezone = id;}
-          
-          Storage.set("settings",stg);
+          if (action === "language") {stg.lang = id;}
+          if (action === "color") {stg.color = id;}
+          if (action === "timezone") {stg.timezone = id;}
+          Storage.set("settings", stg);
+          if(Storage.get("settings") !== null){
+            $('.settings-menu[data-action="language"] label').last()
+            .text(Storage.get('settings').lang);
+
+            $('.settings-menu[data-action="language"]').attr(
+              "data-id",
+              Storage.get('settings').lang
+            );
+            
+            $('.settings-menu[data-action="color"] label')
+            .text(Storage.get('settings').color);
+
+            $('.settings-menu[data-action="color"]').attr(
+              "data-id", 
+              Storage.get('settings').color
+            );
+            
+            $('.settings-menu[data-action="timezone"] label')
+            .text(Storage.get('settings').timezone);
+
+            $('.settings-menu[data-action="timezone"]').attr(
+              "data-id",
+              Storage.get('settings').timezone
+            );
+            
+            $('.settings-menu[data-action="epginfo"] label')
+            .text(Storage.get('settings').egpinfo);
+
+            $('.settings-menu[data-action="epginfo"]').attr(
+              "data-id",
+              Storage.get('settings').epginfo
+            );
+          }
           Focus.to(this.active);
-        }
-        else {
+        } else {
           this.$sub_menu.empty();
-       
           this.top = 0;
           this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
+          switch (action) {
+            case "language":
+              this.active = this.$el.find(".focus");
+              this.renderLanguage();
+              this.isOpened = true;
+              this.$sub_menu.css({ flexBasis: "150%" });
+              Focus.to(
+                this.$el.find(".list .settings_language[data-id='" + id + "']")
+              );
 
-          if (action === "language") {
-            this.active = this.$el.find(".focus");
-            this.renderLanguage();
-            this.isOpened = true;
-            this.$sub_menu.css({ flexBasis: "150%" });
-            Focus.to(
-              this.$el.find(".list .settings_language[data-id='" + id + "']")
-            );
-            this.active.css({ background: "#151617" });
-            this.isTimeZone = true;
-          }
-          if (action === "timezone") {
-            this.active = this.$el.find(".focus");
-            this.renderTimeZone();
-            Focus.to(
-              this.$el.find(".list .settings_language[data-id='" + id + "']")
-            );
-            this.isTimeZone = true;
-            this.isOpened = true;
-            this.$sub_menu.css({ flexBasis: "150%" });
-            this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
-            this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
-            this.active.css({ background: "#151617" });
-          }
-          if (action === "color") {
-            this.active = this.$el.find(".focus");
-            this.renderColors();
-            Focus.to(
-              this.$el.find(".list .settings_language[data-id='" + id + "']")
-            );
-            this.isTimeZone = true;
-            this.isOpened = true;
-            this.$sub_menu.css({ flexBasis: "150%" });
-            this.active.css({ background: "#151617" });
-          }
-          if (action === "epginfo") {
-            var stg = Storage.get("settings");
-            if (id === "Disabled") {
-              $('.settings-menu[data-action="epginfo"] label')
-                .last()
-                .text("Enabled");
-              $('.settings-menu[data-action="epginfo"]').attr(
-                "data-id",
-                "Enabled"
+              this.active.css({ background: "#151617" });
+              this.isTimeZone = true;
+              break;
+            case "color":
+              this.active = this.$el.find(".focus");
+              this.renderColors();
+              Focus.to(
+                this.$el.find(".list .settings_language[data-id='" + id + "']")
               );
-              stg.epginfo = "Enabled";
-              
-            } else {
-              $('.settings-menu[data-action="epginfo"] label')
-                .last()
-                .text("Disabled");
-              $('.settings-menu[data-action="epginfo"]').attr(
-                "data-id",
-                "Disabled"
+              this.isTimeZone = true;
+              this.isOpened = true;
+              this.$sub_menu.css({ flexBasis: "150%" });
+              this.active.css({ background: "#151617" });
+              break;
+            case "timezone":
+              this.active = this.$el.find(".focus");
+              this.renderTimeZone();
+              Focus.to(
+                this.$el.find(".list .settings_language[data-id='" + id + "']")
               );
-              stg.epginfo = "Disabled";
-            }
-            Storage.set("settings",stg);
-          }
-          if (action === "about") {
-            this.active = this.$el.find(".focus");
-            this.renderAbout();
-            this.$sub_menu.css({ flexBasis: "150%" });
-            this.isOpened = true;
-            this.active.css({ background: "#151617" });
-          }
-          if (action === "info") {
-            this.active = this.$el.find(".focus");
-            this.renderInfo();
-            this.$sub_menu.css({ flexBasis: "150%" });
-            this.isOpened = true;
-            this.active.css({ background: "#151617" });
-          }
-          if (action === "reset") {
-            $("#ResetModal").addClass("show");
-            $("#ResetModal").show();
-            Focus.to(this.$el.find(".btn").first());
-            this.active = $el;
-            this.isModalOpened = true;
-          }
-          if (action === "reset_okay") {
-            $("#ResetModal").removeClass("show");
-            $("#ResetModal").hide();
-            Focus.to(this.active);
-            this.isModalOpened = false;
-          }
-          if (action === "reset_cancel") {
-            $("#ResetModal").removeClass("show");
-            $("#ResetModal").hide();
-            Focus.to(this.active);
-            this.isModalOpened = false;
-          }
-          if (action === "back") {
-            this.onReturn();
+              this.isTimeZone = true;
+              this.isOpened = true;
+              this.$sub_menu.css({ flexBasis: "150%" });
+              this.top -= this.$sub_menu.find(".focus")[0].offsetTop;
+              this.$sub_menu.css("transform", "translateY(" + this.top + "px)");
+              this.active.css({ background: "#151617" });
+              break;
+            case "epginfo":
+              var stg = Storage.get("settings");
+              if (id === "Disabled") {
+                $('.settings-menu[data-action="epginfo"] label')
+                  .last()
+                  .text("Enabled");
+                $('.settings-menu[data-action="epginfo"]').attr(
+                  "data-id",
+                  "Enabled"
+                );
+                stg.epginfo = "Enabled";
+              } else {
+                $('.settings-menu[data-action="epginfo"] label')
+                  .last()
+                  .text("Disabled");
+                $('.settings-menu[data-action="epginfo"]').attr(
+                  "data-id",
+                  "Disabled"
+                );
+                stg.epginfo = "Disabled";
+              }
+              Storage.set("settings", stg);
+              break;
+            case "about":
+              this.active = this.$el.find(".focus");
+              this.renderAbout();
+              this.$sub_menu.css({ flexBasis: "150%" });
+              this.isOpened = true;
+              this.active.css({ background: "#151617" });
+              break;
+            case "info":
+              this.active = this.$el.find(".focus");
+              this.renderInfo();
+              this.$sub_menu.css({ flexBasis: "150%" });
+              this.isOpened = true;
+              this.active.css({ background: "#151617" });
+              break;
+            case "reset":
+              $("#ResetModal").addClass("show");
+              $("#ResetModal").show();
+              Focus.to(this.$el.find(".btn").first());
+              this.active = $el;
+              this.isModalOpened = true;
+              break;
+            case "reset_okay":
+              Storage.removeItem("watch_later");
+              Storage.removeItem("settings");
+              Storage.removeItem("resumeMovies");
+              window.location.reload();
+              $("#ResetModal").removeClass("show");
+              $("#ResetModal").hide();
+              Focus.to(this.active);
+              this.isModalOpened = false; 
+              break;
+            case "reset_cancel":
+              $("#ResetModal").removeClass("show");
+              $("#ResetModal").hide();
+              Focus.to(this.active);
+              this.isModalOpened = false;
+              break;
+            case "back":
+              this.onReturn();
+              break;
           }
         }
       }
-        this.fromSideBar = false;
+      this.fromSideBar = false;
     },
 
     onLangChange: function () {

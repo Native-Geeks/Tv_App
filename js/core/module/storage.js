@@ -36,11 +36,15 @@ Storage = (function(Events) {
 
 	    return false;
 	},
-	/**
-	 * Clear all stored data
-	 * 
-	 * @returns {Boolean}s
-	 */
+
+	removeItem: function(item){
+	    if(window.localStorage){
+		return window.localStorage.removeItem(item);
+	    }
+	    
+	    return false;
+	},
+	
 	clear: function(){
 	    if(window.localStorage){
 		return window.localStorage.clear();
