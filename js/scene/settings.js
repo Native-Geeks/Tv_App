@@ -110,10 +110,15 @@ Scene_Settings = (function (Scene) {
       function fillAbout(info) {
         return Mustache.render(tmpAbout, info);
       }
-
-      CONFIG.info_section.forEach((info) => {
+      var i = 0;
+      var infos =Device.getInfoSettings();
+      while(i<infos.length)
+      {
+        var info = {key:infos[i],info:infos[i+1]};
         this.$sub_menu.append(fillAbout(info));
-      });
+        i +=2;
+      }
+      
       I18n.changeLanguage("EN");
     },
 
@@ -327,7 +332,7 @@ Scene_Settings = (function (Scene) {
     },
 
     tmpAbout_Info: function () {
-      return '<div class="settings_language focusable" data-id="{{id}}">{{content}}</div>';
+      return '<li class="settings_language">{{key}} {{info}}</li>';
     },
 
     onReturn: function () {

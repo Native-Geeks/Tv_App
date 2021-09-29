@@ -20,9 +20,10 @@ App = (function(Events, Deferrable) {
 			Router.addScene('live', new Scene_Live);
 			Router.addScene('movie', new Scene_Movie);
 			Router.addScene('serie', new Scene_Serie);
+			Router.addScene('watch_later', new Scene_Watch_Later);
 			
 			
-			Router.go('settings',this.sidebar);
+			Router.go('splash',this.sidebar);
 		}
 	});
 

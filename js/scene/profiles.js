@@ -156,6 +156,9 @@ Scene_Profiles = (function(Scene) {
                         this.$activeEl = $el;
                         Router.go('settings');
                         break;
+                    case 'restart':
+                        window.location.reload();
+                        break;
                     case 'info':
                         for (account in this.$accounts) {
                           if(account === this.$profiles.find(this.$profiles.find($el[0].parentNode)[0].parentNode).attr('data-id'))

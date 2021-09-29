@@ -279,14 +279,23 @@ Keyboard = (function (Events) {
 		},
 		
 		navigate: function (direction) {
-			this.position.x = parseInt(Focus.focused.attr("data-posx"), 10);
-			this.position.y = parseInt(Focus.focused.attr("data-posy"), 10);
-
-			if (direction == "left") this.move(-1, 0, "X");
-			else if (direction == "right") this.move(1, 0, "X");
-			else if (direction == "up") this.move(0, -1, "Y");
-			else if (direction == "down") this.move(0, 1, "Y");
-			return false;
+			if(!this.$el.find('.focus').prev().length && direction === "left")
+            {
+                Focus.to($('.sidebar .active')); 
+                $('.sidebar').addClass('onfocus');
+				this.isOut = true;
+            }
+			if(!this.isOut)
+			{
+				this.position.x = parseInt(Focus.focused.attr("data-posx"), 10);
+				this.position.y = parseInt(Focus.focused.attr("data-posy"), 10);
+	
+				if (direction == "left") this.move(-1, 0, "X");
+				else if (direction == "right") this.move(1, 0, "X");
+				else if (direction == "up") this.move(0, -1, "Y");
+				else if (direction == "down") this.move(0, 1, "Y");
+				return false;
+			}
 		},
 		
 		move: function (dirX, dirY, axis) {

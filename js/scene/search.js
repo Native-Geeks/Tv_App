@@ -27,9 +27,6 @@ Scene_Search = (function (Scene) {
         },
 
         navigate: function(direction) {
-            switch(direction){
-				//case 'left': Focus.to($('.sidebar .active')); $('.sidebar').addClass('onfocus');return;
-			}
 		},
 
 

@@ -362,12 +362,6 @@ CONFIG = {
 			content:"this section is reserved to about information"
 		}
 	],
-	info_section:[
-		{
-			id:"if",
-			content:"this section is reserved to the information about the application"
-		}
-	],
 	sidebar: {
 	  center: [
 		{
@@ -386,6 +380,10 @@ CONFIG = {
 		  class: "bi bi-tv",
 		  label: "Series",
 		},
+		{
+			class: "bi bi-clock-history",
+			label: "Watch later",
+		  },
 	  ],
 	  bottom: [
 		{

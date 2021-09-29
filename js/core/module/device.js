@@ -180,6 +180,21 @@ Device = (function(Events) {
 				+ "\nLocation:\t" + window.location
 				+ "\nUserAgent:\t" + navigator.userAgent;
 		},
+
+		getInfoSettings: function() {
+			return [
+				"Version:",(CONFIG.version || "not-available"),
+				"SDK version:",(CONFIG.versionSDK || "not-available"),
+				"Device:",Main.getDevice().join(' '),
+				"Name:",this.getDeviceName(),
+				"UID:",this.getUID(),
+				"IP address:",this.getIP(),
+				"Firmware:",this.getFirmware(),
+				"Country:",this.getCountry(),
+				"Language:" , this.getLanguage(),
+				"Date:" , this.getDate()
+			];
+		},
 		/**
 		 * Returns driver year.
 		 * 

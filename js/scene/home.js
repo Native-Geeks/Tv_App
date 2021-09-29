@@ -24,6 +24,7 @@ Scene_Home = (function(Scene) {
 			this.sidebar.show();
 			this.sidebar.open();
 			try{
+				this.sidebar.account = account;
 				this.sidebar.$el.find('#profile_name').text(account.name);
 			}catch(err){}
 			Focus.to(this.sidebar.$el.find('.focusable[data-action="Live"]'));

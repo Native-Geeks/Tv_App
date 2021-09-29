@@ -46,7 +46,16 @@ Snippet_Movie_Details = (function(Snippet) {
                         $el.addClass('active');
                         this.parent.subtitles.show();
                         break;
-                    case 'later': 
+                    case 'later':
+                        var id = this.parent.sidebar.account.id;
+                        var list = Storage.get("watch_later");
+                        console.log(this.parent.movie);
+                        eval("list.N"+(id)+" = []");
+                        var lst = list["N"+id];
+                        console.log(list["N"+id]);
+                        lst.push("play");
+                        
+                        Storage.set("watch_later",list);
                         break;
                 }
             }
