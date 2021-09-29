@@ -1,70 +1,18 @@
-/*
- *******************************************************************************
- * Copyright (c) 2013 Mautilus, s.r.o. (Czech Republic)
- * All rights reserved
- *  
- * Questions and comments should be directed https://github.com/mautilus/sdk/issues
- *
- * You may obtain a copy of the License at LICENSE.txt
- *******************************************************************************
- */
-
-/**
- * Developer tools, press 0 (by default) key four times to display developer tools
- * You can see console logs in special layer in the app.
- * 
- * @author Mautilus s.r.o.
- * @class Developer
- * @singleton
- * @mixins Events
- */
-
 Developer = (function() {
-	var Developer = {
-	/**
-	 * @property {Object} config General config hash
-	 */
-	config: {
-		/**
-		 * @cfg {Boolean} debug Toggle debug mode
-		 */
+	var Developer = {	config: {
 		debug: false,
-		/**
-		 * @cfg {Boolean} active TRUE to active tools after start up
-		 */
 		active: false,
-		/**
-		 * @cfg {String} console URL address to the remote console
-		 */
 		console: null,
-		/**
-		 * @cfg {Boolean} consoleActive TRUE to connect to the remote console after start up (`active` must be set to TRUE)
-		 */
 		consoleActive: false,
-		/**
-		 * @cfg {String/Number} activationKey Name of actiovation key
-		 */
 		activationKey: 'ZERO',
-		/**
-		 * @cfg {Boolean} alertToConsole TRUE to redirect alert into console.log
-		 */
 		alertToConsole: true,
-		/**
-		 * @cfg {Number} limitStack Amount of records stored in a console stack (0 = unlimited)
-		 */
 		limitStack: 40,
-		/**
-		 * @cfg {Number} limitNetworkStack Amount of records stored in a network stack (0 = unlimited)
-		 */
 		limitNetworkStack: 0
 	}
 	};
 
 	$.extend(true, Developer, {
-		/**
-		 * Init Developer object
-		 * @param {Object} [config={}] Developer configuration
-		 */
+		
 		init: function(config) {
 			var onerror, scope = this;
 
@@ -330,7 +278,6 @@ Developer = (function() {
 						this.uiToggleInputIP();
 						return false;
 					}
-
 					this.$elContent.find('.developer-ui-ip').text(this.inputBuffer);
 
 					return false;
@@ -491,7 +438,6 @@ Developer = (function() {
 		 */
 		uiToggleInfo: function() {
 			this.$elContent.toggle();
-
 			if (this.$elContent.is(':visible')) {
 				this.$elContent.html(Device.getInfo());
 			}

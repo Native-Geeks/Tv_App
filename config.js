@@ -5,7 +5,7 @@ CONFIG = {
 	appName: "applicationName",
 	developer: {
 	  debug: true,
-	  active: false,
+	  active: true,
 	  console: null,
 	},
 	player: {
@@ -540,7 +540,7 @@ CONFIG = {
 			stream_id: 1001,
 			name: "Big Buck Bunny",
 			stream_url:
-			  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+			  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
 		  },
 		},
 	  },

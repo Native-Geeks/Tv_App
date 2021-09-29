@@ -168,7 +168,7 @@ Snippet_Movie_List = (function(Snippet) {
 					}
 					break; 
 				case 'left' :
-					if(this.transformX === 0)
+					if(!$nowEl.prev().length)
 					{
 						$nowEl.addClass('lastActive');
 						Focus.to($('.sidebar ul .active'));
