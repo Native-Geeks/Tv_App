@@ -37,10 +37,9 @@
 			}
 			this.isRendered = true;
 		},
-        
 		
 		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
+		   this.onEnter($el, event);
 		},
         
 		onEnter: function($el, event) {
@@ -54,7 +53,7 @@
 			if(action === 'Live') {this.close(); Router.go('live',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
 			if(action === 'Films') {this.close(); Router.go('movie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
 			if(action === 'Series') {this.close(); Router.go('serie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); }
-			if(action === 'Watch later'){this.close(); Router.go('watch_later',this); Focus.to($('#scene-watch-later'+Router.activeSceneName+' .focusable').first()); }
+			if(action === 'Watch later'){this.close(); Router.go('watch-later',this); Focus.to($('#scene-watch-later'+Router.activeSceneName+' .focusable').first()); }
 			if(action === 'Settings') {this.hide(); Router.go('settings',true); return;}
 			if(action === 'Quit')	{this.hide();Router.go('profiles');}
 		},
@@ -80,10 +79,13 @@
 		onLangChange: function () {
 			I18n.translateHTML(this.$el);
 		},
+
+		onFocus:function($el){
+			this.open();
+		},
         
 		onReturn:function(){
-			Focus.to($('.focusable').first());
-			this.hide();
+			Router.go("profiles");
 		},
 
 		open:function(){

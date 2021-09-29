@@ -5,19 +5,6 @@ Scene_Home = (function(Scene) {
 	};
 
 	$.extend(true, Scene_Home.prototype, Scene.prototype, {
-		
-		init: function(){
-
-		},
-		
-		render: function() {			
-			/*console.log(CONFIG.LIVE);
-			console.log(CONFIG.LIVE_LIST_X);
-			console.log(CONFIG.VOD);
-			console.log(CONFIG.VOD_LIST_X);
-			console.log(CONFIG.SERIES);
-			console.log(CONFIG.SERIES_LIST_X);*/
-		},
 
 		activate: function(account,sidebar){
 			this.sidebar  = sidebar;
@@ -33,8 +20,7 @@ Scene_Home = (function(Scene) {
 		},
 
 		onReturn:function($el,e,stop){
-			this.sidebar.hide();
-			Router.goBack(null);
+			this.sidebar.onReturn();
 		},
 		
 		create: function() {

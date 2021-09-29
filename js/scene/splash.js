@@ -28,14 +28,6 @@ Scene_Splash = (function(Scene) {
 			},1000);
 		},
 		
-		onLangChange: function () {
-
-		},
-
-		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
-		},
-
 		create: function() {
 			return $('#scene-splash');
 		}

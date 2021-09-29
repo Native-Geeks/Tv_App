@@ -131,7 +131,7 @@ Scene_Profiles = (function(Scene) {
         },
 
         onClick: function($el, event) {
-           this.onEnter(this, arguments);
+           this.onEnter($el, event);
         },
         
         onEnter: function($el, event) {
