@@ -10,7 +10,7 @@ Scene_Watch_Later = (function (Scene) {
 
         activate: function (sidebar) {
             this.sidebar = sidebar;
-            if(Storage.get("watch_later")[this.sidebar.account.id]==null )
+            if(Storage.get("watch_later")["N"+this.sidebar.account.id]==null )
             {
                 this.$el.append('<div class="noItem"><label>There no item on your list !</label><button class="btn focusable" data-action="movie">Go Movie</button></div>');
             }

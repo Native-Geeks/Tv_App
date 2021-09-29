@@ -131,7 +131,7 @@ Scene_Profiles = (function(Scene) {
         },
 
         onClick: function($el, event) {
-           this.onEnter.apply(this, arguments);
+           this.onEnter(this, arguments);
         },
         
         onEnter: function($el, event) {
@@ -143,7 +143,6 @@ Scene_Profiles = (function(Scene) {
                         this.notFromSplash = true;
                         Router.go('home', this.$accounts[account],this.sidebar);
                     }
-                	
                 }
             }
             else
@@ -158,6 +157,11 @@ Scene_Profiles = (function(Scene) {
                         break;
                     case 'restart':
                         window.location.reload();
+                        break;
+                    case 'reset':
+                        Storage.removeItem("watch_later");
+                        Storage.removeItem("settings");
+                        Storage.removeItem("resumeMovies");
                         break;
                     case 'info':
                         for (account in this.$accounts) {

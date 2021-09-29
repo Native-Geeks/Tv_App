@@ -320,10 +320,14 @@ Scene_Settings = (function (Scene) {
               this.isModalOpened = true;
               break;
             case "reset_okay":
+              Storage.removeItem("watch_later");
+              Storage.removeItem("settings");
+              Storage.removeItem("resumeMovies");
+              window.location.reload();
               $("#ResetModal").removeClass("show");
               $("#ResetModal").hide();
               Focus.to(this.active);
-              this.isModalOpened = false;
+              this.isModalOpened = false; 
               break;
             case "reset_cancel":
               $("#ResetModal").removeClass("show");
