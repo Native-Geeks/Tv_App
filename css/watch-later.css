@@ -21,5 +21,18 @@
 }
 #scene-watch-later  .focus{
     font-weight: 600;
-    border : 2px solid white;
+    border : 3px solid white;
+}
+#scene-watch-later .row{
+    margin: 20px 0;
+    --bs-gutter-x: 0; 
+}
+#scene-watch-later .row .focusable{
+    width: 200px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+#scene-watch-later .row .focusable img{
+    width: 100%;
+    height: 100%;
 }

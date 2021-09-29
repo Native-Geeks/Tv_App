@@ -9,25 +9,48 @@ Scene_Watch_Later = (function (Scene) {
         },
 
         activate: function (sidebar) {
+            this.$el.find(".noItem").remove();
+            this.$el.find(".row").empty();
             this.sidebar = sidebar;
-            if(Storage.get("watch_later")["N"+this.sidebar.account.id]==null )
+            if(Storage.get("watch_later")==null )
             {
                 this.$el.append('<div class="noItem"><label>There no item on your list !</label><button class="btn focusable" data-action="movie">Go Movie</button></div>');
             }
             else{
-                var list = Storage.get("watch_later");
+                if(Storage.get("watch_later")["N"+this.sidebar.account.id])
+                {
+                    this.renderItems(Storage.get("watch_later")["N"+this.sidebar.account.id]);
+                }
+                else
+                {
+                    this.$el.append('<div class="noItem"><label>There no item on your list !</label><button class="btn focusable" data-action="movie">Go Movie</button></div>');
+                }
             }
             Focus.to(this.$el.find('.focusable').first());
             this.cp = 0 ;
         },
 
-        render: function () {
+        renderItems: function (items) {
+            if(!this.isRendered)
+            {
+                var tmp = this.tmpCard();
+                function addItem(item){
+                    return Mustache.render(tmp,item);
+                }
+                items.forEach(item => {
+                    console.log(addItem(item));
+                    this.$el.find(".row").append(addItem(item));
+                });
+            }
+            this.isRendered = true;
+        },
 
+        tmpCard:function(){
+            return '<div class="col-6 col-md-4 focusable" data-id="{{id}}" data-type="{{type}}"><img src="{{imgUrl}}" alt="{{id}}"/></div>';
         },
 
         onReturn: function ($el, e, stop) {
-            this.sidebar.hide();
-            Router.go("profiles");
+            this.sidebar.onReturn();
         },
 
         navigate: function(direction) {
