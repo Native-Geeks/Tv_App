@@ -38,12 +38,6 @@ Snippet_Later_List = (function(Snippet) {
                 items.forEach(item => {
                     this.$el.append(addItem(item));
                 });
-                items.forEach(item => {
-                    this.$el.append(addItem(item));
-                });
-                items.forEach(item => {
-                    this.$el.append(addItem(item));
-                });
         },
 
         tmpCard:function(){

@@ -13,31 +13,24 @@ Snippet_Serie_Details = (function (Snippet) {
     render: function () {
       this.$el.find("#director").text(this.parent.serie.data.info.director);
       this.$el.find("#genre").text(this.parent.serie.data.info.genre);
-      this.$el.css({
-        top:
-          this.parent.$el.find("#filmDescription")[0].offsetTop +
-          this.parent.$el.find("#filmDescription")[0].offsetHeight +
-          10,
-      });
+      this.$el.css({top:this.parent.$el.find("#filmDescription")[0].offsetTop +this.parent.$el.find("#filmDescription")[0].offsetHeight +10});
       this.cp = 0;
-    },
+      if(!this.isRendered){
+        var tmp = this.templateButton();
 
-    renderButton: function () {
-      var tplButton = this.templateButton();
-
-      function fillButton(btn) {
-        return Mustache.render(tplButton, btn);
-      }
-
-      CONFIG.series_button.foreach((btn) => {
-        this.$el.find(".div-button").append(fillButton(btn));
-      });
-      I18n.changeLanguage("EN");
-      console.log("dhfvjdfuv");
+        function render(item){
+            return Mustache.render(tmp,item);
+        }
+        CONFIG.serie.details.forEach(item => {
+            this.$el.find("div").append(render(item));
+        });
+        I18n.changeLanguage("EN");
+    }
+    this.isRendered = true;
     },
 
     onClick: function ($el, event) {
-      this.onEnter.apply(this, arguments);
+      this.onEnter($el, event);
     },
 
     onEnter: function ($el, event) {
@@ -78,16 +71,8 @@ Snippet_Serie_Details = (function (Snippet) {
 
     navigate: function (direction) {
       switch (direction) {
-        case "up":
-          Focus.to(this.getFocusable(-1, true));
-          break;
-        case "down":
-          if (this.getFocusable(1, true).length) {
-            Focus.to(this.getFocusable(1, true));
-          } else {
-            this.onReturn();
-          }
-          break;
+        case "up":Focus.to(this.getFocusable(-1, true));break;
+        case "down":Focus.to(this.getFocusable(1, true));break;
       }
     },
 
@@ -106,7 +91,7 @@ Snippet_Serie_Details = (function (Snippet) {
     },
 
     templateButton: function () {
-      return '<button class="btn focusable" data-action="{{action}}"><i class="{{class}}"></i><label data-i18n="{{i18n}}"></label></button>';
+      return '<button class="btn focusable" data-action="{{action}}"><i class="{{icon}}"></i><span data-i18n="{{i18n}}"></span></button>';
     },
 
     create: function () {

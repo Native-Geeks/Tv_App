@@ -179,10 +179,19 @@ body {
 #snippet-movie-details label:last-of-type{
 	margin-bottom: 100px;
 }
+#snippet-serie-details label:last-of-type{margin-bottom: 65px;}
 #ResetModal h5{ 
 	color:#151921;
   }
 #ResetModal .modal-body{ 
 	text-align: center;
 	color:#151921;
+  }
+  .alert{
+	  z-index: 1000;
+	  position: absolute !important;
+	  top: 15px;
+	  right: 15px;
+	  width: fit-content;
+	  font-size: x-large;
   }

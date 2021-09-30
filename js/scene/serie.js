@@ -6,10 +6,6 @@ Scene_Serie = (function(Scene) {
 
 	$.extend(true, Scene_Serie.prototype, Scene.prototype, {
 		
-		init: function(){
-
-		},
-		
 		render: function() {
 			this.list = new Snippet_Serie_List(this);
 			this.details = new Snippet_Serie_Details(this);
@@ -23,11 +19,6 @@ Scene_Serie = (function(Scene) {
 		activate: function(sidebar){
 			this.sidebar  = sidebar;
 			Focus.to();
-		},
-
-		onReturn:function($el,e,stop){
-			this.sidebar.hide();
-			Router.goBack(null);
 		},
 		
 		create: function() {

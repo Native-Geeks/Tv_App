@@ -34,11 +34,6 @@ Subtitles = (function(Events) {
 
 			this.$el.css({
 				position: 'absolute',
-				zIndex: 0,
-				top: 0,
-				left: 0,
-				width: 1280,
-				height: 720
 			}).hide();
 
 			Player.on('timeupdate', function(time) {
@@ -420,10 +415,7 @@ Subtitles = (function(Events) {
 			this.renderAudioCC();
 			this.isVisible = true;
 			this.$el.css({
-				width: Player.width,
-				height: Player.height,
-				left: left,
-				top: window.innerHeight/4
+				right:0
 			}).show();
 			Focus.to(this.$el.find('.focusable').first());
 			this.$el.addClass('show_details');

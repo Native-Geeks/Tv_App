@@ -36,7 +36,7 @@ Snippet_Movie_Details = (function(Snippet) {
 		},
         
 		onClick: function($el, event) {
-		   this.onEnter(this, arguments);
+		   this.onEnter($el, event);
 		},
         
 		onEnter: function($el, event) {
@@ -47,15 +47,11 @@ Snippet_Movie_Details = (function(Snippet) {
                     case 'watch': 
                         $el.addClass('lastActivePlayer');
                         this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
-                         Player.play(this.parent.videoUrl);
+                        Player.play(this.parent.videoUrl);
                         this.parent.player.show();
                         break;
-                    case 'trailer': 
-                        
-                        break;
-                    case 'cc': 
-                        $el.addClass('active');
-                        this.parent.subtitles.show();
+                    case 'back': 
+                        this.onReturn();
                         break;
                     case 'later':
                         var id = this.parent.sidebar.account.id;
@@ -76,6 +72,10 @@ Snippet_Movie_Details = (function(Snippet) {
                             {
                                 if(lst[movie].type == "movie" && lst[movie].id ==  film.stream_id)
                                 {
+                                    this.parent.$el.append('<div class="alert alert-warning" role="alert" data-i18n="movie"></div>');
+                                    setTimeout(()=>{
+                                        this.parent.$el.find(".alert").remove();
+                                    },2500);
                                     return;
                                 }
                             }
@@ -84,10 +84,12 @@ Snippet_Movie_Details = (function(Snippet) {
                             type:"movie",
                             id:film.stream_id,
                             imgUrl:film.stream_icon
-                        });
-                                      
-                        
+                        });                        
                         Storage.set("watch_later",list);
+                        this.parent.$el.append('<div class="alert alert-success" role="alert" data-i18n="movie_watch_later_succes"></div>');
+                        setTimeout(()=>{
+                            this.parent.$el.find(".alert").remove();
+                        },2500);
                         break;
                 }
             }

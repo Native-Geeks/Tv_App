@@ -12,11 +12,7 @@ Scene_Live = (function(Scene) {
 		
 		render: function() {			
 			/*console.log(CONFIG.LIVE);
-			console.log(CONFIG.LIVE_LIST_X);
-			console.log(CONFIG.VOD);
-			console.log(CONFIG.VOD_LIST_X);
-			console.log(CONFIG.SERIES);
-			console.log(CONFIG.SERIES_LIST_X);*/
+			console.log(CONFIG.LIVE_LIST_X);*/
 		},
 
 		activate: function(account,sidebar){
@@ -31,11 +27,6 @@ Scene_Live = (function(Scene) {
 				this.account = account;
 		},
 
-		onReturn:function($el,e,stop){
-			this.sidebar.hide();
-			Router.goBack(null);
-		},
-		
 		create: function() {
 			return $('#scene-live');
 		}

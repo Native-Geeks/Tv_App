@@ -1,23 +1,3 @@
-/*
- *******************************************************************************
- * Copyright (c) 2013 Mautilus, s.r.o. (Czech Republic)
- * All rights reserved
- *  
- * Questions and comments should be directed https://github.com/mautilus/sdk/issues
- *
- * You may obtain a copy of the License at LICENSE.txt
- *******************************************************************************
- */
-
-/**
- * Media Player
- *
- * @author Mautilus s.r.o.
- * @class Player
- * @singleton
- * @mixins Events
- */
-
 Player = (function(Events, Deferrable) {
 	var Player = {
 		STATE_IDLE: -1,
@@ -26,192 +6,47 @@ Player = (function(Events, Deferrable) {
 		STATE_PLAYING: 1,
 		STATE_PAUSED: 2,
 		config: {
-			/**
-			 * @cfg {Number} width Player width (px)
-			 */
 			width: 1280,
-			/**
-			 * @cfg {Number} height Player height (px)
-			 */
 			height: 720,
-			/**
-			 * @cfg {Number} top Player `top` position (px)
-			 */
 			top: 0,
-			/**
-			 * @cfg {Number} left Player `left` position (px)
-			 */
 			left: 0,
-			/**
-			 * @cfg {Number} seekStep Default seek time (ms)
-			 */
 			seekStep: 20000
 		}
 	};
 
 	$.extend(true, Player, Events, Deferrable, {
-		/**
-		 * @event durationchange
-		 * When duration is changed
-		 * @param {Number} duration [ms]
-		 */
-
-		/**
-		 * @event timeupdate
-		 * When playback time (current position) is changed
-		 * @param {Number} currentTime [ms]
-		 */
-
-		/**
-		 * @event end
-		 * When playback ends
-		 * @param {Number} currentTime [ms] Should be same as duration
-		 */
-
-		/**
-		 * @event error
-		 * When error is detected
-		 * @param {Number} code System error code
-		 * @param {String} msg Error message
-		 * @param {Number/String} details Error details from native API (if available)
-		 */
-
-		/**
-		 * @event statechange
-		 * When playback state has changed
-		 * @param {Number} currentState One of possible states (STATE_IDLE, STATE_BUFFERING, STATE_PLAYING, STATE_PAUSED)
-		 */
-
-		/**
-		 * @event reset
-		 * When player configuration and properties are nulled
-		 */
-
-		/**
-		 * @event show
-		 * When player elemenent is shown
-		 */
-
-		/**
-		 * @event hide
-		 * When player elemenent is hidden
-		 */
-
-		/**
-		 * @event url
-		 * When URL is set, before playback starts
-		 * @param {String} url URL address
-		 */
-
-		/**
-		 * @event play
-		 * When playback starts
-		 * @param {String} url URL address
-		 * @param {Number} position Resume position
-		 */
-
-		/**
-		 * @event pause
-		 * When playback is paused
-		 */
-
-		/**
-		 * @event stop
-		 * When playback stops
-		 * @param {Number} currentTime [ms]
-		 */
-
-		/**
-		 * @event seek
-		 * When seek is requested
-		 * @param {Number} position [ms] Seek position
-		 */
-
-		/**
-		 * @event playbackspeed
-		 * When playback speed is changed
-		 * @param {Number} speed 1..8
-		 */
-
-		/**
-		 * @event seek-start
-		 * Seek stared
-		 */
-
-		/**
-		 * @event seek-end
-		 * Seek ended
-		 */
-
-		/**
-		 * Init Player object
-		 * @param {Object} [config={}] Player configuration
-		 */
+		
 		init: function(config) {
 			this.configure(config);
 
-			/**
-			 * @property {String} url Media URL
-			 */
 			this.url = null;
-			/**
-			 * @property {Object} mediaOption Additional media content information
-			 * @property {String} mediaOption.mediaType Media type ('SMOOTH_STREAMING', 'WIDEVINE', 'MPEG-DASH', 'MP4', 'HLS')
-			 * @property {Boolean} [mediaOption.mode4K=false] Set to TV to play UHD content. It Has an effect only on Tizen platform.
-			 * @property {Boolean} mediaOption.isTimeshiftedLiveStream (experimental) If content is time shifted (only for live stream). It can fix issue with counting playback time on Samsung Orsay.
-			 * @private
-			 */
+			
 			this.mediaOption = {
 				isTimeshiftedLiveStream: false,
 				mediaType: '',
 				mode4K: false
 			};
-			/**
-			 * @property {Number} duration Media duration (ms)
-			 */
+			
 			this.duration = 0;
-			/**
-			 * @property {Number} currentTime Current time position  (ms)
-			 */
+			
 			this.currentTime = 0;
-			/**
-			 * @property {Number} currentState Current playback state
-			 */
+			
 			this.currentState = this.STATE_IDLE;
-			/**
-			 * @property {Number} prevState Previous playback state
-			 */
+			
 			this.prevState = null;
-			/**
-			 * @property {Number} speed Playback speed
-			 */
+			
 			this.speed = 1;
-			/**
-			 * @property {Boolean} looping TRUE for endless looping
-			 */
+			
 			this.looping = true;
-			/**
-			 * @property {Number} width Player width
-			 */
+			
 			this.width = this.config.width;
-			/**
-			 * @property {Number} height Player height
-			 */
+			
 			this.height = this.config.height;
-			/**
-			 * @property {Number} top Player top position
-			 */
+			
 			this.top = this.config.top;
-			/**
-			 * @property {Number} left Player left position
-			 */
+			
 			this.left = this.config.left;
-			/**
-			 * @property {Object} drmConfig DRM (Widevine/PlayReady/Verimatrix) configuration
-			 * @property {String} drmConfig.type DRM type ('PLAYREADY', 'WIDEVINE', 'VERIMATRIX' or '')
-			 * @property {Object} drmConfig.option DRM options. See [Player Guide](#!/guide/player)
-			 * @private
-			 */
+			
 			this.drmConfig = {
 				type: '',
 				option: {}
@@ -226,28 +61,16 @@ Player = (function(Events, Deferrable) {
 			// TODO
 			setTimeout(function() { Player.trigger('init'); }, 0);
 		},
-		/**
-		 * De-init player
-		 *
-		 * @private
-		 */
+
 		deinit: function() {
 			this.reset();
 			this.deinitNative();
 		},
-		/**
-		 * Set class config hash
-		 *
-		 * @param {Object} config Hash of parameters
-		 */
+		
 		configure: function(config) {
 			this.config = $.extend(true, this.config || {}, config);
 		},
-		/**
-		 * Init native API, override this method with your device player
-		 *
-		 * @private
-		 */
+		
 		initNative: function() {
 			var scope = this;
 

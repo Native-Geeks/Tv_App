@@ -61,10 +61,7 @@ Snippet_Movie_List = (function(Snippet) {
 				}catch(err){}
 			}
 		},
-        
-		activate: function() {
-		},
-        
+		
 		onLangChange: function () {
 
 		},
@@ -220,6 +217,10 @@ Snippet_Movie_List = (function(Snippet) {
 
 		tmpFill:function(){
 			return '<li class="item focusable" data-id="{{stream_id}}" data-index="{{index}}"><img src="{{stream_icon}}" alt="{{name}}"/></li>'
+		},
+
+		onReturn: function(){
+			this.parent.sidebar.onReturn();
 		},
         
 		create: function() {
