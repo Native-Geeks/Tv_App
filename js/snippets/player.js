@@ -77,7 +77,6 @@ Snippet_Player = (function (Snippet) {
                         this.forward_speed = 5000;
                     }
                     clearInterval(this.speed_timer);
-                    this.speed_timer = 0;
                     Focus.to(this.$el.find("#play-pause"));
                     this.playIsFocused = true;
                     this.$btnPlay.removeClass();
@@ -90,6 +89,13 @@ Snippet_Player = (function (Snippet) {
                 function () {
                     this.$btnPlay.removeClass();
                     this.$btnPlay.addClass("fas fa-play");
+                },
+                this
+            );
+            Player.on(
+                "statechange",
+                function (state) {
+                    if (state === Player.STATE_BUFFERING) console.log("buff");
                 },
                 this
             );
@@ -214,16 +220,14 @@ Snippet_Player = (function (Snippet) {
             this.backward_speed = 5000;
             this.forward_speed *= 2;
             Player.pause();
-
+            clearInterval(this.speed_timer);
             this.speed_timer = setInterval(function () {
-                console.log(Player.duration);
                 if (
                     Player.duration - Player.currentTime < 30000 ||
                     Player.currentTime + this.forward_speed > Player.duration
                 ) {
-                    return false;
-                    // scope.seek(Player.duration);
-                    //     scope.play();
+                    Player.seek(Player.duration);
+                    Player.play();
                 }
 
                 if (scope.forward_speed > 600000) scope.forward_speed = 600000;
