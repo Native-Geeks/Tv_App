@@ -10,7 +10,7 @@ Scene_Movie = (function(Scene) {
 			this.list = new Snippet_Movie_List(this);
 			this.details = new Snippet_Movie_Details(this);
 			this.player = new Snippet_Player(this);
-			this.list.show();
+			this.list.show(); 
 		},
 
 		activate: function(sidebar){

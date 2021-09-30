@@ -28,7 +28,7 @@ Snippet_Movie_Details = (function(Snippet) {
                 });
                 I18n.changeLanguage("EN");
             }
-            this.isRendered = true;
+            this.isRendered = true; 
 		},
         
 		onLangChange: function () {
@@ -49,6 +49,11 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
                         Player.play(this.parent.videoUrl);
                         this.parent.player.show();
+                        this.$el.css({display:"none"});
+                        this.parent.$el.find(".header").css({display:"none"});
+                        $("#trailer .trailer_video").css({display:"none"});
+                        $("#trailer .trailer_image").css({display:"none"});
+                        this.parent.$el.find("shadow").css({display:"none"});
                         break;
                     case 'back': 
                         this.onReturn();
@@ -114,6 +119,7 @@ Snippet_Movie_Details = (function(Snippet) {
 				this.parent.$el.find(".shadow").remove();
             Focus.to(this.parent.list.$el.find('.lastActive'));
             this.parent.list.$el.find('.lastActive').removeClass('lastActive');
+
         },
 
         tmpBtn:function(){

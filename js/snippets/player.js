@@ -181,6 +181,11 @@ Snippet_Player = (function (Snippet) {
             this.hide();
             Focus.to(this.parent.$el.find(".lastActivePlayer"));
             this.parent.$el.find(".lastActivePlayer").removeClass("lastActivePlayer");
+            this.parent.details.show();
+            this.parent.$el.find(".header").css({display:"unset"});
+            $("#trailer .trailer_video").css({display:"unset"});
+            $("#trailer .trailer_image").css({display:"unset"});
+            this.parent.$el.find("shadow").css({display:"unset"});
         },
 
         create: function () {

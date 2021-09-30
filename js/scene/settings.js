@@ -184,7 +184,7 @@ Scene_Settings = (function (Scene) {
     },
 
     onclick: function ($el, event) {
-      // this.onEnter($el, event);
+      this.onEnter($el, event);
     },
 
     onEnter: function ($el, event) {
