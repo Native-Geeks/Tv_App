@@ -4,6 +4,7 @@ Snippet_Player = (function (Snippet) {
     };
 
     $.extend(true, Snippet_Player.prototype, Snippet.prototype, {
+
         init: function () {
             this.$controles = this.$el.find("#controles");
             this.$btnPlay = this.$el.find("#play");
@@ -12,6 +13,7 @@ Snippet_Player = (function (Snippet) {
             this.backward_speed = 5000;
             this.forward_speed = 5000;			
             this.subtitles = new Snippet_Subtitles(this);
+            
             //update timer
             Player.on(
                 "timeupdate",
@@ -66,13 +68,12 @@ Snippet_Player = (function (Snippet) {
                 "play",
                 function () {
                     if (this.forward_speed != 5000 || this.backward_speed != 5000) {
-                        console.log("test of speed");
                         Player.seek(Player.currentTime);
                         this.backward_speed = 5000;
                         this.forward_speed = 5000;
                     }
                     clearInterval(this.speed_timer);
-                    Focus.to(this.$el.find("#play-pause"));
+                    //Focus.to(this.$el.find("#play-pause"));
                     this.playIsFocused = true;
                     this.$btnPlay.removeClass();
                     this.$btnPlay.addClass("fas fa-pause");
@@ -124,7 +125,7 @@ Snippet_Player = (function (Snippet) {
                     break;
                 case "cc":
                     this.subtitles.show();
-                    Focus.to(this.subtitles.find(".focusable").first());
+                    Focus.to(this.subtitles.$el.find(".focusable").first());
                     break;
                 case "next":
                     break;
