@@ -8,7 +8,6 @@ Snippet_Serie_Saisons = (function(Snippet) {
         
 		init: function(){
             this.on("show",function(){
-                console.log("derftgyhju");
                 this.render();
             });
 		},
@@ -20,14 +19,10 @@ Snippet_Serie_Saisons = (function(Snippet) {
             if(!this.isRendered)
             {
                 this.cpN = 0;
-                this.parent.serie.data.seasons.forEach(season => {
-                    this.$el.append('<h6>'+season.name+'</h6><ul></ul>');
-                    // var i = 0;
-                    // while(i<season.episode_count)
-                    // {
-                    //     ++i;
-                    //     this.$el.find('ul').last().append('<li class="focusable" data-season="'+season.name+'" data-episode="'+i+'">Episode '+i+'</li>');
-                    // }
+                this.$el.append('<ul></ul>');
+                this.$el.css({top: this.parent.details.$el[0].offsetTop+ this.parent.details.$el.find("div")[0].offsetTop+16});
+                this.parent.serie.data.seasons.forEach(season => {                    
+                    this.$el.find('ul').last().append('<li class="focusable" data-season="'+season.name+'">'+season.name+'</li>');
                 });
             }
             this.isRendered = true;
@@ -39,7 +34,7 @@ Snippet_Serie_Saisons = (function(Snippet) {
 		},
         
 		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
+		   this.onEnter($el, event);
 		},
         
 		onEnter: function($el, event) {
@@ -52,8 +47,6 @@ Snippet_Serie_Saisons = (function(Snippet) {
 		},
         
 		navigate: function(direction) {
-            if(!this.cpN)
-            {
                 switch(direction)
                 {
                         case 'up': Focus.to(this.getFocusable(-1,true)); break;
@@ -62,12 +55,6 @@ Snippet_Serie_Saisons = (function(Snippet) {
                             this.onReturn();
                             break;
                 }
-            }
-            this.cpN++;
-		},
-
-		onFocus:function($el){
-			
 		},
 
         onReturn:function () {

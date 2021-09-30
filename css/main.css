@@ -158,6 +158,9 @@ body {
     color: #151921;
     font-weight: 600;
 }
+#snippet-movie-details .active span, #snippet-serie-details .active span{
+    color: #151921;
+}
 #snippet-movie-details button:first-of-type, #snippet-serie-details button:first-of-type{
 	margin-top: 1rem;
 }

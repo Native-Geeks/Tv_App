@@ -87,6 +87,10 @@ Snippet_Serie_List = (function(Snippet) {
 			}
 			this.cp++;
 		},
+
+		onReturn:function(){
+			this.parent.sidebar.onReturn();
+		},
         
 		navigate: function(direction) {
 			var $nowEl = this.$el.find('.items .focus');

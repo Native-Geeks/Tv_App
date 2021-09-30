@@ -7,7 +7,7 @@ Snippet_Subtitles = (function(Snippet) {
 	$.extend(true, Snippet_Subtitles.prototype, Snippet.prototype, {
         
 		init: function(){			
-			console.log("zxcvghjkl");
+			this.scope = this;
 			this.on("show",function(){
 				
 				this.$el.addClass("show_details");
@@ -27,9 +27,11 @@ Snippet_Subtitles = (function(Snippet) {
 		},
         
 		navigate: function(direction) {
+			console.log(this);
+			console.log(this.scope);
             switch(direction){
-				case 'up': Focus.to(this.getFocusable(-1,true)); break;
-				case 'down': Focus.to(this.getFocusable(1,true)); break;
+				case 'up': Focus.to(this.scope.getFocusable(-1,true)); break;
+				case 'down': Focus.to(this.scope.getFocusable(1,true)); break;
 			}
 		},
 

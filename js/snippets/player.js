@@ -12,8 +12,6 @@ Snippet_Player = (function (Snippet) {
             this.firstTimePlay = true;
             this.backward_speed = 5000;
             this.forward_speed = 5000;			
-            this.subtitles = new Snippet_Subtitles(this);
-            
             //update timer
             Player.on(
                 "timeupdate",
@@ -126,8 +124,11 @@ Snippet_Player = (function (Snippet) {
                     this.reply();
                     break;
                 case "cc":
-                    this.subtitles.show();
-                    Focus.to(this.subtitles.$el.find(".focusable").first());
+                    this.parent.subtitles.show();
+                    this.isHiding = true; 
+                    this.$el.find('#controles').css({opacity:0});
+                    this.$el.find('#vid-Title').css({opacity:0});
+                    Focus.to(this.parent.subtitles.$el.find(".focusable").first());
                     break;
                 case "next":
                     break;
@@ -143,39 +144,42 @@ Snippet_Player = (function (Snippet) {
         navigate: function (direction) {
             if(!this.isHiding)
             {
-            $nowEl = this.$el.find("#controles .focus");
-            switch (direction) {
-                case "up":
-                    if (this.playIsFocused) {
-                        Focus.to(
-                            this.$el.find("#top-controles .focusable").first()
-                        );
-                        this.playIsFocused = false;
-                    }
-                    break;
-                case "left":
-                    Focus.to($nowEl.prev());
-                    break;
-                case "right":
-                    Focus.to($nowEl.next());
-                    break;
-                case "down":
-                    if (!this.playIsFocused) {
-                        Focus.to(this.$el.find("#play-pause"));
-                        this.playIsFocused = true;
-                    }
-                    break;
-            }
-
+                $nowEl = this.$el.find("#controles .focus");
+                switch (direction) {
+                    case "up":
+                        if (this.playIsFocused) {
+                            Focus.to(
+                                this.$el.find("#top-controles .focusable").first()
+                            );
+                            this.playIsFocused = false;
+                        }
+                        break;
+                    case "left":
+                        Focus.to($nowEl.prev());
+                        break;
+                    case "right":
+                        Focus.to($nowEl.next());
+                        break;
+                    case "down":
+                        if (!this.playIsFocused) {
+                            Focus.to(this.$el.find("#play-pause"));
+                            this.playIsFocused = true;
+                        }
+                        break;
+                }
             }
             this.$el.find('#controles').css({opacity:1});
             this.$el.find('#vid-Title').css({opacity:1});
             this.isHiding = false;
+        },
+
+        onFocus:function(){
+            clearTimeout(this.setTimeout);
             this.setTimeout = setTimeout(()=>{
                 this.$el.find('#controles').css({opacity:0});
                 this.$el.find('#vid-Title').css({opacity:0});
                 this.isHiding = true;
-            },20000);
+            },3000);
         },
 
         onReturn: function ($el, e, stop) {
@@ -186,9 +190,9 @@ Snippet_Player = (function (Snippet) {
             this.parent.$el.find(".lastActivePlayer").removeClass("lastActivePlayer");
             this.parent.details.$el.css({opacity:1});
             this.parent.$el.find(".header").css({opacity:1});
-            $("#trailer .trailer_video").css({opacity:1});
-            $("#trailer .trailer_image").css({opacity:1});
-            this.parent.$el.find("shadow").css({opacity:1});
+            this.parent.$el.find("#trailer iframe").css({opacity:1});
+            this.parent.$el.find("#trailer img").css({opacity:1});
+            this.parent.$el.find(".shadow").css({opacity:1});
         },
 
         create: function () {
@@ -216,6 +220,7 @@ Snippet_Player = (function (Snippet) {
         },
 
         forward: function () {
+            clearTimeout(this.setTimeout);
             var scope = this;
             this.backward_speed = 5000;
             this.forward_speed *= 2;
@@ -238,6 +243,8 @@ Snippet_Player = (function (Snippet) {
         },
 
         backward: function () {
+            clearTimeout(this.setTimeout);
+
             var scope = this;
             this.forward_speed = 5000;
             this.backward_speed *= 2;
@@ -246,6 +253,11 @@ Snippet_Player = (function (Snippet) {
             clearInterval(this.speed_timer);
             this.speed_timer = setInterval(function () {
                 if (scope.backward_speed > 600000) scope.backward_speed = 600000;
+                if(Player.currentTime-scope.backward_speed<0){
+                    Player.seek(0);
+                    Player.play();
+                    Focus.to(this.$el.find("#play-pause"));
+                }
                 Player.currentTime -= scope.backward_speed;
                 console.log(Player.currentTime);
                 scope.updateControllers(Player.currentTime, Player.duration);

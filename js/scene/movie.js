@@ -9,7 +9,8 @@ Scene_Movie = (function(Scene) {
 		render: function() {			
 			this.list = new Snippet_Movie_List(this);
 			this.details = new Snippet_Movie_Details(this);
-			this.player = new Snippet_Player(this);
+			this.player = new Snippet_Player(this);			
+            this.subtitles = new Snippet_Subtitles(this);
 			this.list.show(); 
 		},
 

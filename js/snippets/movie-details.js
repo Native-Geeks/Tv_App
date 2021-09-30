@@ -51,8 +51,8 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.player.show();
                         this.$el.css({opacity:0});
                         this.parent.$el.find(".header").css({opacity:0});
-                        $("#trailer .trailer_video").css({opacity:0});
-                        $("#trailer .trailer_image").css({opacity:0});
+                        this.parent.$el.find("#trailer iframe").css({opacity:0});
+                        this.parent.$el.find("#trailer img").css({opacity:0});
                         this.parent.$el.find("shadow").css({opacity:0});
                         break;
                     case 'back': 
@@ -119,7 +119,6 @@ Snippet_Movie_Details = (function(Snippet) {
 				this.parent.$el.find(".shadow").remove();
             Focus.to(this.parent.list.$el.find('.lastActive'));
             this.parent.list.$el.find('.lastActive').removeClass('lastActive');
-
         },
 
         tmpBtn:function(){

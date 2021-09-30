@@ -42,10 +42,11 @@ Snippet_Serie_Details = (function (Snippet) {
             this.parent.videoUrl = this.parent.serie.data.episodes[0][0].stream_url;
             Player.play(this.parent.videoUrl);
             this.parent.player.show();
-            this.$el.css({display:"none"});
-            this.parent.$el.find(".header").css({display:"none"});
-            $("#trailer .trailer_serie").css({display:"none"});
-            $("#trailer .trailer_imageSerie").css({display:"none"});
+            this.$el.css({opacity:0});
+            this.parent.$el.find(".header").css({opacity:0});
+            this.parent.$el.find("#trailer iframe").css({opacity:0});
+            this.parent.$el.find("#trailer img").css({opacity:0});
+            this.parent.$el.find(".shadow").css({opacity:0});
             break;
           case "trailer":
             $("#scene-serie #trailer iframe").attr(
@@ -84,10 +85,14 @@ Snippet_Serie_Details = (function (Snippet) {
 
     onReturn: function () {
       this.hide();
-      this.parent.list.top -= this.parent.list.topAdded;
-      this.parent.list.$el.css({ top: this.parent.list.top });
-      Focus.to(this.parent.list.$el.find(" .lastActive"));
-      this.parent.list.$el.find(" .lastActive").removeClass("lastActive");
+            this.parent.sidebar.show();
+            this.parent.list.show();
+            this.parent.$el.find("#trailer>div").css({display:'unset'});
+				this.parent.$el.find("#trailer").css({height:'58vh',width:'unset'});
+				this.parent.$el.find("#trailer iframe").css({width:'741px'});
+				this.parent.$el.find(".shadow").remove();
+            Focus.to(this.parent.list.$el.find('.lastActive'));
+            this.parent.list.$el.find('.lastActive').removeClass('lastActive');
     },
 
     onLangChange: function () {
