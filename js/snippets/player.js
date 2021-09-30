@@ -56,11 +56,11 @@ Snippet_Player = (function (Snippet) {
                 $(".player").css("opacity", 1);
                 //Focus.to(this.$el.find("#play-pause"));
 
-                /*setTimeout(()=>{
+                setTimeout(()=>{
                         this.$el.css({opacity:1});
                         Focus.to(this.$el.find("#play-pause"));
                         this.isHiding = true;
-                    },1500);*/
+                },1500);
             });
             Player.on(
                 "play",
@@ -138,8 +138,8 @@ Snippet_Player = (function (Snippet) {
         },
 
         navigate: function (direction) {
-            // if(!this.isHiding)
-            // {
+            if(!this.isHiding)
+            {
             $nowEl = this.$el.find("#controles .focus");
             switch (direction) {
                 case "up":
@@ -164,15 +164,15 @@ Snippet_Player = (function (Snippet) {
                     break;
             }
 
-            // }
-            // this.$el.find('#controles').css({opacity:1});
-            // this.$el.find('#vid-Title').css({opacity:1});
-            // this.isHiding = false;
-            // this.setTimeout = setTimeout(()=>{
-            //     this.$el.find('#controles').css({opacity:0});
-            //     this.$el.find('#vid-Title').css({opacity:0});
-            //     this.isHiding = true;
-            // },20000);
+            }
+            this.$el.find('#controles').css({opacity:1});
+            this.$el.find('#vid-Title').css({opacity:1});
+            this.isHiding = false;
+            this.setTimeout = setTimeout(()=>{
+                this.$el.find('#controles').css({opacity:0});
+                this.$el.find('#vid-Title').css({opacity:0});
+                this.isHiding = true;
+            },20000);
         },
 
         onReturn: function ($el, e, stop) {
