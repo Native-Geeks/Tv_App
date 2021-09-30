@@ -63,28 +63,27 @@ Snippet_Serie_List = (function(Snippet) {
 			}
 		},
         
-		activate: function() {
-		},
-        
-		onLangChange: function () {
-
-		},
-        
 		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
+		   this.onEnter($el, event);
 		},
         
 		onEnter: function($el, event) {
 			if(this.cp>0)
 			{
-				var index = $el.attr('data-index');
-				this.parent.serie = this.$movies[index];
-				this.parent.details.show();
-				this.topAdded = $('#snippet-serie-details')[0].offsetTop+$('#snippet-serie-details')[0].offsetHeight+16 - (window.innerHeight/2);
-				this.top += this.topAdded;
-				this.$el.css('top',this.top);
+				clearTimeout(this.timeOut);
 				$el.addClass('lastActive');
-				Focus.to($('#scene-serie #snippet-serie-details .btn').first());
+				this.parent.serie = this.$movies[$el.attr('data-index')];
+				this.parent.$el.find("#trailer iframe").attr('src','https://www.youtube-nocookie.com/embed/'+this.$movies[$el.attr('data-index')].data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.$movies[$el.attr('data-index')].data.info.youtube_trailer);
+                this.parent.$el.find("trailer img").hide();
+                this.parent.$el.find("#trailer iframe").show();
+				this.parent.details.show();
+				this.$el.hide();				
+				this.parent.$el.find("#trailer>div").css({display:'none'});
+				this.parent.$el.find("#trailer").css({height:'100vh',width:'100vw'});
+				this.parent.$el.find("#trailer iframe").css({width:'100%'});
+				this.parent.$el.append("<div class='shadow'></div>");
+				this.parent.sidebar.hide();
+				Focus.to(this.parent.details.$el.find('.btn').first());
 			}
 			this.cp++;
 		},

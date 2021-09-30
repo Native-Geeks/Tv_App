@@ -379,6 +379,40 @@ CONFIG = {
 				icon:"bi bi-plus-square-fill",
 				i18n:"movie_details_later"
 			},
+			{
+				action: "back",
+				icon:"bi bi-arrow-left",
+				i18n:"movie_details_back"
+			},
+		]
+	},
+	serie:{
+		details:[
+			{
+				action: "watch",
+				icon:"bi bi-play-fill",
+				i18n:"serie_details_watch"
+			},
+			{
+				action: "resume",
+				icon:"bi bi-collection-play-fill",
+				i18n:"serie_details_resume"
+			},
+			{
+				action: "episodes",
+				icon:"bi bi-bar-chart-steps",
+				i18n:"serie_details_later"
+			},
+			{
+				action: "later",
+				icon:"bi bi-plus-square-fill",
+				i18n:"serie_details_later"
+			},
+			{
+				action: "back",
+				icon:"bi bi-arrow-left",
+				i18n:"movie_details_back"
+			},
 		]
 	},
 	sidebar: {

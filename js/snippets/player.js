@@ -11,6 +11,7 @@ Snippet_Player = (function (Snippet) {
             this.firstTimePlay = true;
             this.backward_speed = 5000;
             this.forward_speed = 5000;
+			this.subtitles = new Snippet_Subtitles(this);
 
             //update timer
             Player.on(
@@ -56,22 +57,16 @@ Snippet_Player = (function (Snippet) {
                 $(".player").css("opacity", 1);
                 //Focus.to(this.$el.find("#play-pause"));
 
-                /*if(1===1){
-                    setTimeout(()=>{
+                setTimeout(()=>{
                         this.$el.css({opacity:1});
                         Focus.to(this.$el.find("#play-pause"));
-                        this.setTimeout = setTimeout(()=>{
-                            
-                            this.isHiding = true;
-                        },2000000);
+                        this.isHiding = true;
                     },1500);
-                }*/
             });
             Player.on(
                 "play",
                 function () {
                     if ((this.forward_speed || this.backward_speed) != 5000) {
-                        console.log("k");
                         Player.seek(Player.currentTime);
                         this.backward_speed = 5000;
                         this.forward_speed = 5000;
@@ -109,15 +104,8 @@ Snippet_Player = (function (Snippet) {
             );
         },
 
-        tmpAudio: function () {
-            return "<li class='focusable audCC' data-id='{{id}}'>{{title}}</li>";
-        },
-        tmpCC: function () {
-            return "<li class='focusable audCC' data-id='{{id}}'>{{title}}</li>";
-        },
-
         onClick: function ($el, event) {
-            //this.onEnter($el, event);
+            this.onEnter($el, event);
         },
 
         onEnter: function ($el, event) {
@@ -133,7 +121,8 @@ Snippet_Player = (function (Snippet) {
                     this.reply();
                     break;
                 case "cc":
-                    this.cc();
+                    this.subtitles.show();
+                    Focus.to(this.subtitles.find(".focusable").first());
                     break;
                 case "next":
                     break;
@@ -144,8 +133,8 @@ Snippet_Player = (function (Snippet) {
         },
 
         navigate: function (direction) {
-            /* if(!this.isHiding)
-            {*/
+            if(!this.isHiding)
+            {
             $nowEl = this.$el.find("#controles .focus");
             switch (direction) {
                 case "up":
@@ -170,7 +159,7 @@ Snippet_Player = (function (Snippet) {
                     break;
             }
 
-            /*}
+            }
             this.$el.find('#controles').css({opacity:1});
             this.$el.find('#vid-Title').css({opacity:1});
             this.isHiding = false;
@@ -178,7 +167,7 @@ Snippet_Player = (function (Snippet) {
                 this.$el.find('#controles').css({opacity:0});
                 this.$el.find('#vid-Title').css({opacity:0});
                 this.isHiding = true;
-            },20000);*/
+            },20000);
         },
 
         onReturn: function ($el, e, stop) {
@@ -186,9 +175,7 @@ Snippet_Player = (function (Snippet) {
             Player.hide();
             this.hide();
             Focus.to(this.parent.$el.find(".lastActivePlayer"));
-            this.parent.$el
-                .find(".lastActivePlayer")
-                .removeClass("lastActivePlayer");
+            this.parent.$el.find(".lastActivePlayer").removeClass("lastActivePlayer");
         },
 
         create: function () {

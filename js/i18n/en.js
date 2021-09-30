@@ -33,4 +33,11 @@ I18n.translations.EN = {
 	"movie_details_watch" : "Watch this film",
 	"movie_details_resume" : "Resume film",
 	"movie_details_later" : "Add to watch later",
+	"movie_details_back" : "Go back",
+	"serie_details_watch" : "Watch serie",
+	"serie_details_resume" : "Resume serie",
+	"serie_details_episodes" : "Saisons and episodes",
+	"serie_details_later" : "Add to watch later",
+	"movie_watch_later_succes" : "The movie added successfult to the list",
+	"movie_watch_later_already_exist" : "The movie already exist on the list",
 };

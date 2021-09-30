@@ -8,16 +8,8 @@ Snippet_Subtitles = (function(Snippet) {
         
 		init: function(){
             this.on("show",function(){
-                this.render();
                 Subtitles.show();
             });
-		},
-        
-		render: function() {
-		},
-        
-		onLangChange: function () {
-
 		},
         
 		onClick: function($el, event) {
@@ -29,22 +21,17 @@ Snippet_Subtitles = (function(Snippet) {
 		},
         
 		navigate: function(direction) {
+			console.log(direction);
             if(!this.cpN)
             {
                 switch(direction)
                 {
                         case 'up': Focus.to(this.getFocusable(-1,true)); break;
                         case 'down': Focus.to(this.getFocusable(1,true));break;
-                        case 'left': 
-                            this.onReturn();
-                            break;
+                        case 'left': this.onReturn(); break;
                 }
             }
             this.cpN++;
-		},
-
-		onFocus:function($el){
-			
 		},
 
         onReturn:function () {
