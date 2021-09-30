@@ -60,6 +60,8 @@ Snippet_Player = (function (Snippet) {
 
                 setTimeout(()=>{
                         this.$el.css({opacity:1});
+                        this.$el.find("#controles").css({ opacity: 0 });
+                        this.$el.find("#vid-Title").css({ opacity: 0 });
                         Focus.to(this.$el.find("#play-pause"));
                         this.isHiding = true;
                 },1500);
