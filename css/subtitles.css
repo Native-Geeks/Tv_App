@@ -1,5 +1,5 @@
 .show_details{
-    background-color: rgba(37,47,71,0.7);
+    background-color: rgba(37,47,71,0.4);
     z-index: 102 !important;
     min-width: 30vw !important;
     width: unset !important;
@@ -9,13 +9,14 @@
     position: absolute;
     top: 0;
     right: 0;
+    left: unset !important;
     display: none;
 }
 .show_details h6{
+    color: white;
     text-align: center;
     padding: .5rem 0;
-    font-size: large;
-    background-color: rgba(159,12,51,0.7);
+    font-size: x-large;
     border-radius: 5px;
     width: 100%;
 }

@@ -15,7 +15,7 @@
 div.shadow{
     position: absolute;
     background-color: rgba( 21, 25, 33,0.4);
-    box-shadow: 0 0 75px 100px rgba(21,25,33,0.4) !important;
+    box-shadow: 3px 0.5px 75px 100px rgba(21,25,33,0.4) !important;
     width: 37%;
     height: 60vh;
     left: 6rem;
