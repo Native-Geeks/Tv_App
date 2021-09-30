@@ -9,32 +9,17 @@ Snippet_Player = (function (Snippet) {
             this.$btnPlay = this.$el.find("#play");
             this.playIsFocused = true;
             this.firstTimePlay = true;
-            this.backward_speed = 30000;
-            this.forward_speed = 30000;
-            
-            function timer(s) {
-                if (s < 3600000) return new Date(s).toISOString().substr(14, 5);
-                else return new Date(s).toISOString().substr(11, 8);
-            }
+            this.backward_speed = 5000;
+            this.forward_speed = 5000;
 
-            function updateControllers(currentTime, duration) {
-                $("#snippet-player #timer").text(timer(currentTime));
-                $("#snippet-player #duration").text(timer(duration));
-                $("#snippet-player #real-time").width(
-                    (currentTime / duration) * 100 + "%"
-                );
-            }
             //update timer
-            Player.on("timeupdate", function (time) {
-                updateControllers(Player.currentTime, Player.duration);
-            });
-
-            Player.on("end", function () { 
-                try{
-                    this.$btnPlay.removeClass("fa-pause");   
-                }catch{this.$btnPlay.removeClass("fa-play")};
-                this.$btnPlay.addClass("fa-redo");
-            },this);
+            Player.on(
+                "timeupdate",
+                function (time) {
+                    this.updateControllers(Player.currentTime, Player.duration);
+                },
+                this
+            );
 
             this.on("beforekey", function (keyCode) {
                 if (keyCode === Control.key.RETURN) {
@@ -70,7 +55,7 @@ Snippet_Player = (function (Snippet) {
                 this.$el.find("#vid-Title").css({ opacity: 1 });
                 $(".player").css("opacity", 1);
                 //Focus.to(this.$el.find("#play-pause"));
-                
+
                 /*if(1===1){
                     setTimeout(()=>{
                         this.$el.css({opacity:1});
@@ -85,8 +70,34 @@ Snippet_Player = (function (Snippet) {
             Player.on(
                 "play",
                 function () {
+                    if ((this.forward_speed || this.backward_speed) != 5000) {
+                        console.log("k");
+                        Player.seek(Player.currentTime);
+                        this.backward_speed = 5000;
+                        this.forward_speed = 5000;
+                    }
+                    clearInterval(this.speed_timer);
+                    this.speed_timer = 0;
                     Focus.to(this.$el.find("#play-pause"));
                     this.playIsFocused = true;
+                    this.$btnPlay.removeClass();
+                    this.$btnPlay.addClass("fas fa-pause");
+                },
+                this
+            );
+            Player.on(
+                "pause",
+                function () {
+                    this.$btnPlay.removeClass();
+                    this.$btnPlay.addClass("fas fa-play");
+                },
+                this
+            );
+            Player.on(
+                "end",
+                function () {
+                    this.$btnPlay.removeClass();
+                    this.$btnPlay.addClass("fas fa-redo");
                 },
                 this
             );
@@ -120,7 +131,7 @@ Snippet_Player = (function (Snippet) {
                     break;
                 case "next":
                     break;
-                case "forward" :
+                case "forward":
                     this.forward();
                     break;
             }
@@ -165,7 +176,7 @@ Snippet_Player = (function (Snippet) {
         },
 
         onReturn: function ($el, e, stop) {
-            Player.pause();
+            Player.stop();
             Player.hide();
             this.hide();
             Focus.to(this.parent.$el.find(".lastActivePlayer"));
@@ -179,43 +190,59 @@ Snippet_Player = (function (Snippet) {
         },
 
         playPause: function () {
-            if(!this.firstTimePlay){
-                if (Player.currentTime === Player.duration) {
-                    console.log("g");
-                    this.$btnPlay.removeClass("fa-redo");
-                    this.$btnPlay.addClass("fa-pause");
+            if (!this.firstTimePlay) {
+                if (
+                    Player.currentTime === Player.duration ||
+                    Player.currentState != Player.STATE_PLAYING
+                )
                     Player.play();
-                } else if (Player.currentState != Player.STATE_PLAYING) {
-                console.log(this.$btnPlay);
-                    this.$btnPlay.removeClass("fa-play");
-                    this.$btnPlay.addClass("fa-pause");
-                    Player.play();
-                } else if(Player.currentState === Player.STATE_PLAYING){
-                    this.$btnPlay.removeClass("fa-pause");
-                    this.$btnPlay.addClass("fa-play");
+                else if (Player.currentState === Player.STATE_PLAYING) {
                     Player.pause();
                 }
-            }else{this.firstTimePlay = false}
+            } else {
+                this.firstTimePlay = false;
+            }
         },
 
         reply: function () {
-            if (Player.currentTime === Player.duration)
-                this.$btnPlay.removeClass("fa-redo");
-            else this.$btnPlay.removeClass("fa-play");
-            this.$btnPlay.addClass("fa-pause");
             Player.seek(0);
             Player.play();
         },
 
-        forward: function(){
-            if ((Player.duration - Player.currentTime) < 60000) return false;
-            this.backward_speed = 60000;
+        forward: function () {
+            var scope = this;
+            this.backward_speed = 5000;
             this.forward_speed *= 2;
             Player.pause();
-            this.playPause();
-            Player.currentTime += this.forward_speed;
-            Player.seek(Player.currentTime);
-            
+
+            this.speed_timer = setInterval(function () {
+                console.log(Player.duration);
+                if (
+                    Player.duration - Player.currentTime < 30000 ||
+                    Player.currentTime + this.forward_speed > Player.duration
+                ) {
+                    return false;
+                    // scope.seek(Player.duration);
+                    //     scope.play();
+                }
+
+                if (scope.forward_speed > 600000) scope.forward_speed = 600000;
+                Player.currentTime += scope.forward_speed;
+                scope.updateControllers(Player.currentTime, Player.duration);
+            }, 1000);
+        },
+
+        timer: function (s) {
+            if (s < 3600000) return new Date(s).toISOString().substr(14, 5);
+            else return new Date(s).toISOString().substr(11, 8);
+        },
+
+        updateControllers: function (currentTime, duration) {
+            $("#snippet-player #timer").text(this.timer(currentTime));
+            $("#snippet-player #duration").text(this.timer(duration));
+            $("#snippet-player #real-time").width(
+                (currentTime / duration) * 100 + "%"
+            );
         },
     });
 
