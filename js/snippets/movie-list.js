@@ -70,20 +70,26 @@ Snippet_Movie_List = (function(Snippet) {
 		},
         
 		onClick: function($el, event) {
-		   this.onEnter.apply(this, arguments);
+		   this.onEnter($el, event);
 		},
         
 		onEnter: function($el, event) {
 			if(this.cp>0)
 			{
-				var index = $el.attr('data-index');
-				this.parent.movie = this.$movies[index];
-				this.parent.details.show();
-				this.topAdded = $('#snippet-movie-details')[0].offsetTop+$('#snippet-movie-details')[0].offsetHeight+16 - (window.innerHeight/2);
-				this.top += this.topAdded;
-				this.$el.css('top',this.top);
+				clearTimeout(this.timeOut);
 				$el.addClass('lastActive');
-				Focus.to($('#scene-movie #snippet-movie-details .btn').first());
+				this.parent.movie = this.$movies[$el.attr('data-index')];
+				$('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.movie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.movie.data.info.youtube_trailer);
+                $('#scene-movie #trailer img').hide();
+                $('#scene-movie #trailer iframe').show();
+				this.parent.details.show();
+				this.$el.hide();				
+				this.parent.$el.find("#trailer>div").css({display:'none'});
+				this.parent.$el.find("#trailer").css({height:'100vh',width:'100vw'});
+				this.parent.$el.find("#trailer iframe").css({width:'100%'});
+				this.parent.$el.append("<div class='shadow'></div>");
+				this.parent.sidebar.hide();
+				Focus.to(this.parent.details.$el.find('.btn').first());
 			}
 			this.cp++;
 		},

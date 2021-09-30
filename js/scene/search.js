@@ -19,15 +19,14 @@ Scene_Search = (function (Scene) {
 
         activate: function () {
 
+            $("keyboard-content").show();
+            this.showKeyboard();
+            Focus.to($(".keyboard-content .focusable").first());
         },
 
         onReturn: function ($el, e, stop) {
-            this.sidebar.hide();
-            Router.goBack(null);
+            this.sidebar.onReturn();
         },
-
-        navigate: function(direction) {
-		},
 
 
         onClick: function ($el, event) {

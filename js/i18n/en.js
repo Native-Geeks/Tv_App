@@ -29,5 +29,8 @@ I18n.translations.EN = {
 	"serie_watchLater" : "Add to watch later",
 	"watch_later_header" : "Watch later",
 	"watch_later_empty" : "There no item on your list !",
-	"watch_later_empty_btn" : "Go movies"
+	"watch_later_empty_btn" : "Go movies",
+	"movie_details_watch" : "Watch this film",
+	"movie_details_resume" : "Resume film",
+	"movie_details_later" : "Add to watch later",
 };

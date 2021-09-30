@@ -6,17 +6,7 @@ Scene_Movie = (function(Scene) {
 
 	$.extend(true, Scene_Movie.prototype, Scene.prototype, {
 		
-		init: function(){
-
-		},
-		
 		render: function() {			
-			/*console.log(CONFIG.LIVE);
-			console.log(CONFIG.LIVE_LIST_X);
-			console.log(CONFIG.VOD);
-			console.log(CONFIG.VOD_LIST_X);
-			console.log(CONFIG.SERIES);
-			console.log(CONFIG.SERIES_LIST_X);*/
 			this.list = new Snippet_Movie_List(this);
 			this.details = new Snippet_Movie_Details(this);
 			this.player = new Snippet_Player(this);
@@ -25,11 +15,7 @@ Scene_Movie = (function(Scene) {
 		},
 
 		activate: function(sidebar){
-			this.sidebar  = sidebar;
-		},
-
-		onReturn:function($el,e,stop){
-			this.sidebar.$el.find('.focusable').last().click();
+			if(sidebar != null) {this.sidebar  = sidebar;}
 		},
 		
 		create: function() {

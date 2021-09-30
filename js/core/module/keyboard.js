@@ -179,6 +179,10 @@ Keyboard = (function (Events) {
 			}
 		},
 
+		onFocus:function(){
+			this.isOut = false;
+		},
+
 		/**
 		 * Check forbidden keys for onKeyDown. Currently it is implemented only for Samsung (Orsay) models. 
          * @param {Number} keyCode Key code which be checked if is forbidden or not
@@ -199,82 +203,86 @@ Keyboard = (function (Events) {
 		 * Enter action for keys, this function also uses mouse click.
         * @param {Object} $el Target element, on which element is used enter
 		*/
-		onEnter: function ($el) {			
-			var posx = parseInt(Focus.focused.attr("data-posx"), 10), posy = parseInt(Focus.focused.attr("data-posy"), 10),
-				 selElem = this.specialState ? this.layouts["SPECIAL"].layout[posy][posx] : this.accentsState ? this.layouts["ACENTOS"].layout[posy][posx] : this.layouts[this.lang].layout[posy][posx];
-
-			if (selElem.t == "K") {
-				// normal letter assign
-				var value = '';
-				var date = new Date;
-				var time = date.getTime();
-
-				// test if the key was pressed again in the selected time
-				if (selElem.sec && this.accentsKey == selElem.v && ((time - this.accentsTime) < this.accentsTimeRepeat)) {
-					this.input.backspace();
-					value = selElem.sec;
-				} else if (selElem.sec && this.accentsKey == selElem.sec && ((time - this.accentsTime) < this.accentsTimeRepeat)) {
-					this.input.backspace();
-					value = selElem.v;
-				} else {
-					value = selElem.v;
-				}
-				this.accentsKey = value;
-				this.accentsTime = time;
-				this.insertValue(value, "LETTER");
-			}
-			else if (selElem.t == "N") {
-				if (selElem.v == "123...") {
-					this.specialState = !this.specialState;
+		onEnter: function ($el) {		
+			if(!this.isOut)
+			{
 					
-					if (this.specialState) {
-						// show special keys
-						this.capsLock = false;
-						this.shift = false;
-						this.createKeys(this.layouts["SPECIAL"].layout);
-						this.input.moveCaret(0, "end"); // move cursor to the end
-						// default focus
-						Focus.to(this.$el.find(".key[data-val='ENG..']"));
+				var posx = parseInt(Focus.focused.attr("data-posx"), 10), posy = parseInt(Focus.focused.attr("data-posy"), 10),
+					selElem = this.specialState ? this.layouts["SPECIAL"].layout[posy][posx] : this.accentsState ? this.layouts["ACENTOS"].layout[posy][posx] : this.layouts[this.lang].layout[posy][posx];
+
+				if (selElem.t == "K") {
+					// normal letter assign
+					var value = '';
+					var date = new Date;
+					var time = date.getTime();
+
+					// test if the key was pressed again in the selected time
+					if (selElem.sec && this.accentsKey == selElem.v && ((time - this.accentsTime) < this.accentsTimeRepeat)) {
+						this.input.backspace();
+						value = selElem.sec;
+					} else if (selElem.sec && this.accentsKey == selElem.sec && ((time - this.accentsTime) < this.accentsTimeRepeat)) {
+						this.input.backspace();
+						value = selElem.v;
+					} else {
+						value = selElem.v;
 					}
-					else {
-						// back to normal
-						this.capsLock = false;
-						this.shift = false;
-						this.createKeys();
-						Focus.to(this.$el.find(".key[data-val='ENG..']"));
+					this.accentsKey = value;
+					this.accentsTime = time;
+					this.insertValue(value, "LETTER");
+				}
+				else if (selElem.t == "N") {
+					if (selElem.v == "123...") {
+						this.specialState = !this.specialState;
+						
+						if (this.specialState) {
+							// show special keys
+							this.capsLock = false;
+							this.shift = false;
+							this.createKeys(this.layouts["SPECIAL"].layout);
+							this.input.moveCaret(0, "end"); // move cursor to the end
+							// default focus
+							Focus.to(this.$el.find(".key[data-val='ENG..']"));
+						}
+						else {
+							// back to normal
+							this.capsLock = false;
+							this.shift = false;
+							this.createKeys();
+							Focus.to(this.$el.find(".key[data-val='ENG..']"));
+						}
+					}
+					else if (selElem.v == "Eng..") {
+						this.specialState = !this.specialState;
+						
+						if (this.specialState) {
+							// show special keys
+							this.capsLock = false;
+							this.shift = false;
+							this.createKeys(this.layouts["SPECIAL"].layout);
+							this.input.moveCaret(0, "end"); // move cursor to the end
+							// default focus
+							Focus.to(this.$el.find(".key[data-val='123...']"));
+						}
+						else {
+							// back to normal
+							this.capsLock = false;
+							this.shift = false;
+							this.createKeys();
+							Focus.to(this.$el.find(".key[data-val='123...']"));
+						}
+					}
+					else{
+						this.insertValue(selElem.f, "NUMERIC");
 					}
 				}
-				else if (selElem.v == "Eng..") {
-					this.specialState = !this.specialState;
-					
-					if (this.specialState) {
-						// show special keys
-						this.capsLock = false;
-						this.shift = false;
-						this.createKeys(this.layouts["SPECIAL"].layout);
-						this.input.moveCaret(0, "end"); // move cursor to the end
-						// default focus
-						Focus.to(this.$el.find(".key[data-val='123...']"));
+				else if (selElem.t == "F") {
+					if (selElem.v == "SPACE") {
+						this.insertValue(" ", "SPACE");
 					}
-					else {
-						// back to normal
-						this.capsLock = false;
-						this.shift = false;
-						this.createKeys();
-						Focus.to(this.$el.find(".key[data-val='123...']"));
+					else if (selElem.id === "done") {
 					}
 				}
-				else{
-					this.insertValue(selElem.f, "NUMERIC");
-				}
-			}
-			else if (selElem.t == "F") {
-				if (selElem.v == "SPACE") {
-					this.insertValue(" ", "SPACE");
-				}
-				else if (selElem.id === "done") {
-				}
-			}
+			}	
 			return false;
 		},
 		
@@ -284,6 +292,7 @@ Keyboard = (function (Events) {
                 Focus.to($('.sidebar .active')); 
                 $('.sidebar').addClass('onfocus');
 				this.isOut = true;
+				this.hideKeyboard();
             }
 			if(!this.isOut)
 			{

@@ -93,6 +93,7 @@ body {
     height: 100%;
 	border-radius: 0 0 0 0.75rem;
 }
+#trailer img{width: 100%;}
 #trailer iframe{width: 741px;display: none;}
 .header{
 	display: flex;
@@ -174,7 +175,9 @@ body {
 	color: rgb(207, 207, 207);
 	margin-bottom: .25rem;
 	font-size: 14px;
-<<<<<<< HEAD
+}
+#snippet-movie-details label:last-of-type{
+	margin-bottom: 100px;
 }
 #ResetModal h5{ 
 	color:#151921;
@@ -183,6 +186,3 @@ body {
 	text-align: center;
 	color:#151921;
   }
-=======
-}
->>>>>>> 8a819f2144be72452b54ebab101ac4766838b34f

@@ -362,6 +362,25 @@ CONFIG = {
 			content:"this section is reserved to about information"
 		}
 	],
+	movie:{
+		details:[
+			{
+				action: "watch",
+				icon:"bi bi-play-fill",
+				i18n:"movie_details_watch"
+			},
+			{
+				action: "resume",
+				icon:"bi bi-collection-play-fill",
+				i18n:"movie_details_resume"
+			},
+			{
+				action: "later",
+				icon:"bi bi-plus-square-fill",
+				i18n:"movie_details_later"
+			},
+		]
+	},
 	sidebar: {
 	  center: [
 		{

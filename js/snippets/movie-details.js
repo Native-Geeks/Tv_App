@@ -17,10 +17,22 @@ Snippet_Movie_Details = (function(Snippet) {
             this.$el.find('#genre').text(this.parent.movie.data.info.genre);
             this.$el.css({top:this.parent.$el.find('#filmDescription')[0].offsetTop+this.parent.$el.find('#filmDescription')[0].offsetHeight+10});
             this.cp = 0;
+            if(!this.isRendered){
+                var tmp = this.tmpBtn();
+
+                function render(item){
+                    return Mustache.render(tmp,item);
+                }
+                CONFIG.movie.details.forEach(item => {
+                    this.$el.find("div").append(render(item));
+                });
+                I18n.changeLanguage("EN");
+            }
+            this.isRendered = true;
 		},
         
 		onLangChange: function () {
-
+			I18n.translateHTML(this.$el);
 		},
         
 		onClick: function($el, event) {
@@ -39,9 +51,7 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.player.show();
                         break;
                     case 'trailer': 
-                        $('#scene-movie #trailer iframe').attr('src','https://www.youtube-nocookie.com/embed/'+this.parent.movie.data.info.youtube_trailer+'?controls=0&autoplay=1&loop=1&mute=1&playlist='+this.parent.movie.data.info.youtube_trailer);
-                        $('#scene-movie #trailer img').hide();
-                        $('#scene-movie #trailer iframe').show();
+                        
                         break;
                     case 'cc': 
                         $el.addClass('active');
@@ -88,27 +98,24 @@ Snippet_Movie_Details = (function(Snippet) {
             switch(direction)
                 {
                     case 'up': Focus.to(this.getFocusable(-1,true)); break;
-                    case 'down': 
-                        if(this.getFocusable(1,true).length){
-                            Focus.to(this.getFocusable(1,true)); 
-                        }
-                        else{
-                            this.onReturn();
-                        }
-                        break;
+                    case 'down': Focus.to(this.getFocusable(1,true)); break;
                 }
-		},
-
-		onFocus:function($el){
-			
 		},
 
         onReturn:function () {
             this.hide();
-            this.parent.list.top -= this.parent.list.topAdded;
-            this.parent.list.$el.css({top:this.parent.list.top});
-            Focus.to(this.parent.list.$el.find(' .lastActive'));
-            this.parent.list.$el.find(' .lastActive').removeClass('lastActive');
+            this.parent.sidebar.show();
+            this.parent.list.show();
+            this.parent.$el.find("#trailer>div").css({display:'unset'});
+				this.parent.$el.find("#trailer").css({height:'58vh',width:'unset'});
+				this.parent.$el.find("#trailer iframe").css({width:'741px'});
+				this.parent.$el.find(".shadow").remove();
+            Focus.to(this.parent.list.$el.find('.lastActive'));
+            this.parent.list.$el.find('.lastActive').removeClass('lastActive');
+        },
+
+        tmpBtn:function(){
+            return '<button class="btn focusable" data-action="{{action}}"><i class="{{icon}}"></i><span data-i18n="{{i18n}}"></span></button>';
         },
         
 		create: function() {

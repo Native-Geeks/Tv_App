@@ -247,7 +247,7 @@
         </div>
         <div id="scene-search" class="scene" style="display: none">
             <div id="search-Bar">
-                <select class="form-select" aria-label="Select a type">
+                <select class="form-select focusable" aria-label="Select a type">
                     <option>Select a type</option>
                     <option value="movies">Movies</option>
                     <option value="series">Series</option>
@@ -287,9 +287,7 @@
             <div id="snippet-movie-details" style="display: none;">
                 <label>Director : <span id="director"></span></label>
                 <label id="genre"></label>
-                <button class="btn focusable" data-action="watch"><i class="bi bi-play-fill"></i><span data-i18n="">Watch this film</span></button>
-                <button class="btn focusable" data-action="trailer"><i class="bi bi-collection-play-fill"></i>Resume film</button>
-                <button class="btn focusable" data-action="later"><i class="bi bi-plus-square-fill"></i>Add to watch later</button>
+                <div></div>
             </div>
         </div>
         <div id="scene-serie" class="scene" style="display: none">
@@ -377,6 +375,12 @@
                         <label>
                             <span id="play-pause" class="focusable down">
                                 <i id="play" class="fas fa-pause"></i>
+                            </span>
+                            <span id="backward" class="focusable down">
+                                <i class="fas fa-backward"></i>
+                            </span>
+                            <span id="forward" class="focusable down">
+                                <i class="fas fa-forward"></i>
                             </span>
                         </label>
                         <span id="timer" class="down">00:00</span>

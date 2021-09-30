@@ -374,7 +374,7 @@ Scene_Settings = (function (Scene) {
     },
 
     onReturn: function () {
-      Router.goBack(null);
+      Router.go("profiles");
     },
 
     create: function () {
