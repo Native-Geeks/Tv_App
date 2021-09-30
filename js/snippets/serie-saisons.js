@@ -1,13 +1,14 @@
-Snippet_Serie_Episodes = (function(Snippet) {
+Snippet_Serie_Saisons = (function(Snippet) {
 
-	var Snippet_Serie_Episodes = function() {
+	var Snippet_Serie_Saisons = function() {
 	this.construct.apply(this, arguments);
 	};
 
-	$.extend(true, Snippet_Serie_Episodes.prototype, Snippet.prototype, {
+	$.extend(true, Snippet_Serie_Saisons.prototype, Snippet.prototype, {
         
 		init: function(){
             this.on("show",function(){
+                console.log("derftgyhju");
                 this.render();
             });
 		},
@@ -21,12 +22,12 @@ Snippet_Serie_Episodes = (function(Snippet) {
                 this.cpN = 0;
                 this.parent.serie.data.seasons.forEach(season => {
                     this.$el.append('<h6>'+season.name+'</h6><ul></ul>');
-                    var i = 0;
-                    while(i<season.episode_count)
-                    {
-                        ++i;
-                        this.$el.find('ul').last().append('<li class="focusable" data-season="'+season.name+'" data-episode="'+i+'">Episode '+i+'</li>');
-                    }
+                    // var i = 0;
+                    // while(i<season.episode_count)
+                    // {
+                    //     ++i;
+                    //     this.$el.find('ul').last().append('<li class="focusable" data-season="'+season.name+'" data-episode="'+i+'">Episode '+i+'</li>');
+                    // }
                 });
             }
             this.isRendered = true;
@@ -76,10 +77,10 @@ Snippet_Serie_Episodes = (function(Snippet) {
         },
         
 		create: function() {
-			return $('#snippet-serie-episodes');
+			return $('#snippet-serie-saisons');
 		}
 	});
 
-	return Snippet_Serie_Episodes;
+	return Snippet_Serie_Saisons;
 
 })(Snippet);
