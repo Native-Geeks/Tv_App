@@ -15,7 +15,7 @@ Scene_Settings = (function (Scene) {
     },
 
     activate: function (fromSideBar) {
-      if (fromSideBar != null) this.fromSideBar = true;
+      this.fromSideBar = true;
     },
 
     render: function () {
@@ -184,7 +184,7 @@ Scene_Settings = (function (Scene) {
     },
 
     onclick: function ($el, event) {
-      this.onEnter($el, event);
+      // this.onEnter($el, event);
     },
 
     onEnter: function ($el, event) {
