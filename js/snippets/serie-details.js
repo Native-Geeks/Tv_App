@@ -61,7 +61,8 @@ Snippet_Serie_Details = (function (Snippet) {
             break;
           case "episodes":
             $el.addClass("active");
-            this.parent.episodes.show();
+            this.parent.saison.show();
+            this.parent.episodes.show();   
             break;
           case "cc":
             $el.addClass("active");

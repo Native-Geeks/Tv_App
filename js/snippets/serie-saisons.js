@@ -5,10 +5,10 @@ Snippet_Serie_Saisons = (function(Snippet) {
 	};
 
 	$.extend(true, Snippet_Serie_Saisons.prototype, Snippet.prototype, {
-        
 		init: function(){
             this.on("show",function(){
                 this.render();
+                 
             });
 		},
         
