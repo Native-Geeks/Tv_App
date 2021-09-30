@@ -1,9 +1,9 @@
-Snippet_Player_live = (function (Snippet) {
-    var Snippet_Player_live = function () {
+Snippet_Player_Live = (function (Snippet) {
+    var Snippet_Player_Live = function () {
         this.construct.apply(this, arguments);
     };
 
-    $.extend(true, Snippet_Player_live.prototype, Snippet.prototype, {
+    $.extend(true, Snippet_Player_Live.prototype, Snippet.prototype, {
         init: function () {
             
         },
@@ -25,10 +25,10 @@ Snippet_Player_live = (function (Snippet) {
         },
 
         create: function () {
-            return $("#snippet-player");
+            return $("#snippet-live-player");
         },
 
     });
 
-    return Snippet_Player_live;
+    return Snippet_Player_Live;
 })(Snippet);

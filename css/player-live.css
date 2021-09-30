@@ -1,0 +1,29 @@
+#snippet-live-player {
+    transition: 0.3s;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 102;
+    opacity: 0;
+}
+
+#snippet-live-player #container {
+    position: fixed;
+    width: 100vw;
+    height: 65px;
+    color: white;
+    z-index: 0;
+    bottom: 0px;
+    transition: 0.3s;
+    font-size: large;
+    background-color: azure;
+}
+
+#snippet-live-player #elements {
+    margin: auto;
+    max-width: 1000px;
+    width: 80%;
+    align-items: center;
+}
