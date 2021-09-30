@@ -48,6 +48,7 @@
 			}
 			this.$activeEl = $el;
 			this.$activeEl.addClass('active');
+			
             var action = $el.attr("data-action");
 			if(action === 'Search') {this.close(); Router.go('search',this);}
 			if(action === 'Live') {this.close(); Router.go('live',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first());}
@@ -55,7 +56,7 @@
 			if(action === 'Series') {this.close(); Router.go('serie',this); Focus.to($('#scene-'+Router.activeSceneName+' .focusable').first()); }
 			if(action === 'Watch later'){this.close(); Router.go('watch-later',this); Focus.to($('#scene-watch-later'+Router.activeSceneName+' .focusable').first()); }
 			if(action === 'Settings') {this.hide(); Router.go('settings',true); return;}
-			if(action === 'Quit')	{this.hide();Router.go('profiles');}
+			if(action === 'Quit')	{this.onReturn();}
 		},
         
 		navigate: function(direction) {
@@ -85,6 +86,7 @@
 		},
         
 		onReturn:function(){
+			this.hide();
 			Router.go("profiles");
 		},
 

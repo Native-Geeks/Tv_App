@@ -25,6 +25,10 @@ Scene_Profiles = (function(Scene) {
             if(sidebar!=null)
             {
                 this.sidebar = sidebar;
+                this.cpp = 1;
+            }
+            else{
+                this.cpp = 0;
             }
             if(this.$activeEl != null) {
                 Focus.to(this.$activeEl);
@@ -135,100 +139,122 @@ Scene_Profiles = (function(Scene) {
         },
         
         onEnter: function($el, event) {
-            if(this.$isListHover)
+            if(this.cpp)
             {
-                for (account in this.$accounts) {
-                	if(this.$accounts[account].id == $el.attr("data-id"))
+                if(this.$isListHover)
+                {
+                    for (account in this.$accounts) {
+                        if(this.$accounts[account].id == $el.attr("data-id"))
+                        {
+                            this.notFromSplash = true;
+                            Router.go('home', this.$accounts[account],this.sidebar);
+                        }
+                    }
+                }
+                else
+                {
+                    var action = $el.attr("data-action");
+                    switch(action)
                     {
-                        this.notFromSplash = true;
-                        Router.go('home', this.$accounts[account],this.sidebar);
+                        case 'settings':
+                            this.notFromSplash = true;
+                            this.$activeEl = $el;
+                            Router.go('settings');
+                            break;
+                        case 'restart':
+                            window.location.reload();
+                            break;
+                            case "reset":
+                                $("#ResetModal").addClass("show");
+                                $("#ResetModal").show();
+                                Focus.to($("#ResetModal").find(".btn").first());
+                                this.active = $el;
+                                this.$isModalOn = true;
+                                break;
+                              case "reset_okay":
+                                Storage.removeItem("watch_later");
+                                Storage.removeItem("settings");
+                                Storage.removeItem("resumeMovies");
+                                window.location.reload();
+                                $("#ResetModal").removeClass("show");
+                                $("#ResetModal").hide();
+                                Focus.to(this.active);
+                                this.$isModalOn = false; 
+                                break;
+                              case "reset_cancel":
+                                $("#ResetModal").removeClass("show");
+                                $("#ResetModal").hide();
+                                Focus.to(this.active);
+                                this.$isModalOn = false;
+                                break;
+                        case 'info':
+                            for (account in this.$accounts) {
+                            if(account === this.$profiles.find(this.$profiles.find($el[0].parentNode)[0].parentNode).attr('data-id'))
+                                {
+                                    $('#staticUsername').val(this.$accounts[account].username);
+                                    $('#staticName').val(this.$accounts[account].name);
+                                    $('#staticType').val(this.$accounts[account].type);
+                                }
+                            }
+                            this.$isInfoModalOn = true;
+                            $('#InfoModal').addClass('show');
+                            $('#InfoModal').show();
+                            this.$activeEl = $el;
+                            this.isModal(true);
+                            Focus.to(this.$el.find('#InfoClose'));
+                            break;
+                        case 'info_close':
+                            this.$isInfoModalOn = false;
+                            $('#InfoModal').removeClass('show');
+                            $('#InfoModal').hide();
+                            Focus.to(this.$activeEl);
+                            this.isModal(false);
+                            break;
+                        case 'delete':
+                            this.$isDeleteModalOn = true;
+                            $('#DeleteModal').addClass('show');
+                            $('#DeleteModal').show();
+                            this.$activeEl = $el;
+                            Focus.to($('#DeleteModal #DeleteClose'));
+                            this.isModal(true);
+                            break;
+                        case 'delete_cancel' :
+                            this.$isDeleteModalOn = false;
+                            $('#DeleteModal').removeClass('show');
+                            $('#DeleteModal').hide();
+                            Focus.to(this.$activeEl);
+                            this.isModal(false);
+                            break;
+                        case 'delete_yes' :
+                            this.$isDeleteModalOn = false;
+                            $('#DeleteModal').removeClass('show');
+                            $('#DeleteModal').hide();
+                            Focus.to(this.$activeEl);
+                            this.isModal(false);
+                            break;
+                        case 'ExitModalClose' :
+                            $('#ExitModal').removeClass('show');
+                            $('#ExitModal').hide();
+                            this.$isModalOn = false;
+                            this.isModal(false);
+                            Focus.to(this.$activeEl);
+                                break;
+                        case 'Exit' :
+                            $('#ExitModal').removeClass('show');
+                            $('#ExitModal').hide();
+                            this.$isModalOn = false;
+                        this.isModal(false);
+                            Focus.to(this.$activeEl);
+                            break;
                     }
                 }
             }
-            else
-            {
-                var action = $el.attr("data-action");
-                switch(action)
-                {
-                    case 'settings':
-                        this.notFromSplash = true;
-                        this.$activeEl = $el;
-                        Router.go('settings');
-                        break;
-                    case 'restart':
-                        window.location.reload();
-                        break;
-                    case 'reset':
-                        Storage.removeItem("watch_later");
-                        Storage.removeItem("settings");
-                        Storage.removeItem("resumeMovies");
-                        break;
-                    case 'info':
-                        for (account in this.$accounts) {
-                          if(account === this.$profiles.find(this.$profiles.find($el[0].parentNode)[0].parentNode).attr('data-id'))
-                            {
-                                $('#staticUsername').val(this.$accounts[account].username);
-                                $('#staticName').val(this.$accounts[account].name);
-                                $('#staticType').val(this.$accounts[account].type);
-                            }
-                        }
-                        this.$isInfoModalOn = true;
-                        $('#InfoModal').addClass('show');
-                        $('#InfoModal').show();
-                        this.$activeEl = $el;
-                        this.isModal(true);
-                        Focus.to(this.$el.find('#InfoClose'));
-                        break;
-                    case 'info_close':
-                        this.$isInfoModalOn = false;
-                        $('#InfoModal').removeClass('show');
-                        $('#InfoModal').hide();
-                        Focus.to(this.$activeEl);
-                        this.isModal(false);
-                        break;
-                    case 'delete':
-                        this.$isDeleteModalOn = true;
-                        $('#DeleteModal').addClass('show');
-                        $('#DeleteModal').show();
-                        this.$activeEl = $el;
-                        Focus.to($('#DeleteModal #DeleteClose'));
-                        this.isModal(true);
-                        break;
-                    case 'delete_cancel' :
-                        this.$isDeleteModalOn = false;
-                        $('#DeleteModal').removeClass('show');
-                        $('#DeleteModal').hide();
-                        Focus.to(this.$activeEl);
-                        this.isModal(false);
-                        break;
-                    case 'delete_yes' :
-                        this.$isDeleteModalOn = false;
-                        $('#DeleteModal').removeClass('show');
-                        $('#DeleteModal').hide();
-                        Focus.to(this.$activeEl);
-                        this.isModal(false);
-                        break;
-                    case 'ExitModalClose' :
-                        $('#ExitModal').removeClass('show');
-                        $('#ExitModal').hide();
-                        this.$isModalOn = false;
-                        this.isModal(false);
-                        Focus.to(this.$activeEl);
-                            break;
-                    case 'Exit' :
-                        $('#ExitModal').removeClass('show');
-                        $('#ExitModal').hide();
-                        this.$isModalOn = false;
-                       this.isModal(false);
-                        Focus.to(this.$activeEl);
-                        break;
-                }
-            }
-            return false;
+            this.cpp++;
         },
         
         navigate: function(direction) {
             var $nowEl  = this.$el.find('.focus');
+            if(!$nowEl.length){ $nowEl = $(".focus");}
             var $el ;
             switch(direction){
                 case 'up':

@@ -9,10 +9,11 @@ Snippet_Later_List = (function(Snippet) {
         init: function () {
 
             this.on("show",function(){
+                this.parent.$el.find(".noItem").remove();
                 this.$el.empty();
                 if(Storage.get("watch_later")==null )
                 {
-                    this.parent.$el.append('<div class="noItem"><label>There no item on your list !</label><button class="btn focusable" data-action="movie">Go Movie</button></div>');
+                    this.parent.$el.append('<div class="noItem"><label data-i18n="watch_later_empty"></label><button class="btn focusable" data-action="movie"  data-i18n="watch_later_empty_btn"></button></div>');
                 }
                 else{
                     if(Storage.get("watch_later")["N"+this.parent.sidebar.account.id])
@@ -21,14 +22,14 @@ Snippet_Later_List = (function(Snippet) {
                     }
                     else
                     {
-                        this.parent.$el.append('<div class="noItem"><label>There no item on your list !</label><button class="btn focusable" data-action="movie">Go Movie</button></div>');
+                        this.parent.$el.append('<div class="noItem"><label data-i18n="watch_later_empty"></label><button class="btn focusable" data-action="movie" data-i18n="watch_later_empty_btn"></button></div>');
                     }
                 }
                 Focus.to(this.parent.$el.find('.focusable').first());
                 this.cp = 1 ;
             });
         },
-
+        
         renderItems: function (items) {
                 var tmp = this.tmpCard();
                 function addItem(item){

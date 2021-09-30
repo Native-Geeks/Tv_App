@@ -27,4 +27,7 @@ I18n.translations.EN = {
 	"serie_saisons_episodes" : "Saisons and episodes",
 	"serie_audio_cc" : "Audio and CC",
 	"serie_watchLater" : "Add to watch later",
+	"watch_later_header" : "Watch later",
+	"watch_later_empty" : "There no item on your list !",
+	"watch_later_empty_btn" : "Go movies"
 };

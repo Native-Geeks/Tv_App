@@ -12,6 +12,8 @@ Scene_Watch_Later = (function (Scene) {
         activate: function (sidebar) {
             this.sidebar = sidebar;
             this.list.show();
+            I18n.changeLanguage("EN");
+            this.cp = 0;
         },
 
         onReturn: function ($el, e, stop) {
@@ -22,6 +24,10 @@ Scene_Watch_Later = (function (Scene) {
             return this.onEnter($el, event);
         },
 
+        onLangChange: function () {
+			I18n.translateHTML(this.$el);
+		},
+
         onEnter: function ($el, event) {
             if(this.cp)
             {
@@ -30,7 +36,7 @@ Scene_Watch_Later = (function (Scene) {
                     this.sidebar.$el.find('.sidebar-btn[data-action=Films]').click();
                 }
             }
-            this.cp++;
+            ++this.cp;
         },
 
         create: function () {
