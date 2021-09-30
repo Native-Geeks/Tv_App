@@ -49,11 +49,11 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.videoUrl = this.parent.movie.data.movie_data.stream_url;
                         Player.play(this.parent.videoUrl);
                         this.parent.player.show();
-                        this.$el.css({display:"none"});
-                        this.parent.$el.find(".header").css({display:"none"});
-                        $("#trailer .trailer_video").css({display:"none"});
-                        $("#trailer .trailer_image").css({display:"none"});
-                        this.parent.$el.find("shadow").css({display:"none"});
+                        this.$el.css({opacity:0});
+                        this.parent.$el.find(".header").css({opacity:0});
+                        $("#trailer .trailer_video").css({opacity:0});
+                        $("#trailer .trailer_image").css({opacity:0});
+                        this.parent.$el.find("shadow").css({opacity:0});
                         break;
                     case 'back': 
                         this.onReturn();
