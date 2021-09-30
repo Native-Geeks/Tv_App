@@ -51,8 +51,8 @@ Snippet_Movie_Details = (function(Snippet) {
                         this.parent.player.show();
                         this.$el.css({display:"none"});
                         this.parent.$el.find(".header").css({display:"none"});
-                        $("#trailer .trailer_video").css({display:"none"});
-                        $("#trailer .trailer_image").css({display:"none"});
+                        $("#trailer .trailer_film").css({display:"none"});
+                        $("#trailer .trailer_imageFilm").css({display:"none"});
                         this.parent.$el.find("shadow").css({display:"none"});
                         break;
                     case 'back': 

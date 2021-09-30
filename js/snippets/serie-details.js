@@ -39,9 +39,13 @@ Snippet_Serie_Details = (function (Snippet) {
         switch (action) {
           case "watch":
             $el.addClass("lastActivePlayer");
-            this.parent.videoUrl =
-              this.parent.serie.data.episodes[0][0].stream_url;
+            this.parent.videoUrl = this.parent.serie.data.episodes[0][0].stream_url;
+            Player.play(this.parent.videoUrl);
             this.parent.player.show();
+            this.$el.css({display:"none"});
+            this.parent.$el.find(".header").css({display:"none"});
+            $("#trailer .trailer_serie").css({display:"none"});
+            $("#trailer .trailer_imageSerie").css({display:"none"});
             break;
           case "trailer":
             $("#scene-serie #trailer iframe").attr(
