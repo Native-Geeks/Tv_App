@@ -7,9 +7,7 @@ Snippet_Subtitles = (function(Snippet) {
 	$.extend(true, Snippet_Subtitles.prototype, Snippet.prototype, {
         
 		init: function(){			
-			this.scope = this;
-			this.on("show",function(){
-				
+			this.on("show",function(){				
 				this.$el.addClass("show_details");
 				this.renderAudioCC();
             });
@@ -27,11 +25,10 @@ Snippet_Subtitles = (function(Snippet) {
 		},
         
 		navigate: function(direction) {
-			console.log(this);
-			console.log(this.scope);
+			console.log(this.getFocusable());
             switch(direction){
-				case 'up': Focus.to(this.scope.getFocusable(-1,true)); break;
-				case 'down': Focus.to(this.scope.getFocusable(1,true)); break;
+				case 'up': Focus.to(this.getFocusable(-1,true)); break;
+				case 'down': Focus.to(this.getFocusable(1,true)); break;
 			}
 		},
 
